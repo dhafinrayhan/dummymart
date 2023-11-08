@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
+  HttpOverrides.global = _HttpOverrides();
+
   runApp(const ProviderScope(child: DummyMartApp()));
 }
 
@@ -34,5 +38,13 @@ class HomeScreen extends StatelessWidget {
         child: Text('Home'),
       ),
     );
+  }
+}
+
+class _HttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (_, __, ___) => true;
   }
 }
