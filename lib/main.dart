@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'features/products/screens/products.dart';
+
 void main() {
   HttpOverrides.global = _HttpOverrides();
 
@@ -20,23 +22,7 @@ class DummyMartApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: const Center(
-        child: Text('Home'),
-      ),
+      home: const ProductsScreen(),
     );
   }
 }
