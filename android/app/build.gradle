@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.dummymart"
+    namespace "dev.dhafin.dummymart"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
