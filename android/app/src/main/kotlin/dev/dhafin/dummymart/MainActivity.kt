@@ -1,4 +1,4 @@
-package com.example.dummymart
+package dev.dhafin.dummymart
 
 import io.flutter.embedding.android.FlutterActivity
 
