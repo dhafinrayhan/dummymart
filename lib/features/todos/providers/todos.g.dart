@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_client.dart';
+part of 'todos.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$apiClientHash() => r'54532f3b58f1e89924e10ff1125271e8d544aaeb';
+String _$todosHash() => r'f6df23bf7f45185a745d7616d32c4e85a163c93c';
 
-/// See also [ApiClient].
-@ProviderFor(ApiClient)
-final apiClientProvider = AutoDisposeNotifierProvider<ApiClient, Dio>.internal(
-  ApiClient.new,
-  name: r'apiClientProvider',
+/// See also [todos].
+@ProviderFor(todos)
+final todosProvider = AutoDisposeFutureProvider<List<Todo>>.internal(
+  todos,
+  name: r'todosProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$apiClientHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$todosHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ApiClient = AutoDisposeNotifier<Dio>;
+typedef TodosRef = AutoDisposeFutureProviderRef<List<Todo>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
