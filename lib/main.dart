@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(const DummyMartApp());
+  runApp(const ProviderScope(child: DummyMartApp()));
 }
 
 class DummyMartApp extends StatelessWidget {
