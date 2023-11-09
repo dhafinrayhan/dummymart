@@ -7,7 +7,7 @@ import '../models/login.dart';
 
 part 'auth_state.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class CurrentAuthState extends _$CurrentAuthState {
   @override
   AuthState build() => AuthState.unknown;

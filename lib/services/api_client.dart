@@ -8,7 +8,7 @@ import '../features/todos/models/todo.dart';
 
 part 'api_client.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ApiClient extends _$ApiClient {
   @override
   Dio build() => Dio()..options.baseUrl = 'https://dummyjson.com';

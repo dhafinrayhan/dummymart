@@ -6,11 +6,11 @@ part of 'api_client.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$apiClientHash() => r'f731f8e854acb1df0691bf68747ff4b53dd0f8ac';
+String _$apiClientHash() => r'8f6ae3b6db892b8bf1e8325264fce336d644109a';
 
 /// See also [ApiClient].
 @ProviderFor(ApiClient)
-final apiClientProvider = AutoDisposeNotifierProvider<ApiClient, Dio>.internal(
+final apiClientProvider = NotifierProvider<ApiClient, Dio>.internal(
   ApiClient.new,
   name: r'apiClientProvider',
   debugGetCreateSourceHash:
@@ -19,6 +19,6 @@ final apiClientProvider = AutoDisposeNotifierProvider<ApiClient, Dio>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$ApiClient = AutoDisposeNotifier<Dio>;
+typedef _$ApiClient = Notifier<Dio>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
