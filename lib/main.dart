@@ -1,12 +1,28 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'features/profile/models/profile.dart';
 import 'services/router.dart';
 
-void main() {
+void main() async {
   HttpOverrides.global = _HttpOverrides();
+
+  // Initialize Hive.
+  await Future(() async {
+    await Hive.initFlutter();
+
+    // Register adapters.
+    Hive.registerAdapter(ProfileAdapter());
+    Hive.registerAdapter(GenderAdapter());
+
+    // Open boxes.
+    await Future.wait([
+      Hive.openBox<Profile>('profile'),
+    ]);
+  });
 
   runApp(ProviderScope(
     observers: [_ProviderObserver()],
