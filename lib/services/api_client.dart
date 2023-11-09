@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../features/auth/models/login.dart';
 import '../features/products/models/product.dart';
+import '../features/profile/models/profile.dart';
 import '../features/todos/models/todo.dart';
 
 part 'api_client.g.dart';
@@ -10,6 +12,15 @@ part 'api_client.g.dart';
 class ApiClient extends _$ApiClient {
   @override
   Dio build() => Dio()..options.baseUrl = 'https://dummyjson.com';
+
+  Future<Profile> login(Login data) async {
+    final response = await state.post(
+      '/auth/login',
+      data: data.toJson(),
+    );
+
+    return Profile.fromJson(response.data as Map<String, Object?>);
+  }
 
   Future<List<Product>> fetchProducts() async {
     final response = await state.get('/products');

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../todos/screens/todos.dart';
 import '../models/product.dart';
 import '../providers/products.dart';
 
@@ -15,16 +14,6 @@ class ProductsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const TodosScreen(),
-              ),
-            ),
-            icon: const Icon(Icons.list_alt),
-          ),
-        ],
       ),
       body: products.when(
         loading: () => const Center(child: CircularProgressIndicator()),
