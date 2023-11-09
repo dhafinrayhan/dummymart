@@ -15,12 +15,15 @@ class TodosScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Todos'),
       ),
-      body: todos.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => const Center(child: Text('An error occured')),
-        data: (todos) => ListView.builder(
-          itemCount: todos.length,
-          itemBuilder: (_, index) => _TodoListTile(todos[index]),
+      body: RefreshIndicator(
+        onRefresh: () => ref.refresh(todosProvider.future),
+        child: todos.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (_, __) => const Center(child: Text('An error occured')),
+          data: (todos) => ListView.builder(
+            itemCount: todos.length,
+            itemBuilder: (_, index) => _TodoListTile(todos[index]),
+          ),
         ),
       ),
     );

@@ -15,12 +15,15 @@ class ProductsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Products'),
       ),
-      body: products.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => const Center(child: Text('An error occured')),
-        data: (products) => ListView.builder(
-          itemCount: products.length,
-          itemBuilder: (_, index) => _ProductListTile(products[index]),
+      body: RefreshIndicator(
+        onRefresh: () => ref.refresh(productsProvider.future),
+        child: products.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (_, __) => const Center(child: Text('An error occured')),
+          data: (products) => ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (_, index) => _ProductListTile(products[index]),
+          ),
         ),
       ),
     );
