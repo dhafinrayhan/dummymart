@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../widgets/button.dart';
 import '../models/login.dart';
 import '../providers/auth_state.dart';
 
@@ -13,10 +14,13 @@ class LoginScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isLoading = useState(false);
+
     final usernameController = useTextEditingController();
     final passwordController = useTextEditingController();
 
     Future<void> login() async {
+      isLoading.value = true;
       try {
         await ref.read(currentAuthStateProvider.notifier).login(Login(
               username: usernameController.text,
@@ -29,6 +33,8 @@ class LoginScreen extends HookConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(message ?? 'Login failed'),
         ));
+      } finally {
+        isLoading.value = false;
       }
     }
 
@@ -58,9 +64,10 @@ class LoginScreen extends HookConsumerWidget {
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,
             ),
-            FilledButton(
+            AppButton(
               onPressed: login,
-              child: const Text('Login'),
+              label: 'Login',
+              loading: isLoading.value,
             ),
           ],
         ),
