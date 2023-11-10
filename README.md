@@ -1,8 +1,8 @@
 # DummyMart
 
-An example Flutter project that uses [Riverpod], [flutter_hooks], [Freezed], [Hive], and [go_router].
+An example Flutter project that uses [Riverpod], [flutter_hooks], [Freezed], [Hive] and [go_router].
 
-# Credentials
+## Credentials
 Use these credentials to login:
 
 ```
@@ -17,3 +17,8 @@ Or you can use any user credentials from here: https://dummyjson.com/users
   [freezed]: https://pub.dev/packages/freezed
   [hive]: https://pub.dev/packages/hive
   [go_router]: https://pub.dev/packages/go_router
+
+## Screenshots
+Login | Products | Todos | Profile
+---|---|---|---
+![Screenshot_1699620754](https://github.com/dhafinrayhan/dummymart/assets/49405411/c153b4c2-b6bf-4617-baa6-8b09cadf8c8f ) | ![Screenshot_1699620759](https://github.com/dhafinrayhan/dummymart/assets/49405411/7cfbf2b2-7e76-479e-8aa9-d160668cf5df) | ![Screenshot_1699620762](https://github.com/dhafinrayhan/dummymart/assets/49405411/cb0670ee-26e3-4f65-ad01-064cef717d41) | ![Screenshot_1699621366](https://github.com/dhafinrayhan/dummymart/assets/49405411/5f5eaf18-102b-444c-a53f-9272c8e9a1e4 )
