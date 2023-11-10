@@ -18,6 +18,10 @@ class Profile with _$Profile {
     @HiveField(6) required String image,
   }) = _Profile;
 
+  String get fullName => '$firstName $lastName';
+
+  const Profile._();
+
   factory Profile.fromJson(Map<String, Object?> json) =>
       _$ProfileFromJson(json);
 }

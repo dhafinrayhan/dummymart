@@ -11,8 +11,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(currentProfileProvider);
     final profileRecords = [
-      (label: 'First Name', text: profile?.firstName),
-      (label: 'Last Name', text: profile?.lastName),
+      (label: 'Name', text: profile?.fullName),
       (label: 'Username', text: profile?.username),
       (label: 'Email', text: profile?.email),
     ];
