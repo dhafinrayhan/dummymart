@@ -1,16 +1,24 @@
-# dummymart
+# DummyMart
 
-A new Flutter project.
+An example Flutter project that uses [Riverpod], [flutter_hooks], [Freezed], [Hive] and [go_router].
 
-## Getting Started
+## Credentials
+Use these credentials to login:
 
-This project is a starting point for a Flutter application.
+```
+username: umcgourty9
+password: i0xzpX
+```
 
-A few resources to get you started if this is your first Flutter project:
+Or you can use any user credentials from here: https://dummyjson.com/users
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  [riverpod]: https://pub.dev/packages/riverpod
+  [flutter_hooks]: https://pub.dev/packages/flutter_hooks
+  [freezed]: https://pub.dev/packages/freezed
+  [hive]: https://pub.dev/packages/hive
+  [go_router]: https://pub.dev/packages/go_router
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+Login | Products | Todos | Profile
+---|---|---|---
+![Screenshot_1699620754](https://github.com/dhafinrayhan/dummymart/assets/49405411/c153b4c2-b6bf-4617-baa6-8b09cadf8c8f ) | ![Screenshot_1699620759](https://github.com/dhafinrayhan/dummymart/assets/49405411/7cfbf2b2-7e76-479e-8aa9-d160668cf5df) | ![Screenshot_1699620762](https://github.com/dhafinrayhan/dummymart/assets/49405411/cb0670ee-26e3-4f65-ad01-064cef717d41) | ![Screenshot_1699621366](https://github.com/dhafinrayhan/dummymart/assets/49405411/5f5eaf18-102b-444c-a53f-9272c8e9a1e4 )
