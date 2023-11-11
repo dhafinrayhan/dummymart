@@ -55,7 +55,16 @@ class ApiClient extends _$ApiClient {
   Future<Todo> addTodo(Todo todo) async {
     final response = await state.post(
       '/todos/add',
-      data: todo.toJson(),
+      data: todo.toJson()..remove('id'),
+    );
+
+    return Todo.fromJson(response.data as Map<String, Object?>);
+  }
+
+  Future<Todo> updateTodo(int id, Todo todo) async {
+    final response = await state.put(
+      '/todos/$id',
+      data: todo.toJson()..remove('id'),
     );
 
     return Todo.fromJson(response.data as Map<String, Object?>);

@@ -58,6 +58,10 @@ class TodoScreen extends ConsumerWidget {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.go('/todos/$id/update'),
+        child: const Icon(Icons.edit),
+      ),
     );
   }
 }

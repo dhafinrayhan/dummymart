@@ -15,6 +15,7 @@ enum AuthState {
       '/todos',
       '/todos/add',
       '/todos/:id',
+      '/todos/:id/update',
       '/profile',
     ],
   ),

@@ -12,6 +12,7 @@ import '../features/profile/screens/profile.dart';
 import '../features/todos/screens/add_todo.dart';
 import '../features/todos/screens/todo.dart';
 import '../features/todos/screens/todos.dart';
+import '../features/todos/screens/update_todo.dart';
 import '../widgets/models/nav_bar_item.dart';
 import '../widgets/scaffold_with_nav_bar.dart';
 
@@ -55,12 +56,20 @@ GoRouter router(RouterRef ref) {
           builder: (_, __) => const AddTodoScreen(),
         ),
         GoRoute(
-          path: ':id',
-          builder: (_, state) {
-            final id = int.parse(state.pathParameters['id']!);
-            return TodoScreen(id);
-          },
-        ),
+            path: ':id',
+            builder: (_, state) {
+              final id = int.parse(state.pathParameters['id']!);
+              return TodoScreen(id);
+            },
+            routes: [
+              GoRoute(
+                path: 'update',
+                builder: (_, state) {
+                  final id = int.parse(state.pathParameters['id']!);
+                  return UpdateTodoScreen(id);
+                },
+              ),
+            ]),
       ],
     ),
     NavBarItem(

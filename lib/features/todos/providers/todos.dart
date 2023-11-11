@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../services/api_client.dart';
 import '../models/todo.dart';
+import 'todo.dart';
 
 part 'todos.g.dart';
 
@@ -17,9 +18,18 @@ class Todos extends _$Todos {
     return result;
   }
 
+  Future<Todo> updateItem(int id, Todo todo) async {
+    final result =
+        await ref.read(apiClientProvider.notifier).updateTodo(id, todo);
+    ref.invalidateSelf();
+    return result;
+  }
+
   Future<Todo> delete(int id) async {
     final result = await ref.read(apiClientProvider.notifier).deleteTodo(id);
-    ref.invalidateSelf();
+    ref
+      ..invalidate(todoProvider(id))
+      ..invalidateSelf();
     return result;
   }
 }
