@@ -17,21 +17,26 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentIndex =
+        screens.indexWhere((screen) => screen.path == currentPath);
+    final shouldShowNavBar = currentIndex >= 0;
+
     return Scaffold(
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex:
-            screens.indexWhere((screen) => screen.path == currentPath),
-        onTap: (index) => context.go(screens[index].path),
-        type: BottomNavigationBarType.fixed,
-        items: [
-          for (final screen in screens)
-            BottomNavigationBarItem(
-              icon: Icon(screen.icon),
-              label: screen.label,
+      bottomNavigationBar: shouldShowNavBar
+          ? BottomNavigationBar(
+              currentIndex: currentIndex,
+              onTap: (index) => context.go(screens[index].path),
+              type: BottomNavigationBarType.fixed,
+              items: [
+                for (final screen in screens)
+                  BottomNavigationBarItem(
+                    icon: Icon(screen.icon),
+                    label: screen.label,
+                  )
+              ],
             )
-        ],
-      ),
+          : null,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 
 part 'nav_bar_item.freezed.dart';
 
@@ -17,5 +18,8 @@ class NavBarItem with _$NavBarItem {
 
     /// Label in the navigation bar.
     required String label,
+
+    /// The subroutes of the route from this [path].
+    @Default(<RouteBase>[]) final List<RouteBase> routes,
   }) = _NavBarItem;
 }

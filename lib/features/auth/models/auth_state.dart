@@ -9,7 +9,12 @@ enum AuthState {
   ),
   authenticated(
     redirectPath: '/products',
-    allowedPaths: ['/products', '/todos', '/profile'],
+    allowedPaths: [
+      '/products',
+      '/todos',
+      '/todos/add',
+      '/profile',
+    ],
   ),
   ;
 

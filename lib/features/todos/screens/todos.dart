@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../models/todo.dart';
@@ -25,6 +26,10 @@ class TodosScreen extends ConsumerWidget {
             itemBuilder: (_, index) => _TodoListTile(todos[index]),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.go('/todos/add'),
+        child: const Icon(Icons.add),
       ),
     );
   }

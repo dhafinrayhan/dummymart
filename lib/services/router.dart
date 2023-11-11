@@ -8,6 +8,7 @@ import '../features/auth/screens/login.dart';
 import '../features/auth/screens/splash.dart';
 import '../features/products/screens/products.dart';
 import '../features/profile/screens/profile.dart';
+import '../features/todos/screens/add_todo.dart';
 import '../features/todos/screens/todos.dart';
 import '../widgets/models/nav_bar_item.dart';
 import '../widgets/scaffold_with_nav_bar.dart';
@@ -37,6 +38,12 @@ GoRouter router(RouterRef ref) {
       widget: const TodosScreen(),
       icon: Icons.list_alt,
       label: 'Todos',
+      routes: [
+        GoRoute(
+          path: 'add',
+          builder: (_, __) => const AddTodoScreen(),
+        ),
+      ],
     ),
     NavBarItem(
       path: '/profile',
@@ -62,7 +69,7 @@ GoRouter router(RouterRef ref) {
       // themselves should be defined in [navBarItems].
       ShellRoute(
         builder: (_, state, child) => ScaffoldWithNavBar(
-          currentPath: state.matchedLocation,
+          currentPath: state.uri.path,
           screens: navBarItems,
           child: child,
         ),
@@ -79,6 +86,7 @@ GoRouter router(RouterRef ref) {
                   );
                 },
               ),
+              routes: screen.routes,
             ),
         ],
       ),

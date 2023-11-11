@@ -6,5 +6,14 @@ import '../models/todo.dart';
 part 'todos.g.dart';
 
 @riverpod
-Future<List<Todo>> todos(TodosRef ref) =>
-    ref.watch(apiClientProvider.notifier).fetchTodos();
+class Todos extends _$Todos {
+  @override
+  Future<List<Todo>> build() =>
+      ref.watch(apiClientProvider.notifier).fetchTodos();
+
+  Future<Todo> add(Todo todo) async {
+    final result = await ref.read(apiClientProvider.notifier).addTodo(todo);
+    ref.invalidateSelf();
+    return result;
+  }
+}

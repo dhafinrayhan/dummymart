@@ -28,6 +28,9 @@ mixin _$NavBarItem {
   /// Label in the navigation bar.
   String get label => throw _privateConstructorUsedError;
 
+  /// The subroutes of the route from this [path].
+  List<RouteBase> get routes => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $NavBarItemCopyWith<NavBarItem> get copyWith =>
       throw _privateConstructorUsedError;
@@ -39,7 +42,12 @@ abstract class $NavBarItemCopyWith<$Res> {
           NavBarItem value, $Res Function(NavBarItem) then) =
       _$NavBarItemCopyWithImpl<$Res, NavBarItem>;
   @useResult
-  $Res call({String path, Widget widget, IconData icon, String label});
+  $Res call(
+      {String path,
+      Widget widget,
+      IconData icon,
+      String label,
+      List<RouteBase> routes});
 }
 
 /// @nodoc
@@ -59,6 +67,7 @@ class _$NavBarItemCopyWithImpl<$Res, $Val extends NavBarItem>
     Object? widget = null,
     Object? icon = null,
     Object? label = null,
+    Object? routes = null,
   }) {
     return _then(_value.copyWith(
       path: null == path
@@ -77,6 +86,10 @@ class _$NavBarItemCopyWithImpl<$Res, $Val extends NavBarItem>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
+      routes: null == routes
+          ? _value.routes
+          : routes // ignore: cast_nullable_to_non_nullable
+              as List<RouteBase>,
     ) as $Val);
   }
 }
@@ -89,7 +102,12 @@ abstract class _$$NavBarItemImplCopyWith<$Res>
       __$$NavBarItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String path, Widget widget, IconData icon, String label});
+  $Res call(
+      {String path,
+      Widget widget,
+      IconData icon,
+      String label,
+      List<RouteBase> routes});
 }
 
 /// @nodoc
@@ -107,6 +125,7 @@ class __$$NavBarItemImplCopyWithImpl<$Res>
     Object? widget = null,
     Object? icon = null,
     Object? label = null,
+    Object? routes = null,
   }) {
     return _then(_$NavBarItemImpl(
       path: null == path
@@ -125,6 +144,10 @@ class __$$NavBarItemImplCopyWithImpl<$Res>
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
+      routes: null == routes
+          ? _value._routes
+          : routes // ignore: cast_nullable_to_non_nullable
+              as List<RouteBase>,
     ));
   }
 }
@@ -136,7 +159,9 @@ class _$NavBarItemImpl implements _NavBarItem {
       {required this.path,
       required this.widget,
       required this.icon,
-      required this.label});
+      required this.label,
+      final List<RouteBase> routes = const <RouteBase>[]})
+      : _routes = routes;
 
   /// Path in the router.
   @override
@@ -154,9 +179,21 @@ class _$NavBarItemImpl implements _NavBarItem {
   @override
   final String label;
 
+  /// The subroutes of the route from this [path].
+  final List<RouteBase> _routes;
+
+  /// The subroutes of the route from this [path].
+  @override
+  @JsonKey()
+  List<RouteBase> get routes {
+    if (_routes is EqualUnmodifiableListView) return _routes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_routes);
+  }
+
   @override
   String toString() {
-    return 'NavBarItem(path: $path, widget: $widget, icon: $icon, label: $label)';
+    return 'NavBarItem(path: $path, widget: $widget, icon: $icon, label: $label, routes: $routes)';
   }
 
   @override
@@ -167,11 +204,13 @@ class _$NavBarItemImpl implements _NavBarItem {
             (identical(other.path, path) || other.path == path) &&
             (identical(other.widget, widget) || other.widget == widget) &&
             (identical(other.icon, icon) || other.icon == icon) &&
-            (identical(other.label, label) || other.label == label));
+            (identical(other.label, label) || other.label == label) &&
+            const DeepCollectionEquality().equals(other._routes, _routes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, path, widget, icon, label);
+  int get hashCode => Object.hash(runtimeType, path, widget, icon, label,
+      const DeepCollectionEquality().hash(_routes));
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +224,8 @@ abstract class _NavBarItem implements NavBarItem {
       {required final String path,
       required final Widget widget,
       required final IconData icon,
-      required final String label}) = _$NavBarItemImpl;
+      required final String label,
+      final List<RouteBase> routes}) = _$NavBarItemImpl;
 
   @override
 
@@ -203,6 +243,10 @@ abstract class _NavBarItem implements NavBarItem {
 
   /// Label in the navigation bar.
   String get label;
+  @override
+
+  /// The subroutes of the route from this [path].
+  List<RouteBase> get routes;
   @override
   @JsonKey(ignore: true)
   _$$NavBarItemImplCopyWith<_$NavBarItemImpl> get copyWith =>
