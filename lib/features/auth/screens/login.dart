@@ -39,38 +39,37 @@ class LoginScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      body: Padding(
+      body: SeparatedColumn(
         padding: const EdgeInsets.all(24),
-        child: SeparatedColumn(
-          separatorBuilder: () => const Gap(16),
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Username',
-                border: OutlineInputBorder(),
-              ),
-              textInputAction: TextInputAction.next,
+        separatorBuilder: () => const Gap(16),
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: usernameController,
+            decoration: const InputDecoration(
+              labelText: 'Username',
+              border: OutlineInputBorder(),
             ),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              textInputAction: TextInputAction.done,
+            textInputAction: TextInputAction.next,
+          ),
+          TextField(
+            controller: passwordController,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+              border: OutlineInputBorder(),
             ),
-            AppButton(
-              onPressed: login,
-              label: 'Login',
-              loading: isLoading.value,
-            ),
-          ],
-        ),
+            obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
+            textInputAction: TextInputAction.done,
+          ),
+          const Gap(8),
+          AppButton(
+            onPressed: login,
+            label: 'Login',
+            loading: isLoading.value,
+          ),
+        ],
       ),
     );
   }
