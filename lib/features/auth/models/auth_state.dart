@@ -11,6 +11,7 @@ enum AuthState {
     redirectPath: '/products',
     allowedPaths: [
       '/products',
+      '/products/:id',
       '/todos',
       '/todos/add',
       '/profile',

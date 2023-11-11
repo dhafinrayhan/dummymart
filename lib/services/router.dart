@@ -6,6 +6,7 @@ import '../features/auth/models/auth_state.dart';
 import '../features/auth/providers/auth_state.dart';
 import '../features/auth/screens/login.dart';
 import '../features/auth/screens/splash.dart';
+import '../features/products/screens/product.dart';
 import '../features/products/screens/products.dart';
 import '../features/profile/screens/profile.dart';
 import '../features/todos/screens/add_todo.dart';
@@ -32,6 +33,15 @@ GoRouter router(RouterRef ref) {
       widget: const ProductsScreen(),
       icon: Icons.category,
       label: 'Products',
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (_, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return ProductScreen(id);
+          },
+        ),
+      ],
     ),
     NavBarItem(
       path: '/todos',
@@ -94,7 +104,7 @@ GoRouter router(RouterRef ref) {
     refreshListenable: authStateNotifier,
     redirect: (_, state) {
       final authState = ref.read(currentAuthStateProvider);
-      if (!authState.allowedPaths.contains(state.matchedLocation)) {
+      if (!authState.allowedPaths.contains(state.fullPath)) {
         return authState.redirectPath;
       }
       return null;

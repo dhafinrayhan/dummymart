@@ -31,6 +31,12 @@ class ApiClient extends _$ApiClient {
         .toList();
   }
 
+  Future<Product> fetchProduct(int id) async {
+    final response = await state.get('/products/$id');
+
+    return Product.fromJson(response.data as Map<String, Object?>);
+  }
+
   Future<List<Todo>> fetchTodos() async {
     final response = await state.get('/todos');
 

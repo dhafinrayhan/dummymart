@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../models/product.dart';
@@ -38,6 +39,7 @@ class _ProductListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => context.go('/products/${product.id}'),
       title: Text(product.title),
       subtitle: Text(product.brand),
     );
