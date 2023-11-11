@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/todo.dart';
+import '../providers/todos.dart';
 
 class TodoScreen extends ConsumerWidget {
   const TodoScreen(this.id, {super.key});
@@ -12,9 +16,22 @@ class TodoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(id));
 
+    void confirmDelete() {
+      showDialog(
+        context: context,
+        builder: (_) => _ConfirmDeleteDialog(id),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo'),
+        actions: [
+          IconButton(
+            onPressed: confirmDelete,
+            icon: const Icon(Icons.delete),
+          ),
+        ],
       ),
       body: todo.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -40,6 +57,58 @@ class TodoScreen extends ConsumerWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _ConfirmDeleteDialog extends HookConsumerWidget {
+  const _ConfirmDeleteDialog(this.id);
+
+  final int id;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isLoading = useState(false);
+
+    Future<void> deleteTodo() async {
+      isLoading.value = true;
+      try {
+        await ref.read(todosProvider.notifier).delete(id);
+
+        if (!context.mounted) return;
+        context
+          ..pop()
+          ..go('/todos');
+      } on DioException catch (e) {
+        if (!context.mounted) return;
+
+        final message = e.response?.data?['message'] as String?;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(message ?? 'Delete todo failed'),
+        ));
+      } finally {
+        isLoading.value = false;
+      }
+    }
+
+    return AlertDialog(
+      title: const Text('Delete this todo?'),
+      content: isLoading.value
+          ? const SizedBox(
+              height: 48,
+              child: Center(child: CircularProgressIndicator()),
+            )
+          : null,
+      actions: [
+        TextButton(
+          onPressed: () => context.pop(),
+          child: const Text('No'),
+        ),
+        TextButton(
+          onPressed: deleteTodo,
+          child: const Text('Yes'),
+        ),
+      ],
     );
   }
 }

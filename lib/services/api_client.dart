@@ -60,4 +60,10 @@ class ApiClient extends _$ApiClient {
 
     return Todo.fromJson(response.data as Map<String, Object?>);
   }
+
+  Future<Todo> deleteTodo(int id) async {
+    final response = await state.delete('/todos/$id');
+
+    return Todo.fromJson(response.data as Map<String, Object?>);
+  }
 }

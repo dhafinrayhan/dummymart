@@ -16,4 +16,10 @@ class Todos extends _$Todos {
     ref.invalidateSelf();
     return result;
   }
+
+  Future<Todo> delete(int id) async {
+    final result = await ref.read(apiClientProvider.notifier).deleteTodo(id);
+    ref.invalidateSelf();
+    return result;
+  }
 }
