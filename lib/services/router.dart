@@ -70,15 +70,15 @@ GoRouter router(RouterRef ref) {
       ShellRoute(
         builder: (_, state, child) => ScaffoldWithNavBar(
           currentPath: state.uri.path,
-          screens: navBarItems,
+          navBarItems: navBarItems,
           child: child,
         ),
         routes: [
-          for (final screen in navBarItems)
+          for (final item in navBarItems)
             GoRoute(
-              path: screen.path,
+              path: item.path,
               pageBuilder: (_, __) => CustomTransitionPage(
-                child: screen.widget,
+                child: item.widget,
                 transitionsBuilder: (_, animation, __, child) {
                   return FadeTransition(
                     opacity: animation.drive(CurveTween(curve: Curves.ease)),
@@ -86,7 +86,7 @@ GoRouter router(RouterRef ref) {
                   );
                 },
               ),
-              routes: screen.routes,
+              routes: item.routes,
             ),
         ],
       ),

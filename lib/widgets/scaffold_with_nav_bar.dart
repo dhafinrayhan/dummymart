@@ -8,17 +8,17 @@ class ScaffoldWithNavBar extends StatelessWidget {
     super.key,
     required this.child,
     required this.currentPath,
-    required this.screens,
+    required this.navBarItems,
   });
 
   final Widget child;
   final String currentPath;
-  final List<NavBarItem> screens;
+  final List<NavBarItem> navBarItems;
 
   @override
   Widget build(BuildContext context) {
     final currentIndex =
-        screens.indexWhere((screen) => screen.path == currentPath);
+        navBarItems.indexWhere((item) => item.path == currentPath);
     final shouldShowNavBar = currentIndex >= 0;
 
     return Scaffold(
@@ -26,13 +26,13 @@ class ScaffoldWithNavBar extends StatelessWidget {
       bottomNavigationBar: shouldShowNavBar
           ? BottomNavigationBar(
               currentIndex: currentIndex,
-              onTap: (index) => context.go(screens[index].path),
+              onTap: (index) => context.go(navBarItems[index].path),
               type: BottomNavigationBarType.fixed,
               items: [
-                for (final screen in screens)
+                for (final item in navBarItems)
                   BottomNavigationBarItem(
-                    icon: Icon(screen.icon),
-                    label: screen.label,
+                    icon: Icon(item.icon),
+                    label: item.label,
                   )
               ],
             )
