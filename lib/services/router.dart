@@ -10,6 +10,7 @@ import '../features/products/screens/product.dart';
 import '../features/products/screens/products.dart';
 import '../features/profile/screens/profile.dart';
 import '../features/todos/screens/add_todo.dart';
+import '../features/todos/screens/todo.dart';
 import '../features/todos/screens/todos.dart';
 import '../widgets/models/nav_bar_item.dart';
 import '../widgets/scaffold_with_nav_bar.dart';
@@ -52,6 +53,13 @@ GoRouter router(RouterRef ref) {
         GoRoute(
           path: 'add',
           builder: (_, __) => const AddTodoScreen(),
+        ),
+        GoRoute(
+          path: ':id',
+          builder: (_, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return TodoScreen(id);
+          },
         ),
       ],
     ),

@@ -43,6 +43,7 @@ class _TodoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => context.go('/todos/${todo.id}'),
       title: Text(
         todo.todo,
         style: TextStyle(
