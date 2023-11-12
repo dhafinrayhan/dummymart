@@ -2,7 +2,7 @@
 
 An example Flutter project that uses [Riverpod], [flutter_hooks], [Freezed], [Hive] and [go_router].
 
-This project uses [DummyJSON] API. Please not that DummyJSON doesn't apply your changes when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to the API limitations.
+This project uses [DummyJSON] API. Please note that DummyJSON doesn't apply your changes when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to the API limitations.
 
 ## Credentials
 Use these credentials to login:
