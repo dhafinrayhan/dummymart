@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../features/auth/models/login.dart';
@@ -29,15 +29,15 @@ class ApiClient extends _$ApiClient {
     setToken(token);
 
     // Save the new [token] to Hive box.
-    final box = Hive.box<String>('token');
-    box.put('current', token);
+    final box = Hive.box<String>(name: 'token');
+    box['current'] = token;
 
     return Profile.fromJson(response.data as Map<String, Object?>);
   }
 
   void logout() {
     // Delete the current [token] from Hive box.
-    final box = Hive.box<String>('token');
+    final box = Hive.box<String>(name: 'token');
     box.delete('current');
 
     ref.invalidateSelf();

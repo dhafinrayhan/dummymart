@@ -20,19 +20,12 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Profile {
-  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get username => throw _privateConstructorUsedError;
-  @HiveField(2)
   String get email => throw _privateConstructorUsedError;
-  @HiveField(3)
   String get firstName => throw _privateConstructorUsedError;
-  @HiveField(4)
   String get lastName => throw _privateConstructorUsedError;
-  @HiveField(5)
   Gender get gender => throw _privateConstructorUsedError;
-  @HiveField(6)
   String get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,13 +39,13 @@ abstract class $ProfileCopyWith<$Res> {
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
   $Res call(
-      {@HiveField(0) int id,
-      @HiveField(1) String username,
-      @HiveField(2) String email,
-      @HiveField(3) String firstName,
-      @HiveField(4) String lastName,
-      @HiveField(5) Gender gender,
-      @HiveField(6) String image});
+      {int id,
+      String username,
+      String email,
+      String firstName,
+      String lastName,
+      Gender gender,
+      String image});
 }
 
 /// @nodoc
@@ -117,13 +110,13 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) int id,
-      @HiveField(1) String username,
-      @HiveField(2) String email,
-      @HiveField(3) String firstName,
-      @HiveField(4) String lastName,
-      @HiveField(5) Gender gender,
-      @HiveField(6) String image});
+      {int id,
+      String username,
+      String email,
+      String firstName,
+      String lastName,
+      Gender gender,
+      String image});
 }
 
 /// @nodoc
@@ -182,38 +175,31 @@ class __$$ProfileImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
   const _$ProfileImpl(
-      {@HiveField(0) required this.id,
-      @HiveField(1) required this.username,
-      @HiveField(2) required this.email,
-      @HiveField(3) required this.firstName,
-      @HiveField(4) required this.lastName,
-      @HiveField(5) required this.gender,
-      @HiveField(6) required this.image})
+      {required this.id,
+      required this.username,
+      required this.email,
+      required this.firstName,
+      required this.lastName,
+      required this.gender,
+      required this.image})
       : super._();
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
 
   @override
-  @HiveField(0)
   final int id;
   @override
-  @HiveField(1)
   final String username;
   @override
-  @HiveField(2)
   final String email;
   @override
-  @HiveField(3)
   final String firstName;
   @override
-  @HiveField(4)
   final String lastName;
   @override
-  @HiveField(5)
   final Gender gender;
   @override
-  @HiveField(6)
   final String image;
 
   @override
@@ -273,37 +259,30 @@ class _$ProfileImpl extends _Profile with DiagnosticableTreeMixin {
 
 abstract class _Profile extends Profile {
   const factory _Profile(
-      {@HiveField(0) required final int id,
-      @HiveField(1) required final String username,
-      @HiveField(2) required final String email,
-      @HiveField(3) required final String firstName,
-      @HiveField(4) required final String lastName,
-      @HiveField(5) required final Gender gender,
-      @HiveField(6) required final String image}) = _$ProfileImpl;
+      {required final int id,
+      required final String username,
+      required final String email,
+      required final String firstName,
+      required final String lastName,
+      required final Gender gender,
+      required final String image}) = _$ProfileImpl;
   const _Profile._() : super._();
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
   @override
-  @HiveField(0)
   int get id;
   @override
-  @HiveField(1)
   String get username;
   @override
-  @HiveField(2)
   String get email;
   @override
-  @HiveField(3)
   String get firstName;
   @override
-  @HiveField(4)
   String get lastName;
   @override
-  @HiveField(5)
   Gender get gender;
   @override
-  @HiveField(6)
   String get image;
   @override
   @JsonKey(ignore: true)

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api_client.dart';
@@ -17,11 +17,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   /// Checks the last [AuthState] of the app, restores token and the current
   /// [Profile] if authenticated.
   void _restoreAuthState() {
-    final tokenBox = Hive.box<String>('token');
-    final token = tokenBox.get('current');
+    final tokenBox = Hive.box<String>(name: 'token');
+    final token = tokenBox['current'];
 
-    final profileBox = Hive.box<Profile>('profile');
-    final profile = profileBox.get('current');
+    final profileBox = Hive.box<Profile>(name: 'profile');
+    final profile = profileBox['current'];
 
     if (token != null && profile != null) {
       ref.read(apiClientProvider.notifier).setToken(token);

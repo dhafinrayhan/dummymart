@@ -1,28 +1,27 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'features/profile/models/profile.dart';
 import 'services/router.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = _HttpOverrides();
 
   // Initialize Hive.
   await Future(() async {
-    await Hive.initFlutter();
+    final dir = await getApplicationDocumentsDirectory();
+    Hive.defaultDirectory = dir.path;
 
     // Register adapters.
-    Hive.registerAdapter(ProfileAdapter());
-    Hive.registerAdapter(GenderAdapter());
-
-    // Open boxes.
-    await Future.wait([
-      Hive.openBox<Profile>('profile'),
-      Hive.openBox<String>('token'),
-    ]);
+    Hive.registerAdapter<Profile>(
+      'Profile',
+      (json) => Profile.fromJson(json as Map<String, Object?>),
+    );
   });
 
   runApp(ProviderScope(
