@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../features/auth/models/login.dart';
@@ -13,13 +14,33 @@ class ApiClient extends _$ApiClient {
   @override
   Dio build() => Dio()..options.baseUrl = 'https://dummyjson.com';
 
+  void setToken(String token) {
+    state = Dio(state.options)
+      ..options.headers['Authorization'] = 'Bearer $token';
+  }
+
   Future<Profile> login(Login data) async {
     final response = await state.post(
       '/auth/login',
       data: data.toJson(),
     );
 
+    final token = response.data['token'] as String;
+    setToken(token);
+
+    // Save the new [token] to Hive box.
+    final box = Hive.box<String>('token');
+    box.put('current', token);
+
     return Profile.fromJson(response.data as Map<String, Object?>);
+  }
+
+  void logout() {
+    // Delete the current [token] from Hive box.
+    final box = Hive.box<String>('token');
+    box.delete('current');
+
+    ref.invalidateSelf();
   }
 
   Future<List<Product>> fetchProducts() async {

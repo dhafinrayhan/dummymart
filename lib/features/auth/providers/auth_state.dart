@@ -25,6 +25,8 @@ class CurrentAuthState extends _$CurrentAuthState {
   }
 
   void logout() {
+    ref.read(apiClientProvider.notifier).logout();
+
     // Delete the saved [Profile] from Hive box.
     final box = Hive.box<Profile>('profile');
     box.delete('current');
