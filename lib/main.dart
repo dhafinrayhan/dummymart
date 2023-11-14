@@ -19,10 +19,10 @@ void main() async {
     Hive.registerAdapter(GenderAdapter());
 
     // Open boxes.
-    await Future.wait([
+    await [
       Hive.openBox<Profile>('profile'),
       Hive.openBox<String>('token'),
-    ]);
+    ].wait;
   });
 
   runApp(ProviderScope(
