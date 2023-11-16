@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'features/profile/models/profile.dart';
 import 'services/router.dart';
 
-void main() async {
+Future<void> main() async {
   HttpOverrides.global = _HttpOverrides();
 
   // Initialize Hive.
