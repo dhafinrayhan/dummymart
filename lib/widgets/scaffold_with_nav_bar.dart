@@ -24,13 +24,13 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: shouldShowNavBar
-          ? BottomNavigationBar(
-              currentIndex: currentIndex,
-              onTap: (index) => context.go(navBarItems[index].path),
-              type: BottomNavigationBarType.fixed,
-              items: [
+          ? NavigationBar(
+              selectedIndex: currentIndex,
+              onDestinationSelected: (index) =>
+                  context.go(navBarItems[index].path),
+              destinations: [
                 for (final item in navBarItems)
-                  BottomNavigationBarItem(
+                  NavigationDestination(
                     icon: Icon(item.icon),
                     label: item.label,
                   )
