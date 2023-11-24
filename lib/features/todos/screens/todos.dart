@@ -29,6 +29,7 @@ class TodosScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/todos/add'),
+        tooltip: 'Add todo',
         child: const Icon(Icons.add),
       ),
     );

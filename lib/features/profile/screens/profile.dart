@@ -24,6 +24,7 @@ class ProfileScreen extends ConsumerWidget {
             onPressed: () =>
                 ref.read(currentAuthStateProvider.notifier).logout(),
             icon: const Icon(Icons.logout),
+            tooltip: 'Logout',
           ),
         ],
       ),

@@ -21,7 +21,9 @@ class Todos extends _$Todos {
   Future<Todo> updateItem(int id, Todo todo) async {
     final result =
         await ref.read(apiClientProvider.notifier).updateTodo(id, todo);
-    ref.invalidateSelf();
+    ref
+      ..invalidate(todoProvider(id))
+      ..invalidateSelf();
     return result;
   }
 

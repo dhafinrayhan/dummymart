@@ -31,6 +31,7 @@ class TodoScreen extends ConsumerWidget {
             onPressed: confirmDelete,
             icon: const Icon(Icons.delete),
             color: Theme.of(context).colorScheme.error,
+            tooltip: 'Delete',
           ),
         ],
       ),
@@ -60,6 +61,7 @@ class TodoScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/todos/$id/update'),
+        tooltip: 'Edit',
         child: const Icon(Icons.edit),
       ),
     );
