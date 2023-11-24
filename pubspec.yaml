@@ -18,6 +18,7 @@ dependencies:
   go_router: ^12.1.0
   hive: ^4.0.0-dev.2
   hooks_riverpod: ^2.4.5
+  isar_flutter_libs: ^4.0.0-dev.14
   json_annotation: ^4.8.1
   path_provider: ^2.1.1
   riverpod_annotation: ^2.3.0
