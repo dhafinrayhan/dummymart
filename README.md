@@ -4,6 +4,10 @@ An example Flutter project that uses [Riverpod], [flutter_hooks], [Freezed], [Hi
 
 This project uses [DummyJSON] API. Please note that DummyJSON doesn't apply your changes when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to the API limitations.
 
+## Setup
+1. Run `flutter pub get` to get dependencies.
+2. Run `dart run build_runner build` to generate required files. You can also run `dart run build_runner watch` to generate files and let [build_runner] watch for changes and rebuild if necessary.
+
 ## Credentials
 Use these credentials to login:
 
@@ -22,6 +26,7 @@ Or you can use any user credentials from here: https://dummyjson.com/users
   [freezed]: https://pub.dev/packages/freezed
   [hive]: https://pub.dev/packages/hive
   [go_router]: https://pub.dev/packages/go_router
+  [build_runner]: https://pub.dev/packages/build_runner
   [DummyJSON]: https://dummyjson.com/
 
 ## Screenshots
