@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../services/api_client.dart';
+import '../../../services/api/api_service.dart';
 import '../../profile/models/profile.dart';
 import '../providers/auth_state.dart';
 
@@ -24,7 +24,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final profile = profileBox.get('current');
 
     if (token != null && profile != null) {
-      ref.read(apiClientProvider.notifier).setToken(token);
+      ref.read(apiServiceProvider.notifier).setToken(token);
       ref.read(currentAuthStateProvider.notifier).restore(profile);
     } else {
       ref.read(currentAuthStateProvider.notifier).reset();
