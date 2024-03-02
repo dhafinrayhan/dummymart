@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../services/api_client.dart';
+import '../../../services/api/api_service.dart';
 import '../../profile/models/profile.dart';
 import '../../profile/providers/profile.dart';
 import '../models/auth_state.dart';
@@ -15,7 +15,7 @@ class CurrentAuthState extends _$CurrentAuthState {
   AuthState build() => AuthState.unknown;
 
   Future<void> login(Login data) async {
-    final profile = await ref.read(apiClientProvider.notifier).login(data);
+    final profile = await ref.read(apiServiceProvider.notifier).login(data);
 
     // Save the new [Profile] to Hive box.
     final box = Hive.box<Profile>('profile');
@@ -25,7 +25,7 @@ class CurrentAuthState extends _$CurrentAuthState {
   }
 
   void logout() {
-    ref.read(apiClientProvider.notifier).logout();
+    ref.read(apiServiceProvider.notifier).logout();
 
     // Delete the saved [Profile] from Hive box.
     final box = Hive.box<Profile>('profile');
