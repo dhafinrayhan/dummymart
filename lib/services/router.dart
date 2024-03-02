@@ -56,20 +56,21 @@ GoRouter router(RouterRef ref) {
           builder: (_, __) => const AddTodoScreen(),
         ),
         GoRoute(
-            path: ':id',
-            builder: (_, state) {
-              final id = int.parse(state.pathParameters['id']!);
-              return TodoScreen(id);
-            },
-            routes: [
-              GoRoute(
-                path: 'update',
-                builder: (_, state) {
-                  final id = int.parse(state.pathParameters['id']!);
-                  return UpdateTodoScreen(id);
-                },
-              ),
-            ]),
+          path: ':id',
+          builder: (_, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return TodoScreen(id);
+          },
+          routes: [
+            GoRoute(
+              path: 'update',
+              builder: (_, state) {
+                final id = int.parse(state.pathParameters['id']!);
+                return UpdateTodoScreen(id);
+              },
+            ),
+          ],
+        ),
       ],
     ),
     NavBarItem(

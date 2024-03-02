@@ -83,9 +83,8 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
         await ref.read(todosProvider.notifier).delete(id);
 
         if (!context.mounted) return;
-        context
-          ..pop()
-          ..go('/todos');
+        Navigator.pop(context);
+        context.go('/todos');
       } on DioException catch (e) {
         if (!context.mounted) return;
 
@@ -108,7 +107,7 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
           : null,
       actions: [
         TextButton(
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.pop(context),
           child: const Text('No'),
         ),
         TextButton(
