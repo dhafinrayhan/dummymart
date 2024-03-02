@@ -41,8 +41,14 @@ class DummyMartApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'DummyMart',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        colorSchemeSeed: Colors.blue,
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blue,
+        brightness: Brightness.dark,
       ),
       routerConfig: router,
     );
