@@ -5,6 +5,8 @@ import '../../features/products/models/product.dart';
 import '../../features/profile/models/profile.dart';
 import '../../features/todos/models/todo.dart';
 
+typedef _ResponseData = Map<String, Object?>;
+
 class ApiClient {
   final Dio _httpClient;
 
@@ -22,7 +24,7 @@ class ApiClient {
       data: data.toJson(),
     );
 
-    final profile = Profile.fromJson(response.data as Map<String, Object?>);
+    final profile = Profile.fromJson(response.data as _ResponseData);
     final token = response.data['token'] as String;
 
     return (profile, token);
@@ -32,7 +34,7 @@ class ApiClient {
     final response = await _httpClient.get('/products');
 
     return (response.data['products'] as List)
-        .cast<Map<String, Object?>>()
+        .cast<_ResponseData>()
         .map(Product.fromJson)
         .toList();
   }
@@ -40,14 +42,14 @@ class ApiClient {
   Future<Product> fetchProduct(int id) async {
     final response = await _httpClient.get('/products/$id');
 
-    return Product.fromJson(response.data as Map<String, Object?>);
+    return Product.fromJson(response.data as _ResponseData);
   }
 
   Future<List<Todo>> fetchTodos() async {
     final response = await _httpClient.get('/todos');
 
     return (response.data['todos'] as List)
-        .cast<Map<String, Object?>>()
+        .cast<_ResponseData>()
         .map(Todo.fromJson)
         .toList();
   }
@@ -55,7 +57,7 @@ class ApiClient {
   Future<Todo> fetchTodo(int id) async {
     final response = await _httpClient.get('/todos/$id');
 
-    return Todo.fromJson(response.data as Map<String, Object?>);
+    return Todo.fromJson(response.data as _ResponseData);
   }
 
   Future<Todo> addTodo(Todo todo) async {
@@ -64,7 +66,7 @@ class ApiClient {
       data: todo.toJson()..remove('id'),
     );
 
-    return Todo.fromJson(response.data as Map<String, Object?>);
+    return Todo.fromJson(response.data as _ResponseData);
   }
 
   Future<Todo> updateTodo(int id, Todo todo) async {
@@ -73,12 +75,12 @@ class ApiClient {
       data: todo.toJson()..remove('id'),
     );
 
-    return Todo.fromJson(response.data as Map<String, Object?>);
+    return Todo.fromJson(response.data as _ResponseData);
   }
 
   Future<Todo> deleteTodo(int id) async {
     final response = await _httpClient.delete('/todos/$id');
 
-    return Todo.fromJson(response.data as Map<String, Object?>);
+    return Todo.fromJson(response.data as _ResponseData);
   }
 }
