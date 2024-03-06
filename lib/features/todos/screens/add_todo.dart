@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -6,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../services/api/api_client.dart';
 import '../../../widgets/button.dart';
 import '../models/todo.dart';
 import '../providers/todos.dart';
@@ -32,7 +32,7 @@ class AddTodoScreen extends HookConsumerWidget {
 
         if (!context.mounted) return;
         context.go('/todos');
-      } on DioException catch (e) {
+      } on ApiClientException catch (e) {
         if (!context.mounted) return;
 
         final message = e.response?.data?['message'] as String?;

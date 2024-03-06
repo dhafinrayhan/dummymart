@@ -5,6 +5,7 @@ import '../../features/products/models/product.dart';
 import '../../features/profile/models/profile.dart';
 import '../../features/todos/models/todo.dart';
 
+typedef ApiClientException = DioException;
 typedef _ResponseData = Map<String, Object?>;
 
 class ApiClient {
