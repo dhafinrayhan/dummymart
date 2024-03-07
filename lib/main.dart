@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'features/profile/models/profile.dart';
 import 'services/router.dart';
+import 'services/theme_mode.dart';
 
 Future<void> main() async {
   HttpOverrides.global = _HttpOverrides();
@@ -22,6 +23,7 @@ Future<void> main() async {
     await [
       Hive.openBox<Profile>('profile'),
       Hive.openBox<String>('token'),
+      Hive.openBox<String>('settings'),
     ].wait;
   });
 
@@ -37,9 +39,11 @@ class DummyMartApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    final themeMode = ref.watch(currentThemeModeProvider);
 
     return MaterialApp.router(
       title: 'DummyMart',
+      themeMode: themeMode,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.blue,
