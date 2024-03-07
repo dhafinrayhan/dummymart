@@ -23,6 +23,7 @@ Future<void> main() async {
     await [
       Hive.openBox<Profile>('profile'),
       Hive.openBox<String>('token'),
+      Hive.openBox<String>('settings'),
     ].wait;
   });
 
