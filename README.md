@@ -1,6 +1,6 @@
 # DummyMart
 
-An example Flutter project that uses [Riverpod], [flutter_hooks], [Freezed], [Hive], and [go_router].
+An example Flutter project that uses [Riverpod], [go_router], [Hive], [flutter_hooks], and [Freezed].
 
 This project uses [DummyJSON] API. Please note that DummyJSON **doesn't apply your changes** when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to these API limitations.
 
@@ -36,6 +36,13 @@ password: i0xzpX
 
 Or you can use any user credentials from here: https://dummyjson.com/users
 
+## Screenshots
+|||||
+|----|----|----|----|
+| ![View all todos] | ![View a single todo] | ![Add todo] | ![Update todo] |
+| ![Login] | ![Profile] | ![View all products] | ![View a single product] |
+
+
   [riverpod]: https://pub.dev/packages/riverpod
   [flutter_hooks]: https://pub.dev/packages/flutter_hooks
   [freezed]: https://pub.dev/packages/freezed
@@ -43,13 +50,6 @@ Or you can use any user credentials from here: https://dummyjson.com/users
   [go_router]: https://pub.dev/packages/go_router
   [build_runner]: https://pub.dev/packages/build_runner
   [DummyJSON]: https://dummyjson.com/
-
-## Screenshots
-|||||
-|----|----|----|----|
-| ![View all todos] | ![View a single todo] | ![Add todo] | ![Update todo] |
-| ![Login] | ![Profile] | ![View all products] | ![View a single product] |
-
 
   [View all todos]: https://github.com/dhafinrayhan/dummymart/assets/49405411/02fb9cc4-4252-4acc-ae59-84d1500a7de5
   [View a single todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/b5203d1c-8030-42bf-b8c4-cc2ff90c6bdb
