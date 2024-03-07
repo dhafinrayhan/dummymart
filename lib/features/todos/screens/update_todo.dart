@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api/api_client.dart';
+import '../../../utils/ui_helper.dart';
 import '../../../widgets/button.dart';
 import '../models/todo.dart';
 import '../providers/todo.dart';
@@ -65,9 +66,7 @@ class _UpdateTodoForm extends HookConsumerWidget {
         if (!context.mounted) return;
 
         final message = e.response?.data?['message'] as String?;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(message ?? 'Update todo failed'),
-        ));
+        context.showTextSnackBar(message ?? 'Update todo failed');
       } finally {
         isLoading.value = false;
       }

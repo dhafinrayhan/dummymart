@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api/api_client.dart';
+import '../../../utils/ui_helper.dart';
 import '../../../widgets/button.dart';
 import '../models/todo.dart';
 import '../providers/todos.dart';
@@ -36,9 +37,7 @@ class AddTodoScreen extends HookConsumerWidget {
         if (!context.mounted) return;
 
         final message = e.response?.data?['message'] as String?;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(message ?? 'Add todo failed'),
-        ));
+        context.showTextSnackBar(message ?? 'Add todo failed');
       } finally {
         isLoading.value = false;
       }

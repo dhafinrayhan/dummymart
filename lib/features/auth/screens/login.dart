@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api/api_client.dart';
+import '../../../utils/ui_helper.dart';
 import '../../../widgets/button.dart';
 import '../models/login.dart';
 import '../providers/auth_state.dart';
@@ -30,9 +31,7 @@ class LoginScreen extends HookConsumerWidget {
         if (!context.mounted) return;
 
         final message = e.response?.data?['message'] as String?;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(message ?? 'Login failed'),
-        ));
+        context.showTextSnackBar(message ?? 'Login failed');
       } finally {
         isLoading.value = false;
       }

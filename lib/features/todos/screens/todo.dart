@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api/api_client.dart';
+import '../../../utils/ui_helper.dart';
 import '../providers/todo.dart';
 import '../providers/todos.dart';
 
@@ -30,7 +31,7 @@ class TodoScreen extends ConsumerWidget {
           IconButton(
             onPressed: confirmDelete,
             icon: const Icon(Icons.delete),
-            color: Theme.of(context).colorScheme.error,
+            color: context.colorScheme.error,
             tooltip: 'Delete',
           ),
         ],
@@ -89,9 +90,7 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
         if (!context.mounted) return;
 
         final message = e.response?.data?['message'] as String?;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(message ?? 'Delete todo failed'),
-        ));
+        context.showTextSnackBar(message ?? 'Delete todo failed');
       } finally {
         isLoading.value = false;
       }

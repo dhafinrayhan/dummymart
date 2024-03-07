@@ -2,6 +2,8 @@ import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../utils/ui_helper.dart';
+
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,
@@ -27,7 +29,7 @@ class AppButton extends StatelessWidget {
               dimension: 12,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: context.colorScheme.onPrimary,
               ),
             ),
           Text(label),
