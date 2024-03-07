@@ -82,6 +82,7 @@ GoRouter router(RouterRef ref) {
   ];
 
   final router = GoRouter(
+    debugLogDiagnostics: true,
     initialLocation: navBarItems.first.path,
     routes: [
       GoRoute(
