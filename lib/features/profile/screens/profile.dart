@@ -19,24 +19,21 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        actions: [
-          IconButton(
-            onPressed: () =>
-                ref.read(currentAuthStateProvider.notifier).logout(),
-            icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
+      ),
+      body: ListView(
+        children: [
+          for (final record in profileRecords)
+            ListTile(
+              title: Text(record.label),
+              subtitle: Text(record.text ?? ''),
+            ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            onTap: () => ref.read(currentAuthStateProvider.notifier).logout(),
           ),
         ],
-      ),
-      body: ListView.builder(
-        itemCount: profileRecords.length,
-        itemBuilder: (_, index) {
-          final record = profileRecords[index];
-          return ListTile(
-            title: Text(record.label),
-            subtitle: Text(record.text ?? ''),
-          );
-        },
       ),
     );
   }
