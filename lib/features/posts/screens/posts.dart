@@ -12,13 +12,20 @@ class PostsScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /// Whether the app bar is in search mode (showing search field instead of
+    /// the title text).
     final isSearchMode = useState(false);
+
+    /// The search query that will be passed to the provider.
     final search = useState('');
+
     final searchController = useTextEditingController();
     final searchFocusNode = useFocusNode();
 
     final posts = ref.watch(postsProvider(search: search.value));
 
+    // Register a listener on [searchController] so the search query will be
+    // updated based on the latest input with debounce mechanism.
     useEffect(() {
       void searchControllerListener() {
         EasyDebounce.debounce(
