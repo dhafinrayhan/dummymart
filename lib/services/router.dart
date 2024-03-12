@@ -6,6 +6,8 @@ import '../features/auth/models/auth_state.dart';
 import '../features/auth/providers/auth_state.dart';
 import '../features/auth/screens/login.dart';
 import '../features/auth/screens/splash.dart';
+import '../features/posts/screens/post.dart';
+import '../features/posts/screens/posts.dart';
 import '../features/products/screens/product.dart';
 import '../features/products/screens/products.dart';
 import '../features/profile/screens/profile.dart';
@@ -48,7 +50,7 @@ GoRouter router(RouterRef ref) {
     NavBarItem(
       path: '/todos',
       widget: const TodosScreen(),
-      icon: Icons.list_alt,
+      icon: Icons.subject,
       label: 'Todos',
       routes: [
         GoRoute(
@@ -70,6 +72,21 @@ GoRouter router(RouterRef ref) {
               },
             ),
           ],
+        ),
+      ],
+    ),
+    NavBarItem(
+      path: '/posts',
+      widget: const PostsScreen(),
+      icon: Icons.article,
+      label: 'Posts',
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (_, state) {
+            final id = int.parse(state.pathParameters['id']!);
+            return PostScreen(id);
+          },
         ),
       ],
     ),

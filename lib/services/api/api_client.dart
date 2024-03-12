@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../features/auth/models/login.dart';
+import '../../features/posts/models/post.dart';
 import '../../features/products/models/product.dart';
 import '../../features/profile/models/profile.dart';
 import '../../features/todos/models/todo.dart';
@@ -83,5 +84,32 @@ class ApiClient {
     final response = await _httpClient.delete('/todos/$id');
 
     return Todo.fromJson(response.data as _ResponseData);
+  }
+
+  Future<List<Post>> fetchPosts({String? search, int? limit}) async {
+    var path = '/posts';
+    final queryParameters = <String, dynamic>{};
+
+    if (search != null && search.isNotEmpty) {
+      path += '/search';
+      queryParameters['q'] = search;
+    }
+    if (limit != null) {
+      queryParameters['limit'] = limit;
+    }
+
+    final response =
+        await _httpClient.get(path, queryParameters: queryParameters);
+
+    return (response.data['posts'] as List)
+        .cast<_ResponseData>()
+        .map(Post.fromJson)
+        .toList();
+  }
+
+  Future<Post> fetchPost(int id) async {
+    final response = await _httpClient.get('/posts/$id');
+
+    return Post.fromJson(response.data as _ResponseData);
   }
 }
