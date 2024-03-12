@@ -78,30 +78,45 @@ class PostsScreen extends HookConsumerWidget {
                 ),
               ],
             ),
-      body: RefreshIndicator(
-        onRefresh: () =>
-            ref.refresh(postsProvider(search: search.value).future),
-        child: posts.when(
-          skipLoadingOnReload: true,
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const Center(child: Text('An error occured')),
-          data: (posts) => ListView.builder(
-            itemCount: posts.length + 1,
-            itemBuilder: (_, index) {
-              // Show a "load more" button at the bottom of the list.
-              if (index == posts.length) {
-                return Center(
-                  child: isLoadingMore.value
-                      ? const CircularProgressIndicator()
-                      : TextButton(
-                          onPressed: loadMore,
-                          child: const Text('Load more'),
-                        ),
-                );
-              }
+      body: NotificationListener<ScrollEndNotification>(
+        onNotification: (notification) {
+          // Use this check to prevent requesting "load more" twice in a single
+          // max scroll event.
+          if (!isLoadingMore.value) {
+            final ScrollMetrics(:pixels, :maxScrollExtent) =
+                notification.metrics;
+            if (pixels >= maxScrollExtent) {
+              loadMore();
+            }
+          }
 
-              return _PostListTile(posts[index]);
-            },
+          return true;
+        },
+        child: RefreshIndicator(
+          onRefresh: () =>
+              ref.refresh(postsProvider(search: search.value).future),
+          child: posts.when(
+            skipLoadingOnReload: true,
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (_, __) => const Center(child: Text('An error occured')),
+            data: (posts) => ListView.builder(
+              itemCount: posts.length + 1,
+              itemBuilder: (_, index) {
+                // Show a "load more" button at the bottom of the list.
+                if (index == posts.length) {
+                  return Center(
+                    child: SizedBox.square(
+                      dimension: 36,
+                      child: isLoadingMore.value
+                          ? const CircularProgressIndicator()
+                          : const SizedBox(),
+                    ),
+                  );
+                }
+
+                return _PostListTile(posts[index]);
+              },
+            ),
           ),
         ),
       ),
