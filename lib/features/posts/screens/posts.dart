@@ -16,6 +16,9 @@ class PostsScreen extends HookConsumerWidget {
     /// the title text).
     final isSearchMode = useState(false);
 
+    /// Whether the request to load more is on loading state.
+    final isLoadingMore = useState(false);
+
     /// The search query that will be passed to the provider.
     final search = useState('');
 
@@ -38,6 +41,12 @@ class PostsScreen extends HookConsumerWidget {
       searchController.addListener(searchControllerListener);
       return () => searchController.removeListener(searchControllerListener);
     }, []);
+
+    Future<void> loadMore() async {
+      isLoadingMore.value = true;
+      await ref.read(postsProvider(search: search.value).notifier).loadMore();
+      isLoadingMore.value = false;
+    }
 
     return Scaffold(
       appBar: isSearchMode.value
@@ -73,11 +82,26 @@ class PostsScreen extends HookConsumerWidget {
         onRefresh: () =>
             ref.refresh(postsProvider(search: search.value).future),
         child: posts.when(
+          skipLoadingOnReload: true,
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, __) => const Center(child: Text('An error occured')),
           data: (posts) => ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (_, index) => _PostListTile(posts[index]),
+            itemCount: posts.length + 1,
+            itemBuilder: (_, index) {
+              // Show a "load more" button at the bottom of the list.
+              if (index == posts.length) {
+                return Center(
+                  child: isLoadingMore.value
+                      ? const CircularProgressIndicator()
+                      : TextButton(
+                          onPressed: loadMore,
+                          child: const Text('Load more'),
+                        ),
+                );
+              }
+
+              return _PostListTile(posts[index]);
+            },
           ),
         ),
       ),

@@ -86,12 +86,20 @@ class ApiClient {
     return Todo.fromJson(response.data as _ResponseData);
   }
 
-  Future<List<Post>> fetchPosts({String? search}) async {
-    String path = '/posts';
+  Future<List<Post>> fetchPosts({String? search, int? limit}) async {
+    var path = '/posts';
+    final queryParameters = <String, dynamic>{};
+
     if (search != null && search.isNotEmpty) {
-      path += '/search?q=$search';
+      path += '/search';
+      queryParameters['q'] = search;
     }
-    final response = await _httpClient.get(path);
+    if (limit != null) {
+      queryParameters['limit'] = limit;
+    }
+
+    final response =
+        await _httpClient.get(path, queryParameters: queryParameters);
 
     return (response.data['posts'] as List)
         .cast<_ResponseData>()

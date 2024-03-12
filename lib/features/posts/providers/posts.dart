@@ -6,6 +6,24 @@ import '../models/post.dart';
 part 'posts.g.dart';
 
 @riverpod
-Future<List<Post>> posts(PostsRef ref, {String? search}) {
-  return ref.watch(apiServiceProvider).fetchPosts(search: search);
+class Posts extends _$Posts {
+  static const defaultLimit = 15;
+
+  @override
+  Future<List<Post>> build({String? search}) {
+    return ref
+        .watch(apiServiceProvider)
+        .fetchPosts(search: search, limit: defaultLimit);
+  }
+
+  Future<void> loadMore() async {
+    final newLimit = (await future).length + defaultLimit;
+
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      return ref
+          .read(apiServiceProvider)
+          .fetchPosts(search: search, limit: newLimit);
+    });
+  }
 }
