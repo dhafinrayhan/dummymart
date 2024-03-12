@@ -86,8 +86,12 @@ class ApiClient {
     return Todo.fromJson(response.data as _ResponseData);
   }
 
-  Future<List<Post>> fetchPosts() async {
-    final response = await _httpClient.get('/posts');
+  Future<List<Post>> fetchPosts({String? search}) async {
+    String path = '/posts';
+    if (search != null && search.isNotEmpty) {
+      path += '/search?q=$search';
+    }
+    final response = await _httpClient.get(path);
 
     return (response.data['posts'] as List)
         .cast<_ResponseData>()

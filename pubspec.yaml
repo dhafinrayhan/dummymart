@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   dio: ^5.4.1
+  easy_debounce: ^2.0.3
   flextras: ^1.0.0
   flutter:
     sdk: flutter
