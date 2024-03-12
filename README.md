@@ -2,9 +2,17 @@
 
 An example Flutter project that uses [Riverpod], [go_router], [Hive], [flutter_hooks], and [Freezed].
 
+### ⚠ Important Notes
 This project uses [DummyJSON] API. Please note that DummyJSON **doesn't apply your changes** when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to these API limitations.
 
-#### Routes
+## Features
+Each feature demonstrates certain functionalities that are commonly used in a CRUD app.
+1. [Products](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/products): Basic **"view all items"** and **"view item details"** functionality. Also implements **"pull-to-refresh"** mechanism.
+2. [Todos](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/todos): Full CRUD operations, including **"add item"**, **"edit item"**, and **"delete item"**.
+3. [Posts](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/posts): More advanced read operations such as **"search as we type (with debounce)"** and **"infinite scrolling"**.
+4. [Auth](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/auth): Managing auth states, including functionality to **"invalidate all data when logging out"** and **"redirect screens based on the auth state"**.
+
+## Routes
 ```
 Full paths for routes:
   => /
@@ -20,7 +28,7 @@ Full paths for routes:
 
 ## Setup
 1. Run `flutter pub get` to get dependencies.
-2. Run `dart run build_runner build` to generate required files. You can also run `dart run build_runner watch` to generate files and let [build_runner] watch for changes and rebuild if necessary.
+1. Run `dart run build_runner build` to generate required files. You can also run `dart run build_runner watch` to generate files and let [build_runner] watch for changes and rebuild if necessary.
 
 ## Credentials
 Use these credentials to login:
