@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../utils/ui_helper.dart';
 import '../models/post.dart';
 import '../providers/posts.dart';
 
@@ -134,7 +135,34 @@ class _PostListTile extends StatelessWidget {
     return ListTile(
       onTap: () => context.go('/posts/${post.id}'),
       title: Text(post.title),
-      subtitle: Text('Reactions: ${post.reactions}'),
+      subtitle: Wrap(
+        spacing: 4,
+        children: [for (final tag in post.tags) _PostTag(tag)],
+      ),
+    );
+  }
+}
+
+class _PostTag extends StatelessWidget {
+  const _PostTag(this.tag);
+
+  final String tag;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: context.colorScheme.secondaryContainer.withOpacity(0.7),
+      ),
+      child: Text(
+        tag,
+        style: TextStyle(
+          fontSize: 11,
+          color: context.colorScheme.onSecondaryContainer,
+        ),
+      ),
     );
   }
 }
