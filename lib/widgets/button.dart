@@ -2,7 +2,7 @@ import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../utils/ui_helper.dart';
+import '../utils/extensions.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({

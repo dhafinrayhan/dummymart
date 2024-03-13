@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../utils/ui_helper.dart';
+import '../../../utils/extensions.dart';
 import '../models/post.dart';
 import '../providers/posts.dart';
 

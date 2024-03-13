@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-extension UiHelper on BuildContext {
+extension BuildContextExtension on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
+  /// Shows a floating snack bar with text as its content.
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showTextSnackBar(
     String text,
   ) =>
@@ -10,4 +11,12 @@ extension UiHelper on BuildContext {
         behavior: SnackBarBehavior.floating,
         content: Text(text),
       ));
+}
+
+extension ThemeModeExtension on ThemeMode {
+  String get label => switch (this) {
+        ThemeMode.system => 'System',
+        ThemeMode.light => 'Light',
+        ThemeMode.dark => 'Dark',
+      };
 }

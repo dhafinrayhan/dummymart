@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/theme_mode.dart';
-import '../../../utils/theme_mode_helper.dart';
+import '../../../utils/extensions.dart';
 import '../../auth/providers/auth_state.dart';
 import '../providers/profile.dart';
 
