@@ -23,6 +23,8 @@ Full paths for routes:
   =>   /todos/add
   =>   /todos/:id
   =>     /todos/:id/update
+  => /posts
+  =>   /posts/:id
   => /profile
 ```
 
