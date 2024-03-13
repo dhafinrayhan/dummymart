@@ -20,6 +20,7 @@ class TodoScreen extends ConsumerWidget {
     void confirmDelete() {
       showDialog(
         context: context,
+        useRootNavigator: false,
         builder: (_) => _ConfirmDeleteDialog(id),
       );
     }
