@@ -50,7 +50,7 @@ Or you can use any user credentials from here: https://dummyjson.com/users
 |||||
 |----|----|----|----|
 | ![View all todos] | ![View a single todo] | ![Add todo] | ![Update todo] |
-| ![Login] | ![Profile] | ![View all products] | ![View a single product] |
+| ![Login] | ![Profile] | ![Infinite scrolling] | ![Search post] |
 
 
   [riverpod]: https://pub.dev/packages/riverpod
@@ -61,12 +61,12 @@ Or you can use any user credentials from here: https://dummyjson.com/users
   [build_runner]: https://pub.dev/packages/build_runner
   [DummyJSON]: https://dummyjson.com/
 
-  [View all todos]: https://github.com/dhafinrayhan/dummymart/assets/49405411/02fb9cc4-4252-4acc-ae59-84d1500a7de5
-  [View a single todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/b5203d1c-8030-42bf-b8c4-cc2ff90c6bdb
-  [Add todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/7a901a1b-df57-4ad8-8c70-93838a9b162d
-  [Update todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/7696ab81-7c58-4833-9607-277725219dc2
+  [View all todos]: https://github.com/dhafinrayhan/dummymart/assets/49405411/bc4a0202-ec44-4f7c-a26a-3d88f55a4f7a
+  [View a single todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/7611f63a-efd7-4a58-a831-8a1eb360ad8a
+  [Add todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/d412a52a-530d-4624-be7a-fc0be06cd2ab
+  [Update todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/3a386227-9ed4-4c9b-9223-bd4f98194576
 
-  [Login]: https://github.com/dhafinrayhan/dummymart/assets/49405411/15c235f4-0e2d-4a4c-9060-7569c7f953e7
-  [Profile]: https://github.com/dhafinrayhan/dummymart/assets/49405411/4ddaaa6e-ca48-4674-a49a-8fd7be0d2859
-  [View all products]: https://github.com/dhafinrayhan/dummymart/assets/49405411/253f5167-cf83-4414-b6b5-cecb2cba6403
-  [View a single product]: https://github.com/dhafinrayhan/dummymart/assets/49405411/a05010b9-db74-47f0-8ae1-bcfca54a5d15
+  [Login]: https://github.com/dhafinrayhan/dummymart/assets/49405411/fdcea9a8-a25a-4b95-9a11-a66afa503a83
+  [Profile]: https://github.com/dhafinrayhan/dummymart/assets/49405411/454dcf3e-c5c6-4021-be03-2f88f7e1fd5b
+  [Infinite scrolling]: https://github.com/dhafinrayhan/dummymart/assets/49405411/276bafc1-4959-4551-a86b-b3f4ec9c4722
+  [Search post]: https://github.com/dhafinrayhan/dummymart/assets/49405411/2dca7217-8b80-4549-b76f-83e53850818a
