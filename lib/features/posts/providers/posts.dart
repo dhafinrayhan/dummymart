@@ -7,7 +7,7 @@ part 'posts.g.dart';
 
 @riverpod
 class Posts extends _$Posts {
-  static const defaultLimit = 15;
+  static const int defaultLimit = 15;
 
   @override
   Future<List<Post>> build({String? search}) {
