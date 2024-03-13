@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/theme_mode.dart';
@@ -68,7 +69,7 @@ class _ThemeModeDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     void setThemeMode(ThemeMode themeMode) {
       ref.read(currentThemeModeProvider.notifier).set(themeMode);
-      Navigator.of(context).pop();
+      context.pop();
     }
 
     return SimpleDialog(
