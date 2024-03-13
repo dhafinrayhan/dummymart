@@ -10,7 +10,7 @@ Each feature demonstrates certain functionalities that are commonly used in a CR
 1. [Products](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/products): Basic **"view all items"** and **"view item details"** functionality. Also implements **"pull-to-refresh"** mechanism.
 2. [Todos](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/todos): Full CRUD operations, including **"add item"**, **"edit item"**, and **"delete item"**.
 3. [Posts](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/posts): More advanced read operations such as **"search as we type (with debounce)"** and **"infinite scrolling"**.
-4. [Auth](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/auth): Managing auth states, including functionality to **"invalidate all data when logging out"** and **"redirect screens based on the auth state"**.
+4. [Auth](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/auth): Managing auth states, allowing functionalities such as **"invalidate all data when logging out"** and **"redirect screens based on the auth state"**.
 
 ## Routes
 ```
