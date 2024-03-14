@@ -7,7 +7,7 @@ This project uses [DummyJSON] API. Please note that DummyJSON **doesn't apply yo
 
 ## Features
 Each feature demonstrates certain functionalities that are commonly used in a CRUD app.
-1. [Products](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/products): Basic **"view all items"** and **"view item details"** functionality. Also implements **"pull-to-refresh"** mechanism.
+1. [Products](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/products): Basic **"view all items"** and **"view item details"** functionalities. Also implements **"pull-to-refresh"** mechanism.
 2. [Todos](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/todos): Full CRUD operations, including **"add item"**, **"edit item"**, and **"delete item"**.
 3. [Posts](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/posts): More advanced read operations such as **"search as we type (with debounce)"** and **"infinite scrolling"**.
 4. [Auth](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/auth): Managing auth states, allowing functionalities such as **"invalidate all data when logging out"** and **"redirect screens based on the auth state"**.
@@ -66,7 +66,8 @@ Or you can use any user credentials from here: https://dummyjson.com/users
   [Add todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/d412a52a-530d-4624-be7a-fc0be06cd2ab
   [Update todo]: https://github.com/dhafinrayhan/dummymart/assets/49405411/3a386227-9ed4-4c9b-9223-bd4f98194576
 
-  [Login]: https://github.com/dhafinrayhan/dummymart/assets/49405411/fdcea9a8-a25a-4b95-9a11-a66afa503a83
-  [Profile]: https://github.com/dhafinrayhan/dummymart/assets/49405411/454dcf3e-c5c6-4021-be03-2f88f7e1fd5b
+  [Login]: https://github.com/dhafinrayhan/dummymart/assets/49405411/c1f0a23d-0643-449e-abf3-3c1b1a330e83
+  [Profile]: https://github.com/dhafinrayhan/dummymart/assets/49405411/738db00a-a9a0-423a-8630-8f097d6ff966
   [Infinite scrolling]: https://github.com/dhafinrayhan/dummymart/assets/49405411/276bafc1-4959-4551-a86b-b3f4ec9c4722
   [Search post]: https://github.com/dhafinrayhan/dummymart/assets/49405411/2dca7217-8b80-4549-b76f-83e53850818a
+
