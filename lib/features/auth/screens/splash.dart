@@ -6,6 +6,13 @@ import '../../../services/api/api_service.dart';
 import '../../profile/models/profile.dart';
 import '../providers/auth_state.dart';
 
+/// The screen shown at the beginning after the app is launched.
+///
+/// This screen is not meant to be the usual "splash screen" where it shows some
+/// logo or animation representing the app's brand, but rather it's used as a
+/// temporary screen to show when the authentication state is still unknown and
+/// the app needs to determine what authentication state should be used based on
+/// the saved profile/token.
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 

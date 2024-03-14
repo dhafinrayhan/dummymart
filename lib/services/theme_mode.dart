@@ -4,6 +4,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'theme_mode.g.dart';
 
+/// The current theme mode of the app.
+///
+/// When this provider is first read, it will read the saved value from storage,
+/// and defaults to [ThemeMode.system] if the theme mode was not set before.
 @Riverpod(keepAlive: true)
 class CurrentThemeMode extends _$CurrentThemeMode {
   @override

@@ -9,11 +9,17 @@ import '../models/login.dart';
 
 part 'auth_state.g.dart';
 
+/// The current authentication state of the app.
+///
+/// This notifier does not restore/save states by its own. Restore/save must be
+/// explicitly called externally.
 @Riverpod(keepAlive: true)
 class CurrentAuthState extends _$CurrentAuthState {
   @override
   AuthState build() => AuthState.unknown;
 
+  /// Attempts to login with [data], saves the profile info when success and
+  /// restores the profile.
   Future<void> login(Login data) async {
     final profile = await ref.read(apiServiceProvider.notifier).login(data);
 
@@ -24,6 +30,7 @@ class CurrentAuthState extends _$CurrentAuthState {
     restore(profile);
   }
 
+  /// Logouts and removes the saved profile.
   void logout() {
     ref.read(apiServiceProvider.notifier).logout();
 
@@ -34,12 +41,16 @@ class CurrentAuthState extends _$CurrentAuthState {
     reset();
   }
 
+  /// Restores the current profile from [profile] and sets the authentication
+  /// state to [AuthState.authenticated].
   void restore(Profile profile) {
     ref.read(currentProfileProvider.notifier).set(profile);
 
     state = AuthState.authenticated;
   }
 
+  /// Invalidates the current profile and sets the authentication state to
+  /// [AuthState.unauthenticated].
   void reset() {
     ref.invalidate(currentProfileProvider);
 

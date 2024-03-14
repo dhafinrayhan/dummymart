@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/product.dart';
 import '../providers/products.dart';
 
+/// A screen showing all products in a list view.
 class ProductsScreen extends ConsumerWidget {
   const ProductsScreen({super.key});
 

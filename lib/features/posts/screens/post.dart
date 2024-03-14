@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/post.dart';
 
+/// A screen showing a post with the specific [id].
 class PostScreen extends ConsumerWidget {
   const PostScreen(this.id, {super.key});
 

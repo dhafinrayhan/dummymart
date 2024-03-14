@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/product.dart';
 
+/// A screen showing a product with the specific [id].
 class ProductScreen extends ConsumerWidget {
   const ProductScreen(this.id, {super.key});
 

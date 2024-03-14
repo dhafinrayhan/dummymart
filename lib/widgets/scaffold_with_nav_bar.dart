@@ -19,6 +19,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentIndex =
         navBarItems.indexWhere((item) => item.path == currentPath);
+
+    // Only show nav bar when the current path is a nav bar item.
     final shouldShowNavBar = currentIndex >= 0;
 
     return Scaffold(

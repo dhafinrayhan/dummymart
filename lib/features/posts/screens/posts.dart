@@ -8,6 +8,9 @@ import '../../../utils/extensions.dart';
 import '../models/post.dart';
 import '../providers/posts.dart';
 
+/// A screen showing posts in a list view, with the ability to load more posts
+/// when the user scrolled to the bottom of the list, and allows the user to
+/// search with the search bar.
 class PostsScreen extends HookConsumerWidget {
   const PostsScreen({super.key});
 

@@ -9,12 +9,25 @@ import '../../features/todos/models/todo.dart';
 typedef ApiClientException = DioException;
 typedef _ResponseData = Map<String, Object?>;
 
+/// An API client that makes network requests.
+///
+/// This class is meant to be seen as a representation of the common API
+/// contract or API list (such as Swagger or Postman) given by the backend.
+///
+/// This class does not maintain authentication state, but rather receive the
+/// token from external source.
+///
+/// When a widget or provider wants to make a network request, it should not
+/// instantiate this class, but instead call the provider that exposes an object
+/// of this type.
 class ApiClient {
   final Dio _httpClient;
 
   ApiClient() : _httpClient = Dio()..options.baseUrl = 'https://dummyjson.com';
   ApiClient._withOptions(BaseOptions options) : _httpClient = Dio(options);
 
+  /// Returns an [ApiClient] object with the same configurations as this with
+  /// the authorization token updated with the provided [token].
   ApiClient copyWithToken(String token) {
     return ApiClient._withOptions(
         _httpClient.options..headers['Authorization'] = 'Bearer $token');

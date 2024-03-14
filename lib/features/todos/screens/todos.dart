@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/todo.dart';
 import '../providers/todos.dart';
 
+/// A screen showing all todos in a list view, with a floating action button to
+/// add a new todo item.
 class TodosScreen extends ConsumerWidget {
   const TodosScreen({super.key});
 

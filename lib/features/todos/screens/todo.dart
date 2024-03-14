@@ -8,6 +8,8 @@ import '../../../utils/extensions.dart';
 import '../providers/todo.dart';
 import '../providers/todos.dart';
 
+/// A screen showing a todo with the specific [id], with a floating action
+/// button to edit the todo and a delete button to delete the todo.
 class TodoScreen extends ConsumerWidget {
   const TodoScreen(this.id, {super.key});
 
