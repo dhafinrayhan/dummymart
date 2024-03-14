@@ -11,6 +11,12 @@ extension BuildContextExtension on BuildContext {
         behavior: SnackBarBehavior.floating,
         content: Text(text),
       ));
+
+  void showAppLicensePage() => showLicensePage(
+        context: this,
+        useRootNavigator: true,
+        applicationName: 'DummyMart',
+      );
 }
 
 extension ThemeModeExtension on ThemeMode {

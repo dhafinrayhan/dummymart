@@ -38,6 +38,15 @@ class LoginScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+        actions: [
+          IconButton(
+            onPressed: () => context.showAppLicensePage(),
+            icon: const Icon(Icons.info_outline),
+          ),
+        ],
+      ),
       body: SeparatedColumn(
         padding: const EdgeInsets.all(24),
         separatorBuilder: () => const Gap(16),

@@ -35,6 +35,12 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        actions: [
+          IconButton(
+            onPressed: () => context.showAppLicensePage(),
+            icon: const Icon(Icons.info_outline),
+          ),
+        ],
       ),
       body: ListView(
         children: [
