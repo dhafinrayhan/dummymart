@@ -16,6 +16,7 @@ class LoginScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = useState(false);
+    final isPasswordVisible = useState(false);
 
     final usernameController = useTextEditingController();
     final passwordController = useTextEditingController();
@@ -63,11 +64,20 @@ class LoginScreen extends HookConsumerWidget {
           ),
           TextField(
             controller: passwordController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Password',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  isPasswordVisible.value
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                ),
+                onPressed: () =>
+                    isPasswordVisible.value = !isPasswordVisible.value,
+              ),
             ),
-            obscureText: true,
+            obscureText: !isPasswordVisible.value,
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
           ),
