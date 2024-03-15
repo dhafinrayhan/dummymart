@@ -30,9 +30,7 @@ class LoginScreen extends HookConsumerWidget {
             ));
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
-
-        final message = e.response?.data?['message'] as String?;
-        context.showTextSnackBar(message ?? 'Login failed');
+        context.showTextSnackBar(e.responseMessage ?? 'Login failed');
       } finally {
         isLoading.value = false;
       }

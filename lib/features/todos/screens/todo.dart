@@ -92,9 +92,7 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
           ..go('/todos');
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
-
-        final message = e.response?.data?['message'] as String?;
-        context.showTextSnackBar(message ?? 'Delete todo failed');
+        context.showTextSnackBar(e.responseMessage ?? 'Delete todo failed');
       } finally {
         isLoading.value = false;
       }

@@ -35,9 +35,7 @@ class AddTodoScreen extends HookConsumerWidget {
         context.go('/todos');
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
-
-        final message = e.response?.data?['message'] as String?;
-        context.showTextSnackBar(message ?? 'Add todo failed');
+        context.showTextSnackBar(e.responseMessage ?? 'Add todo failed');
       } finally {
         isLoading.value = false;
       }
