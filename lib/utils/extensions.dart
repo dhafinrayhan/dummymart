@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../services/api/api_client.dart';
-
 extension BuildContextExtension on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
@@ -27,8 +25,4 @@ extension ThemeModeExtension on ThemeMode {
         ThemeMode.light => 'Light',
         ThemeMode.dark => 'Dark',
       };
-}
-
-extension ApiClientExceptionExtension on ApiClientException {
-  String? get responseMessage => response?.data?['message'] as String?;
 }

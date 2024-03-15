@@ -9,6 +9,10 @@ import '../../features/todos/models/todo.dart';
 typedef ApiClientException = DioException;
 typedef _ResponseData = Map<String, Object?>;
 
+extension ApiClientExceptionExtension on ApiClientException {
+  String? get responseMessage => response?.data?['message'] as String?;
+}
+
 /// An API client that makes network requests.
 ///
 /// This class is meant to be seen as a representation of the common API
