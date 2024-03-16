@@ -24,11 +24,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   /// Checks the last [AuthState] of the app, restores token and the current
   /// [Profile] if authenticated.
   void _restoreAuthState() {
-    final tokenBox = Hive.box<String>('token');
-    final token = tokenBox.get('current');
-
-    final profileBox = Hive.box<Profile>('profile');
-    final profile = profileBox.get('current');
+    final token = Hive.box<String>('token').get('current');
+    final profile = Hive.box<Profile>('profile').get('current');
 
     if (token != null && profile != null) {
       ref.read(apiServiceProvider.notifier).setToken(token);

@@ -24,8 +24,7 @@ class CurrentAuthState extends _$CurrentAuthState {
     final profile = await ref.read(apiServiceProvider.notifier).login(data);
 
     // Save the new [Profile] to Hive box.
-    final box = Hive.box<Profile>('profile');
-    box.put('current', profile);
+    Hive.box<Profile>('profile').put('current', profile);
 
     restore(profile);
   }
@@ -35,8 +34,7 @@ class CurrentAuthState extends _$CurrentAuthState {
     ref.read(apiServiceProvider.notifier).logout();
 
     // Delete the saved [Profile] from Hive box.
-    final box = Hive.box<Profile>('profile');
-    box.delete('current');
+    Hive.box<Profile>('profile').delete('current');
 
     reset();
   }
