@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'features/profile/models/profile.dart';
 import 'services/router.dart';
-import 'services/theme_mode.dart';
+import 'services/settings.dart';
 
 Future<void> main() async {
   HttpOverrides.global = _HttpOverrides();

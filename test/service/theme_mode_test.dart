@@ -1,4 +1,4 @@
-import 'package:dummymart/services/theme_mode.dart';
+import 'package:dummymart/services/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:test/test.dart';
