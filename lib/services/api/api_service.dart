@@ -16,6 +16,9 @@ part 'api_service.g.dart';
 ///
 /// This service is responsible for saving/removing the token and profile info
 /// to the storage.
+///
+/// The provider is kept alive to follow dio's recommendation to use the same
+/// client instance for the entire app.
 @Riverpod(keepAlive: true)
 class ApiService extends _$ApiService {
   final _tokenBox = Hive.box<String>('token');
