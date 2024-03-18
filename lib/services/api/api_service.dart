@@ -16,6 +16,7 @@ part 'api_service.g.dart';
 @Riverpod(keepAlive: true)
 class ApiService extends _$ApiService {
   final _tokenBox = Hive.box<String>('token');
+  final _profileBox = Hive.box<Profile>('profile');
 
   @override
   ApiClient build() {
@@ -35,8 +36,9 @@ class ApiService extends _$ApiService {
   Future<Profile> login(Login data) async {
     final (profile, token) = await state.login(data);
 
-    // Save the new [token] to Hive box.
+    // Save the new [token] and [profile] to Hive box.
     _tokenBox.put('current', token);
+    _profileBox.put('current', profile);
 
     // Invalidate the state to get a new client that uses the new token.
     ref.invalidateSelf();
@@ -48,8 +50,9 @@ class ApiService extends _$ApiService {
   /// provider won't use the previous token anymore. Removes the saved token
   /// from storage.
   void logout() {
-    // Delete the current [token] from Hive box.
+    // Delete the current [token] and [profile] from Hive box.
     _tokenBox.delete('current');
+    _profileBox.delete('current');
 
     // Invalidate the state so that a new client with no token will be created
     // and used as the new state.
