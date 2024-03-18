@@ -13,7 +13,7 @@ part 'auth_state.g.dart';
 ///
 /// This notifier does not restore/save states by its own. Restore/save must be
 /// explicitly called externally.
-@Riverpod(keepAlive: true)
+@riverpod
 class CurrentAuthState extends _$CurrentAuthState {
   @override
   AuthState build() => AuthState.unknown;
