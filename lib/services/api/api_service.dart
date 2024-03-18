@@ -23,13 +23,8 @@ class ApiService extends _$ApiService {
 
   @override
   ApiClient build() {
-    final client = ApiClient();
-
     final token = _tokenBox.get('current');
-    if (token != null) {
-      client.copyWithToken(token);
-    }
-
+    final client = token != null ? ApiClient.withToken(token) : ApiClient();
     return client;
   }
 
