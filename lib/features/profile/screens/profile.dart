@@ -12,7 +12,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(currentProfileProvider);
+    final profile = ref.watch(profileProvider);
     final themeMode = ref.watch(currentThemeModeProvider);
 
     final profileRecords = [

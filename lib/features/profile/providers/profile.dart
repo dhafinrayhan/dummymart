@@ -1,15 +1,13 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/profile.dart';
 
 part 'profile.g.dart';
 
-@Riverpod(keepAlive: true)
-class CurrentProfile extends _$CurrentProfile {
-  @override
-  Profile? build() => null;
-
-  void set(Profile profile) {
-    state = profile;
-  }
+/// The profile info of the currently logged in user.
+@riverpod
+Profile? profile(ProfileRef ref) {
+  final profile = Hive.box<Profile>('profile').get('current');
+  return profile;
 }

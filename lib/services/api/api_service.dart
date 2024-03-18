@@ -13,36 +13,48 @@ part 'api_service.g.dart';
 /// instantiating the [ApiClient] itself. When being watched, it will force any
 /// data provider (provider that fetches data) to refetch when the
 /// authentication state changes.
+///
+/// This service is responsible for saving/removing the token and profile info
+/// to the storage.
+///
+/// The provider is kept alive to follow dio's recommendation to use the same
+/// client instance for the entire app. Technically, this would still work
+/// without keepAlive set to true.
 @Riverpod(keepAlive: true)
 class ApiService extends _$ApiService {
-  @override
-  ApiClient build() => ApiClient();
+  final _tokenBox = Hive.box<String>('token');
+  final _profileBox = Hive.box<Profile>('profile');
 
-  /// Updates the state with a new [ApiClient] that uses the provided [token].
-  void setToken(String token) {
-    state = state.copyWithToken(token);
+  @override
+  ApiClient build() {
+    final token = _tokenBox.get('current');
+    final client = token != null ? ApiClient.withToken(token) : ApiClient();
+    return client;
   }
 
-  /// Attempts a login and updates the state with a new [ApiClient] that
-  /// uses the authentication token from the API response. Saves the token to
-  /// storage.
+  /// Attempts a login and saves the token and profile info to storage. Will
+  /// invalidate the state so that the [ApiClient] will be updated to a new one
+  /// based on the saved token.
   Future<Profile> login(Login data) async {
     final (profile, token) = await state.login(data);
 
-    setToken(token);
+    // Save the new [token] and [profile] to Hive box.
+    _tokenBox.put('current', token);
+    _profileBox.put('current', profile);
 
-    // Save the new [token] to Hive box.
-    Hive.box<String>('token').put('current', token);
+    // Invalidate the state to get a new client that uses the new token.
+    ref.invalidateSelf();
 
     return profile;
   }
 
-  /// Invalidates the current state so that the new [ApiClient] exposed by this
-  /// provider won't use the previous token anymore. Removes the saved token
-  /// from storage.
+  /// Deletes the saved the token and profile info from storage and invalidates
+  /// the state so that the [ApiClient] will be updated to a new one that
+  /// doesn't use the previous token.
   void logout() {
-    // Delete the current [token] from Hive box.
-    Hive.box<String>('token').delete('current');
+    // Delete the current [token] and [profile] from Hive box.
+    _tokenBox.delete('current');
+    _profileBox.delete('current');
 
     // Invalidate the state so that a new client with no token will be created
     // and used as the new state.
