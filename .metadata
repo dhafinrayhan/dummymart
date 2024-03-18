@@ -15,7 +15,7 @@ migration:
     - platform: root
       create_revision: ba393198430278b6595976de84fe170f553cc728
       base_revision: ba393198430278b6595976de84fe170f553cc728
-    - platform: windows
+    - platform: linux
       create_revision: ba393198430278b6595976de84fe170f553cc728
       base_revision: ba393198430278b6595976de84fe170f553cc728
 
