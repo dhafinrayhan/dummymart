@@ -18,7 +18,8 @@ part 'api_service.g.dart';
 /// to the storage.
 ///
 /// The provider is kept alive to follow dio's recommendation to use the same
-/// client instance for the entire app.
+/// client instance for the entire app. Technically, this would still work
+/// without keepAlive set to true.
 @Riverpod(keepAlive: true)
 class ApiService extends _$ApiService {
   final _tokenBox = Hive.box<String>('token');
