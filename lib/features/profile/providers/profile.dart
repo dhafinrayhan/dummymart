@@ -6,7 +6,7 @@ import '../models/profile.dart';
 part 'profile.g.dart';
 
 @riverpod
-Profile? currentProfile(CurrentProfileRef ref) {
+Profile? profile(ProfileRef ref) {
   final profile = Hive.box<Profile>('profile').get('current');
   return profile;
 }
