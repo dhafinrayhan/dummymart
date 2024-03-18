@@ -37,6 +37,11 @@ class ApiClient {
         _httpClient.options..headers['Authorization'] = 'Bearer $token');
   }
 
+  @override
+  String toString() {
+    return "ApiClient(_httpClient.options.headers['Authorization']: ${_httpClient.options.headers['Authorization']})";
+  }
+
   Future<(Profile, String)> login(Login data) async {
     final response = await _httpClient.post(
       '/auth/login',

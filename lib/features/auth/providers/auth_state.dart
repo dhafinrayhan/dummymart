@@ -15,27 +15,24 @@ part 'auth_state.g.dart';
 /// explicitly called externally.
 @riverpod
 class CurrentAuthState extends _$CurrentAuthState {
+  final _tokenBox = Hive.box<String>('token');
+
   @override
-  AuthState build() => AuthState.unknown;
+  AuthState build() {
+    final token = _tokenBox.get('current');
+    return token != null ? AuthState.authenticated : AuthState.unauthenticated;
+  }
 
   /// Attempts to login with [data], saves the profile info when success and
   /// restores the profile.
   Future<void> login(Login data) async {
     final profile = await ref.read(apiServiceProvider.notifier).login(data);
-
-    // Save the new [Profile] to Hive box.
-    Hive.box<Profile>('profile').put('current', profile);
-
     restore(profile);
   }
 
   /// Logouts and removes the saved profile.
   void logout() {
     ref.read(apiServiceProvider.notifier).logout();
-
-    // Delete the saved [Profile] from Hive box.
-    Hive.box<Profile>('profile').delete('current');
-
     reset();
   }
 
@@ -50,7 +47,7 @@ class CurrentAuthState extends _$CurrentAuthState {
   /// Invalidates the current profile and sets the authentication state to
   /// [AuthState.unauthenticated].
   void reset() {
-    ref.invalidate(currentProfileProvider);
+    ref.read(currentProfileProvider.notifier).reset();
 
     state = AuthState.unauthenticated;
   }
