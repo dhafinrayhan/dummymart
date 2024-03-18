@@ -5,6 +5,7 @@ import '../models/profile.dart';
 
 part 'profile.g.dart';
 
+/// The profile info of the currently logged in user.
 @riverpod
 Profile? profile(ProfileRef ref) {
   final profile = Hive.box<Profile>('profile').get('current');
