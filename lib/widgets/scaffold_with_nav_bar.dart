@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 
-import 'models/nav_bar_item.dart';
+part 'scaffold_with_nav_bar.freezed.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({
@@ -41,4 +42,24 @@ class ScaffoldWithNavBar extends StatelessWidget {
           : null,
     );
   }
+}
+
+@freezed
+class NavBarItem with _$NavBarItem {
+  factory NavBarItem({
+    /// Path in the router.
+    required String path,
+
+    /// Widget to show when navigating to this [path].
+    required Widget widget,
+
+    /// Icon in the navigation bar.
+    required IconData icon,
+
+    /// Label in the navigation bar.
+    required String label,
+
+    /// The subroutes of the route from this [path].
+    @Default(<RouteBase>[]) final List<RouteBase> routes,
+  }) = _NavBarItem;
 }
