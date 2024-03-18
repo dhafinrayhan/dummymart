@@ -20,7 +20,7 @@ import '../widgets/scaffold_with_nav_bar.dart';
 
 part 'router.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 GoRouter router(RouterRef ref) {
   // Local notifier for the current auth state. The purpose of this notifier is
   // to provide a [Listenable] to the [GoRouter] exposed by this provider.

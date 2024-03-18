@@ -8,7 +8,7 @@ part 'settings.g.dart';
 ///
 /// When this provider is first read, it will read the saved value from storage,
 /// and defaults to [ThemeMode.system] if the theme mode was not set before.
-@Riverpod(keepAlive: true)
+@riverpod
 class CurrentThemeMode extends _$CurrentThemeMode {
   @override
   ThemeMode build() {
