@@ -6,6 +6,5 @@ import '../models/product.dart';
 part 'products.g.dart';
 
 @riverpod
-Future<List<Product>> products(ProductsRef ref) {
-  return ref.watch(apiServiceProvider).fetchProducts();
-}
+Future<List<Product>> products(ProductsRef ref) =>
+    ref.watch(apiServiceProvider).fetchProducts();
