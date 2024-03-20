@@ -38,6 +38,7 @@ class ScaffoldWithNavigation extends StatelessWidget {
                   label: item.label,
                 )
             ],
+            largeBreakpoint: Breakpoints.mediumAndUp,
             useDrawer: false,
             internalAnimations: false,
           )
