@@ -55,6 +55,7 @@ class DummyMartApp extends ConsumerWidget {
         brightness: Brightness.dark,
       ),
       routerConfig: router,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
