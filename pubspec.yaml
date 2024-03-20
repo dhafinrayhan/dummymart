@@ -1,7 +1,7 @@
 name: dummymart
 description: "An example Flutter project that uses Riverpod, go_router, Hive, flutter_hooks, and Freezed."
 publish_to: "none"
-version: 1.1.1
+version: 1.2.0
 
 environment:
   sdk: ">=3.2.0 <4.0.0"
