@@ -23,8 +23,7 @@ void main() {
       await expectLater(
         client.fetchProduct(id),
         completion(
-          const TypeMatcher<Product>()
-              .having((item) => item.id, 'id', equals(id)),
+          isA<Product>().having((item) => item.id, 'id', equals(id)),
         ),
       );
     });
@@ -47,7 +46,7 @@ void main() {
       await expectLater(
         client.fetchTodo(id),
         completion(
-          const TypeMatcher<Todo>().having((item) => item.id, 'id', equals(id)),
+          isA<Todo>().having((item) => item.id, 'id', equals(id)),
         ),
       );
     });
@@ -95,8 +94,7 @@ void main() {
         client.fetchTodos(),
         completion(
           contains(
-            const TypeMatcher<Todo>()
-                .having((item) => item.id, 'id', equals(id)),
+            isA<Todo>().having((item) => item.id, 'id', equals(id)),
           ),
         ),
       );
@@ -105,8 +103,7 @@ void main() {
         client.fetchTodos(),
         completion(
           isNot(contains(
-            const TypeMatcher<Todo>()
-                .having((item) => item.id, 'id', equals(id)),
+            isA<Todo>().having((item) => item.id, 'id', equals(id)),
           )),
         ),
       );
@@ -151,10 +148,10 @@ void main() {
         client.fetchPosts(search: search),
         completion(everyElement(
           anyOf(
-            const TypeMatcher<Post>().having((item) => item.title.toLowerCase(),
-                'title', contains(search.toLowerCase())),
-            const TypeMatcher<Post>().having((item) => item.body.toLowerCase(),
-                'title', contains(search.toLowerCase())),
+            isA<Post>().having((item) => item.title.toLowerCase(), 'title',
+                contains(search.toLowerCase())),
+            isA<Post>().having((item) => item.body.toLowerCase(), 'title',
+                contains(search.toLowerCase())),
           ),
         )),
       );
@@ -172,13 +169,9 @@ void main() {
           hasLength(limit),
           everyElement(
             anyOf(
-              const TypeMatcher<Post>().having(
-                  (item) => item.title.toLowerCase(),
-                  'title',
+              isA<Post>().having((item) => item.title.toLowerCase(), 'title',
                   contains(search.toLowerCase())),
-              const TypeMatcher<Post>().having(
-                  (item) => item.body.toLowerCase(),
-                  'title',
+              isA<Post>().having((item) => item.body.toLowerCase(), 'body',
                   contains(search.toLowerCase())),
             ),
           ),
@@ -193,7 +186,7 @@ void main() {
       await expectLater(
         client.fetchPost(id),
         completion(
-          const TypeMatcher<Post>().having((item) => item.id, 'id', equals(id)),
+          isA<Post>().having((item) => item.id, 'id', equals(id)),
         ),
       );
     });
