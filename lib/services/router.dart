@@ -33,7 +33,7 @@ GoRouter router(RouterRef ref) {
   final navigationItems = [
     NavigationItem(
       path: '/products',
-      widget: const ProductsScreen(),
+      body: (_) => const ProductsScreen(),
       icon: Icons.category,
       label: 'Products',
       routes: [
@@ -48,7 +48,7 @@ GoRouter router(RouterRef ref) {
     ),
     NavigationItem(
       path: '/todos',
-      widget: const TodosScreen(),
+      body: (_) => const TodosScreen(),
       icon: Icons.subject,
       label: 'Todos',
       routes: [
@@ -76,7 +76,7 @@ GoRouter router(RouterRef ref) {
     ),
     NavigationItem(
       path: '/posts',
-      widget: const PostsScreen(),
+      body: (_) => const PostsScreen(),
       icon: Icons.article,
       label: 'Posts',
       routes: [
@@ -91,7 +91,7 @@ GoRouter router(RouterRef ref) {
     ),
     NavigationItem(
       path: '/profile',
-      widget: const ProfileScreen(),
+      body: (_) => const ProfileScreen(),
       icon: Icons.person,
       label: 'Profile',
     ),
@@ -122,8 +122,8 @@ GoRouter router(RouterRef ref) {
           for (final item in navigationItems)
             GoRoute(
               path: item.path,
-              pageBuilder: (_, __) => CustomTransitionPage(
-                child: item.widget,
+              pageBuilder: (context, __) => CustomTransitionPage(
+                child: item.body(context),
                 transitionsBuilder: (_, animation, __, child) {
                   return FadeTransition(
                     opacity: animation.drive(CurveTween(curve: Curves.ease)),

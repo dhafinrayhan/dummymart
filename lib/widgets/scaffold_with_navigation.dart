@@ -53,7 +53,7 @@ class NavigationItem with _$NavigationItem {
     required String path,
 
     /// Widget to show when navigating to this [path].
-    required Widget widget,
+    required WidgetBuilder body,
 
     /// Icon in the navigation bar.
     required IconData icon,
