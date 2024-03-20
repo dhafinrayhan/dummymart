@@ -3,6 +3,10 @@ import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test/test.dart';
 
+/// Number of parallel test run, used when creating temporary path for Hive to
+/// prevent locking each other.
+int _parallelCount = 0;
+
 /// Creates a [ProviderContainer] and automatically disposes it at the end of
 /// the test.
 ProviderContainer createContainer({
@@ -31,7 +35,8 @@ Future<Box<E>> openTemporaryBox<E>(
   /// adapters.
   void Function()? onInit,
 }) {
-  Hive.init('.test-cache/temporaryPath');
+  final pathIdentifier = (_parallelCount++).toString().padLeft(3, '0');
+  Hive.init('.test-cache/temp-$pathIdentifier');
   addTearDown(Hive.deleteFromDisk);
   onInit?.call();
 
@@ -43,7 +48,8 @@ Future<(Box<E1>, Box<E2>)> openTemporaryBox2<E1, E2>(
   String name2, {
   void Function()? onInit,
 }) {
-  Hive.init('.test-cache/temporaryPath');
+  final pathIdentifier = (_parallelCount++).toString().padLeft(3, '0');
+  Hive.init('.test-cache/temp-$pathIdentifier');
   addTearDown(Hive.deleteFromDisk);
   onInit?.call();
 
