@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../features/auth/models/login.dart';
 import '../../features/profile/models/profile.dart';
 import 'api_client.dart';
+import 'mock/mocked_api_client.dart';
 
 part 'api_service.g.dart';
 
@@ -22,14 +23,17 @@ part 'api_service.g.dart';
 /// without keepAlive set to true.
 @Riverpod(keepAlive: true)
 class ApiService extends _$ApiService {
+  static const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
+
   final _tokenBox = Hive.box<String>('token');
   final _profileBox = Hive.box<Profile>('profile');
 
   @override
   ApiClient build() {
     final token = _tokenBox.get('current');
-    final client = token != null ? ApiClient.withToken(token) : ApiClient();
-    return client;
+
+    if (mock) return MockedApiClient();
+    return token != null ? ApiClient.withToken(token) : ApiClient();
   }
 
   /// Attempts a login and saves the token and profile info to storage. Will

@@ -10,16 +10,13 @@
             "type": "dart"
         },
         {
-            "name": "dummymart (profile mode)",
+            "name": "dummymart (mock API)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "toolArgs": [
+                "--dart-define",
+                "MOCK_API=true"
+            ]
         },
-        {
-            "name": "dummymart (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
     ]
 }
