@@ -15,7 +15,7 @@ import '../features/todos/screens/add_todo.dart';
 import '../features/todos/screens/todo.dart';
 import '../features/todos/screens/todos.dart';
 import '../features/todos/screens/update_todo.dart';
-import '../widgets/scaffold_with_nav_bar.dart';
+import '../widgets/scaffold_with_navigation.dart';
 
 part 'router.g.dart';
 
@@ -30,10 +30,10 @@ GoRouter router(RouterRef ref) {
       authStateNotifier.value = value;
     });
 
-  final navBarItems = [
-    NavBarItem(
+  final navigationItems = [
+    NavigationItem(
       path: '/products',
-      widget: const ProductsScreen(),
+      body: (_) => const ProductsScreen(),
       icon: Icons.category,
       label: 'Products',
       routes: [
@@ -46,9 +46,9 @@ GoRouter router(RouterRef ref) {
         ),
       ],
     ),
-    NavBarItem(
+    NavigationItem(
       path: '/todos',
-      widget: const TodosScreen(),
+      body: (_) => const TodosScreen(),
       icon: Icons.subject,
       label: 'Todos',
       routes: [
@@ -74,9 +74,9 @@ GoRouter router(RouterRef ref) {
         ),
       ],
     ),
-    NavBarItem(
+    NavigationItem(
       path: '/posts',
-      widget: const PostsScreen(),
+      body: (_) => const PostsScreen(),
       icon: Icons.article,
       label: 'Posts',
       routes: [
@@ -89,9 +89,9 @@ GoRouter router(RouterRef ref) {
         ),
       ],
     ),
-    NavBarItem(
+    NavigationItem(
       path: '/profile',
-      widget: const ProfileScreen(),
+      body: (_) => const ProfileScreen(),
       icon: Icons.person,
       label: 'Profile',
     ),
@@ -99,7 +99,7 @@ GoRouter router(RouterRef ref) {
 
   final router = GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: navBarItems.first.path,
+    initialLocation: navigationItems.first.path,
     routes: [
       GoRoute(
         path: '/',
@@ -111,19 +111,19 @@ GoRouter router(RouterRef ref) {
       ),
 
       // Configuration for the bottom navigation bar routes. The routes
-      // themselves should be defined in [navBarItems].
+      // themselves should be defined in [navigationItems].
       ShellRoute(
-        builder: (_, state, child) => ScaffoldWithNavBar(
+        builder: (_, state, child) => ScaffoldWithNavigation(
           currentPath: state.uri.path,
-          navBarItems: navBarItems,
+          navigationItems: navigationItems,
           child: child,
         ),
         routes: [
-          for (final item in navBarItems)
+          for (final item in navigationItems)
             GoRoute(
               path: item.path,
-              pageBuilder: (_, __) => CustomTransitionPage(
-                child: item.widget,
+              pageBuilder: (context, __) => CustomTransitionPage(
+                child: item.body(context),
                 transitionsBuilder: (_, animation, __, child) {
                   return FadeTransition(
                     opacity: animation.drive(CurveTween(curve: Curves.ease)),
