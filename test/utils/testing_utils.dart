@@ -25,13 +25,32 @@ ProviderContainer createContainer({
 
 /// Initializes Hive temporarily and opens a box. Will delete the box after
 /// the current test.
-Future<Box<E>> openTemporaryBox<E>(String name) async {
+Future<Box<E>> openTemporaryBox<E>(
+  String name, {
+  /// A callback called after initializing Hive. Generally used to register
+  /// adapters.
+  void Function()? onInit,
+}) {
   Hive.init('.test-cache/temporaryPath');
-  final box = await Hive.openBox<E>(name);
-
   addTearDown(Hive.deleteFromDisk);
+  onInit?.call();
 
-  return box;
+  return Hive.openBox<E>(name);
+}
+
+Future<(Box<E1>, Box<E2>)> openTemporaryBox2<E1, E2>(
+  String name1,
+  String name2, {
+  void Function()? onInit,
+}) {
+  Hive.init('.test-cache/temporaryPath');
+  addTearDown(Hive.deleteFromDisk);
+  onInit?.call();
+
+  return (
+    Hive.openBox<E1>(name1),
+    Hive.openBox<E2>(name2),
+  ).wait;
 }
 
 /// Creates a [MockedApiClient] with the given [delay] as the duration before
