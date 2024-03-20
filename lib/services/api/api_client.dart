@@ -25,8 +25,9 @@ extension ApiClientExceptionExtension on ApiClientException {
 /// instantiate this class, but instead call the provider that exposes an object
 /// of this type.
 class ApiClient {
-  static final BaseOptions _defaultOptions = BaseOptions()
-    ..baseUrl = 'https://dummyjson.com';
+  static final BaseOptions _defaultOptions = BaseOptions(
+    baseUrl: 'https://dummyjson.com',
+  );
 
   final Dio _httpClient;
 
@@ -35,8 +36,10 @@ class ApiClient {
 
   /// Creates an [ApiClient] with [token] set for authorization.
   ApiClient.withToken(String token)
-      : _httpClient =
-            Dio(_defaultOptions..headers['Authorization'] = 'Bearer $token');
+      : _httpClient = Dio(
+          _defaultOptions.copyWith()
+            ..headers['Authorization'] = 'Bearer $token',
+        );
 
   @override
   String toString() {
