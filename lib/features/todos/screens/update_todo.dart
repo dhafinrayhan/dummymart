@@ -61,7 +61,7 @@ class _UpdateTodoForm extends HookConsumerWidget {
             ));
 
         if (!context.mounted) return;
-        context.go('/todos/$id');
+        context.pop();
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
         context.showTextSnackBar(e.responseMessage ?? 'Update todo failed');
