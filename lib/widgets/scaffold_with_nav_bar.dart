@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,23 +25,23 @@ class ScaffoldWithNavBar extends StatelessWidget {
     // Only show nav bar when the current path is a nav bar item.
     final shouldShowNavBar = currentIndex >= 0;
 
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: shouldShowNavBar
-          ? NavigationBar(
-              selectedIndex: currentIndex,
-              onDestinationSelected: (index) =>
-                  context.go(navBarItems[index].path),
-              destinations: [
-                for (final item in navBarItems)
-                  NavigationDestination(
-                    icon: Icon(item.icon),
-                    label: item.label,
-                  )
-              ],
-            )
-          : null,
-    );
+    return shouldShowNavBar
+        ? AdaptiveScaffold(
+            body: (_) => child,
+            selectedIndex: currentIndex,
+            onSelectedIndexChange: (index) =>
+                context.go(navBarItems[index].path),
+            destinations: [
+              for (final item in navBarItems)
+                NavigationDestination(
+                  icon: Icon(item.icon),
+                  label: item.label,
+                )
+            ],
+            useDrawer: false,
+            internalAnimations: false,
+          )
+        : Scaffold(body: child);
   }
 }
 
