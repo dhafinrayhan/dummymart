@@ -3,36 +3,36 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 
-part 'scaffold_with_nav_bar.freezed.dart';
+part 'scaffold_with_navigation.freezed.dart';
 
-class ScaffoldWithNavBar extends StatelessWidget {
-  const ScaffoldWithNavBar({
+class ScaffoldWithNavigation extends StatelessWidget {
+  const ScaffoldWithNavigation({
     super.key,
     required this.child,
     required this.currentPath,
-    required this.navBarItems,
+    required this.navigationItems,
   });
 
   final Widget child;
   final String currentPath;
-  final List<NavBarItem> navBarItems;
+  final List<NavigationItem> navigationItems;
 
   @override
   Widget build(BuildContext context) {
     final currentIndex =
-        navBarItems.indexWhere((item) => item.path == currentPath);
+        navigationItems.indexWhere((item) => item.path == currentPath);
 
-    // Only show nav bar when the current path is a nav bar item.
-    final shouldShowNavBar = currentIndex >= 0;
+    // Only show navigation bar/rail when the current path is a navigation item.
+    final shouldShowNavigation = currentIndex >= 0;
 
-    return shouldShowNavBar
+    return shouldShowNavigation
         ? AdaptiveScaffold(
             body: (_) => child,
             selectedIndex: currentIndex,
             onSelectedIndexChange: (index) =>
-                context.go(navBarItems[index].path),
+                context.go(navigationItems[index].path),
             destinations: [
-              for (final item in navBarItems)
+              for (final item in navigationItems)
                 NavigationDestination(
                   icon: Icon(item.icon),
                   label: item.label,
@@ -46,8 +46,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
 }
 
 @freezed
-class NavBarItem with _$NavBarItem {
-  factory NavBarItem({
+class NavigationItem with _$NavigationItem {
+  factory NavigationItem({
     /// Path in the router.
     required String path,
 
@@ -62,5 +62,5 @@ class NavBarItem with _$NavBarItem {
 
     /// The subroutes of the route from this [path].
     @Default(<RouteBase>[]) final List<RouteBase> routes,
-  }) = _NavBarItem;
+  }) = _NavigationItem;
 }
