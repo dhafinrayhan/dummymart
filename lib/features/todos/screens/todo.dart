@@ -40,6 +40,9 @@ class TodoScreen extends ConsumerWidget {
         ],
       ),
       body: todo.when(
+        // Set this option to false to show the loading state after updating
+        // the todo.
+        skipLoadingOnRefresh: false,
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, __) => const Center(child: Text('An error occured')),
         data: (todo) {
