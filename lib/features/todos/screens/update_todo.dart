@@ -12,7 +12,7 @@ import '../models/todo.dart';
 import '../providers/todo.dart';
 import '../providers/todos.dart';
 
-class UpdateTodoScreen extends HookConsumerWidget {
+class UpdateTodoScreen extends ConsumerWidget {
   const UpdateTodoScreen(this.id, {super.key});
 
   final int id;
