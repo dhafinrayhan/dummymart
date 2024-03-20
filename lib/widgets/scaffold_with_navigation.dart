@@ -35,6 +35,9 @@ class ScaffoldWithNavigation extends StatelessWidget {
               for (final item in navigationItems)
                 NavigationDestination(
                   icon: Icon(item.icon),
+                  selectedIcon: item.selectedIcon != null
+                      ? Icon(item.selectedIcon)
+                      : null,
                   label: item.label,
                 )
             ],
@@ -57,6 +60,9 @@ class NavigationItem with _$NavigationItem {
 
     /// Icon in the navigation bar.
     required IconData icon,
+
+    /// Icon in the navigation bar when selected.
+    IconData? selectedIcon,
 
     /// Label in the navigation bar.
     required String label,

@@ -34,7 +34,8 @@ GoRouter router(RouterRef ref) {
     NavigationItem(
       path: '/products',
       body: (_) => const ProductsScreen(),
-      icon: Icons.category,
+      icon: Icons.widgets_outlined,
+      selectedIcon: Icons.widgets,
       label: 'Products',
       routes: [
         GoRoute(
@@ -49,7 +50,8 @@ GoRouter router(RouterRef ref) {
     NavigationItem(
       path: '/todos',
       body: (_) => const TodosScreen(),
-      icon: Icons.subject,
+      icon: Icons.checklist_outlined,
+      selectedIcon: Icons.checklist,
       label: 'Todos',
       routes: [
         GoRoute(
@@ -77,7 +79,8 @@ GoRouter router(RouterRef ref) {
     NavigationItem(
       path: '/posts',
       body: (_) => const PostsScreen(),
-      icon: Icons.article,
+      icon: Icons.article_outlined,
+      selectedIcon: Icons.article,
       label: 'Posts',
       routes: [
         GoRoute(
@@ -92,7 +95,8 @@ GoRouter router(RouterRef ref) {
     NavigationItem(
       path: '/profile',
       body: (_) => const ProfileScreen(),
-      icon: Icons.person,
+      icon: Icons.person_outline,
+      selectedIcon: Icons.person,
       label: 'Profile',
     ),
   ];
