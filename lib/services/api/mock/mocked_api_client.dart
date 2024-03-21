@@ -10,9 +10,6 @@ import '../api_client.dart';
 part 'mocked_api_client_repository.dart';
 
 class MockedApiClient implements ApiClient {
-  static bool _search(String text, String query) =>
-      text.toLowerCase().contains(query.toLowerCase());
-
   final Duration _delay;
 
   final List<Product> _products = _MockedApiClientRepository.getProducts();
@@ -94,8 +91,7 @@ class MockedApiClient implements ApiClient {
     var posts = _posts;
     if (search != null && search.isNotEmpty) {
       posts = posts
-          .where((post) =>
-              _search(post.title, search) || _search(post.body, search))
+          .where((post) => post.title.find(search) || post.body.find(search))
           .toList();
     }
     if (limit != null) {
@@ -109,4 +105,9 @@ class MockedApiClient implements ApiClient {
     await Future.delayed(_delay);
     return _posts.singleWhere((post) => post.id == id);
   }
+}
+
+extension on String {
+  /// Checks if this contains [query], case-insensitively.
+  bool find(String query) => toLowerCase().contains(query.toLowerCase());
 }
