@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/extensions.dart';
+import '../../../utils/hooks.dart';
 import '../models/post.dart';
 import '../providers/posts.dart';
 
@@ -26,25 +27,18 @@ class PostsScreen extends HookConsumerWidget {
     /// The search query that will be passed to the provider.
     final search = useState('');
 
-    final searchController = useTextEditingController();
     final searchFocusNode = useFocusNode();
-
-    final posts = ref.watch(postsProvider(search: search.value));
-
-    // Register a listener on [searchController] so the search query will be
-    // updated based on the latest input with debounce mechanism.
-    useEffect(() {
-      void searchControllerListener() {
+    final searchController = useTextEditingControllerWithValueChangedCallback(
+      onChanged: (value) {
         EasyDebounce.debounce(
           'search-post',
           const Duration(milliseconds: 500),
-          () => search.value = searchController.text,
+          () => search.value = value.text,
         );
-      }
+      },
+    );
 
-      searchController.addListener(searchControllerListener);
-      return () => searchController.removeListener(searchControllerListener);
-    }, []);
+    final posts = ref.watch(postsProvider(search: search.value));
 
     Future<void> loadMore() async {
       isLoadingMore.value = true;
