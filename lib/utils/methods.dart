@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+
+/// Creates two [ThemeData]s (light and dark variants) from a given [seedColor].
+(ThemeData, ThemeData) createDualThemeData({
+  required Color seedColor,
+  TextTheme? textTheme,
+  bool? useMaterial3,
+}) {
+  final lightTheme = ThemeData.from(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: seedColor,
+      brightness: Brightness.light,
+    ),
+    textTheme: textTheme,
+    useMaterial3: useMaterial3,
+  );
+  final darkTheme = ThemeData.from(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: seedColor,
+      brightness: Brightness.dark,
+    ),
+    textTheme: textTheme,
+    useMaterial3: useMaterial3,
+  );
+  return (lightTheme, darkTheme);
+}

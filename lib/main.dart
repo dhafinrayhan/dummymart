@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'features/profile/models/profile.dart';
 import 'services/router.dart';
 import 'services/settings.dart';
+import 'utils/methods.dart';
 
 Future<void> main() async {
   // Some packages, like Hive (through its `initFlutter` method) call this
@@ -49,19 +50,16 @@ class DummyMartApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(currentThemeModeProvider);
 
+    final (lightTheme, darkTheme) = createDualThemeData(
+      seedColor: Colors.blue,
+      useMaterial3: true,
+    );
+
     return MaterialApp.router(
       title: 'DummyMart',
       themeMode: themeMode,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.dark,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
     );
