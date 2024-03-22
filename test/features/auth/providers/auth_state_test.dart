@@ -10,14 +10,16 @@ import '../../../utils/testing_utils.dart';
 void main() {
   group('Test CurrentAuthState notifier and provider', () {
     test('login and logout should work', () async {
-      await openTemporaryBox2<String, Profile>(
-        'token',
-        'profile',
-        onInit: () {
-          Hive.registerAdapter(ProfileAdapter());
-          Hive.registerAdapter(GenderAdapter());
-        },
-      );
+      await setupHive(() async {
+        Hive.registerAdapter(ProfileAdapter());
+        Hive.registerAdapter(GenderAdapter());
+
+        await [
+          Hive.openBox<String>('token'),
+          Hive.openBox<Profile>('profile'),
+        ].wait;
+      });
+
       final container = createContainer();
 
       expect(

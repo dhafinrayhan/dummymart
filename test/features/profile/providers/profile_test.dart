@@ -10,7 +10,15 @@ import '../../../utils/testing_utils.dart';
 void main() {
   group('Test profileProvider', () {
     test('profile should initially be null before login', () async {
-      await openTemporaryBox<Profile>('profile');
+      await setupHive(() async {
+        Hive.registerAdapter(ProfileAdapter());
+        Hive.registerAdapter(GenderAdapter());
+
+        await [
+          Hive.openBox<Profile>('profile'),
+        ].wait;
+      });
+
       final container = createContainer();
 
       expect(
@@ -20,14 +28,16 @@ void main() {
     });
 
     test('profile should be non-null after a successful login', () async {
-      await openTemporaryBox2<String, Profile>(
-        'token',
-        'profile',
-        onInit: () {
-          Hive.registerAdapter(ProfileAdapter());
-          Hive.registerAdapter(GenderAdapter());
-        },
-      );
+      await setupHive(() async {
+        Hive.registerAdapter(ProfileAdapter());
+        Hive.registerAdapter(GenderAdapter());
+
+        await [
+          Hive.openBox<String>('token'),
+          Hive.openBox<Profile>('profile'),
+        ].wait;
+      });
+
       final container = createContainer();
 
       await container

@@ -8,7 +8,10 @@ import '../utils/testing_utils.dart';
 void main() {
   group('Test theme mode provider', () {
     test('theme should initally be ThemeMode.system', () async {
-      await openTemporaryBox<String>('settings');
+      await setupHive(() async {
+        await Hive.openBox<String>('settings');
+      });
+
       final container = createContainer();
 
       expect(
@@ -20,7 +23,10 @@ void main() {
     test(
         'value exposed by the provider should update when the theme is changed',
         () async {
-      await openTemporaryBox<String>('settings');
+      await setupHive(() async {
+        await Hive.openBox<String>('settings');
+      });
+
       final container = createContainer();
 
       // Change the theme mode to dark.
@@ -35,7 +41,10 @@ void main() {
     test(
         'value on the settings box should be updated when the theme is changed',
         () async {
-      await openTemporaryBox<String>('settings');
+      await setupHive(() async {
+        await Hive.openBox<String>('settings');
+      });
+
       final container = createContainer();
 
       // Change the theme mode to light.
