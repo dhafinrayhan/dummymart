@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension BuildContextExtension on BuildContext {
+extension BuildContextX on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
   /// Shows a floating snack bar with text as its content.
@@ -19,7 +19,7 @@ extension BuildContextExtension on BuildContext {
       );
 }
 
-extension ThemeModeExtension on ThemeMode {
+extension ThemeModeX on ThemeMode {
   String get label => switch (this) {
         ThemeMode.system => 'System',
         ThemeMode.light => 'Light',

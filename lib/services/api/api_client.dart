@@ -9,7 +9,7 @@ import '../../features/todos/models/todo.dart';
 typedef ApiClientException = DioException;
 typedef _ResponseData = Map<String, Object?>;
 
-extension ApiClientExceptionExtension on ApiClientException {
+extension ApiClientExceptionX on ApiClientException {
   String? get responseMessage => response?.data?['message'] as String?;
 }
 
