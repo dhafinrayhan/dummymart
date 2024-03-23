@@ -1,10 +1,8 @@
 import 'package:dummymart/features/profile/models/profile.dart';
 import 'package:dummymart/features/profile/providers/profile.dart';
 import 'package:dummymart/features/profile/screens/profile.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/testing_utils.dart';
 
@@ -27,13 +25,11 @@ void main() {
           image: 'https://robohash.org/Assunta.png?set=set4',
         );
 
-        await tester.pumpWidget(
-          ProviderScope(
-            overrides: [
-              profileProvider.overrideWithValue(profile),
-            ],
-            child: const MaterialApp(home: ProfileScreen()),
-          ),
+        await tester.pumpMaterialWidgetScoped(
+          const ProfileScreen(),
+          overrides: [
+            profileProvider.overrideWithValue(profile),
+          ],
         );
 
         final nameFinder = find.text(profile.fullName);

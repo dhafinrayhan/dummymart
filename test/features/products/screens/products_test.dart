@@ -12,13 +12,11 @@ void main() {
     testWidgets(
       'should show title and brand of the first item',
       (tester) async {
-        await tester.pumpWidget(
-          ProviderScope(
-            overrides: [
-              apiServiceProvider.overrideWith((ref) => createMockedApiClient())
-            ],
-            child: const MaterialApp(home: ProductsScreen()),
-          ),
+        await tester.pumpMaterialWidgetScoped(
+          const ProductsScreen(),
+          overrides: [
+            apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+          ],
         );
 
         await tester.pumpAndSettle();
@@ -40,13 +38,11 @@ void main() {
     testWidgets(
       'should show title of the last item',
       (tester) async {
-        await tester.pumpWidget(
-          ProviderScope(
-            overrides: [
-              apiServiceProvider.overrideWith((ref) => createMockedApiClient())
-            ],
-            child: const MaterialApp(home: ProductsScreen()),
-          ),
+        await tester.pumpMaterialWidgetScoped(
+          const ProductsScreen(),
+          overrides: [
+            apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+          ],
         );
 
         await tester.pumpAndSettle();

@@ -1,5 +1,6 @@
 import 'package:dummymart/services/api/mock/mocked_api_client.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -63,4 +64,36 @@ MockedApiClient createMockedApiClient({
   Duration delay = const Duration(milliseconds: 200),
 }) {
   return MockedApiClient(delay: delay);
+}
+
+extension WidgetTesterX on WidgetTester {
+  /// Calls [pumpWidget] with the [widget] wrapped in a [MaterialApp].
+  Future<void> pumpMaterialWidget(
+    Widget widget, [
+    Duration? duration,
+    EnginePhase phase = EnginePhase.sendSemanticsUpdate,
+  ]) =>
+      pumpWidget(MaterialApp(home: widget), duration, phase);
+
+  /// Calls [pumpWidget] with the [widget] wrapped in a [MaterialApp] and scoped
+  /// with a [ProviderScope].
+  ///
+  /// The [overrides] and [observers] values will be passed to the
+  /// [ProviderScope].
+  Future<void> pumpMaterialWidgetScoped(
+    Widget widget, {
+    Duration? duration,
+    EnginePhase phase = EnginePhase.sendSemanticsUpdate,
+    List<Override> overrides = const [],
+    List<ProviderObserver>? observers,
+  }) =>
+      pumpWidget(
+        ProviderScope(
+          overrides: overrides,
+          observers: observers,
+          child: MaterialApp(home: widget),
+        ),
+        duration,
+        phase,
+      );
 }

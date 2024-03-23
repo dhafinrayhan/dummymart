@@ -2,6 +2,8 @@ import 'package:dummymart/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../utils/testing_utils.dart';
+
 void main() {
   group('Test AppButton', () {
     testWidgets(
@@ -9,12 +11,10 @@ void main() {
       (tester) async {
         const label = 'Submit';
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: AppButton(
-              onPressed: () {},
-              label: label,
-            ),
+        await tester.pumpMaterialWidget(
+          AppButton(
+            onPressed: () {},
+            label: label,
           ),
         );
 
@@ -27,13 +27,11 @@ void main() {
     testWidgets(
       'should not show loading indicator when loading is false',
       (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: AppButton(
-              onPressed: () {},
-              label: 'Submit',
-              loading: false,
-            ),
+        await tester.pumpMaterialWidget(
+          AppButton(
+            onPressed: () {},
+            label: 'Submit',
+            loading: false,
           ),
         );
 
@@ -46,13 +44,11 @@ void main() {
     testWidgets(
       'should show loading indicator when loading is true',
       (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: AppButton(
-              onPressed: () {},
-              label: 'Submit',
-              loading: true,
-            ),
+        await tester.pumpMaterialWidget(
+          AppButton(
+            onPressed: () {},
+            label: 'Submit',
+            loading: true,
           ),
         );
 
@@ -67,15 +63,13 @@ void main() {
       (tester) async {
         var called = false;
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: AppButton(
-              onPressed: () {
-                called = true;
-              },
-              label: 'Submit',
-              loading: true,
-            ),
+        await tester.pumpMaterialWidget(
+          AppButton(
+            onPressed: () {
+              called = true;
+            },
+            label: 'Submit',
+            loading: true,
           ),
         );
 

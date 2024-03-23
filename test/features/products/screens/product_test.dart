@@ -1,7 +1,6 @@
 import 'package:dummymart/features/products/providers/product.dart';
 import 'package:dummymart/features/products/screens/product.dart';
 import 'package:dummymart/services/api/api_service.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,13 +13,11 @@ void main() {
       (tester) async {
         const id = 24;
 
-        await tester.pumpWidget(
-          ProviderScope(
-            overrides: [
-              apiServiceProvider.overrideWith((ref) => createMockedApiClient())
-            ],
-            child: const MaterialApp(home: ProductScreen(id)),
-          ),
+        await tester.pumpMaterialWidgetScoped(
+          const ProductScreen(id),
+          overrides: [
+            apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+          ],
         );
 
         await tester.pumpAndSettle();
