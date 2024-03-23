@@ -97,7 +97,7 @@ Future<void> setupHiveFlutter(WidgetTester tester, AsyncCallback onInit) async {
 /// Creates a [MockedApiClient] with the given [delay] as the duration before
 /// each API call returns a value.
 MockedApiClient createMockedApiClient({
-  Duration delay = const Duration(milliseconds: 200),
+  Duration delay = const Duration(milliseconds: 50),
 }) {
   return MockedApiClient(delay: delay);
 }
