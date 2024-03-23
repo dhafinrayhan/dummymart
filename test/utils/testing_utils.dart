@@ -43,16 +43,52 @@ void _setupHive() {
 ///
 /// The [onInit] callback is typically used for registering adapters and opening
 /// boxes.
+///
+/// ```dart
+/// test('login and logout should work', () async {
+///   await setupHive(() async {
+///     Hive.registerAdapter(ProfileAdapter());
+///     Hive.registerAdapter(GenderAdapter());
+///
+///     await [
+///       Hive.openBox<String>('token'),
+///       Hive.openBox<Profile>('profile'),
+///     ].wait;
+///   });
+///
+///   // ...
+/// });
+/// ```
+///
+/// For widget testing, see [setupHiveFlutter].
 Future<void> setupHive(AsyncCallback onInit) async {
   _setupHive();
   await onInit();
 }
 
-/// Initializes Hive for widget & integration test and automatically deletes all
-/// boxes at the end of the test.
+/// Initializes Hive for widget test and automatically deletes all boxes at the
+/// end of the test.
 ///
 /// The [onInit] callback is typically used for registering adapters and opening
 /// boxes.
+///
+/// ```dart
+/// testWidgets('login and logout should work', (tester) async {
+///   await setupHiveFlutter(tester, () async {
+///     Hive.registerAdapter(ProfileAdapter());
+///     Hive.registerAdapter(GenderAdapter());
+///
+///     await [
+///       Hive.openBox<String>('token'),
+///       Hive.openBox<Profile>('profile'),
+///     ].wait;
+///   });
+///
+///   // ...
+/// });
+/// ```
+///
+/// For unit testing, see [setupHive].
 Future<void> setupHiveFlutter(WidgetTester tester, AsyncCallback onInit) async {
   _setupHive();
   await tester.runAsync(onInit);
@@ -78,8 +114,7 @@ extension WidgetTesterX on WidgetTester {
   /// Calls [pumpWidget] with the [widget] wrapped in a [MaterialApp] and scoped
   /// with a [ProviderScope].
   ///
-  /// The [overrides] and [observers] values will be passed to the
-  /// [ProviderScope].
+  /// The [overrides] and [observers] values will be passed to the [ProviderScope].
   Future<void> pumpMaterialWidgetScoped(
     Widget widget, {
     Duration? duration,
