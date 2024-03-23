@@ -23,5 +23,5 @@ void useOnValueChanged<T>(
   useEffect(() {
     valueNotifier.addListener(listener);
     return () => valueNotifier.removeListener(listener);
-  }, []);
+  }, [valueNotifier]);
 }
