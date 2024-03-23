@@ -29,6 +29,9 @@ ProviderContainer createContainer({
 }
 
 /// Initializes Hive and automatically deletes all boxes at the end of the test.
+///
+/// The [onInit] callback is typically used for registering adapters and opening
+/// boxes.
 Future<void> setupHive(AsyncCallback onInit) async {
   final pathIdentifier = (_parallelCount++).toString().padLeft(3, '0');
   Hive.init('.test-cache/temp-$pathIdentifier');

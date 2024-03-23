@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Creates two [ThemeData]s (light and dark variants) from a given [seedColor].
+///
+/// This method is needed because once a [ThemeData] is generated, we cannot get
+/// the [ColorScheme] seed to generate another one based on the same seed.
 (ThemeData, ThemeData) createDualThemeData({
   required Color seedColor,
   TextTheme? textTheme,
@@ -22,5 +25,6 @@ import 'package:flutter/material.dart';
     textTheme: textTheme,
     useMaterial3: useMaterial3,
   );
+
   return (lightTheme, darkTheme);
 }
