@@ -1,8 +1,8 @@
 import 'package:dummymart/services/api/mock/mocked_api_client.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test/test.dart';
 
 /// Number of parallel test run, used when creating temporary path for Hive to
 /// prevent locking each other.
@@ -28,18 +28,33 @@ ProviderContainer createContainer({
   return container;
 }
 
-/// Initializes Hive and automatically deletes all boxes at the end of the test.
-///
-/// The [onInit] callback is typically used for registering adapters and opening
-/// boxes.
-Future<void> setupHive(AsyncCallback onInit) async {
+void _setupHive() {
   final pathIdentifier = (_parallelCount++).toString().padLeft(3, '0');
   Hive.init('.test-cache/temp-$pathIdentifier');
   addTearDown(() {
     Hive.deleteFromDisk();
     Hive.resetAdapters();
   });
+}
+
+/// Initializes Hive for unit test and automatically deletes all boxes at the
+/// end of the test.
+///
+/// The [onInit] callback is typically used for registering adapters and opening
+/// boxes.
+Future<void> setupHive(AsyncCallback onInit) async {
+  _setupHive();
   await onInit();
+}
+
+/// Initializes Hive for widget & integration test and automatically deletes all
+/// boxes at the end of the test.
+///
+/// The [onInit] callback is typically used for registering adapters and opening
+/// boxes.
+Future<void> setupHiveFlutter(WidgetTester tester, AsyncCallback onInit) async {
+  _setupHive();
+  await tester.runAsync(onInit);
 }
 
 /// Creates a [MockedApiClient] with the given [delay] as the duration before
