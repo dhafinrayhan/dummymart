@@ -4,6 +4,11 @@ import 'package:go_router/go_router.dart';
 
 part 'scaffold_with_navigation.freezed.dart';
 
+/// A scaffold that shows navigation bar/rail when the current path is a navigation
+/// item.
+///
+/// When in a navigation item, a [NavigationBar] will be shown if the width of the
+/// screen is less than 600dp. Otherwise, a [NavigationRail] will be shown.
 class ScaffoldWithNavigation extends StatelessWidget {
   const ScaffoldWithNavigation({
     super.key,
@@ -80,6 +85,7 @@ class ScaffoldWithNavigation extends StatelessWidget {
   }
 }
 
+/// An item that represents a navigation destination in a navigation bar/rail.
 @freezed
 class NavigationItem with _$NavigationItem {
   factory NavigationItem({
