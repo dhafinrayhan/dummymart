@@ -22,28 +22,61 @@ class ScaffoldWithNavigation extends StatelessWidget {
         navigationItems.indexWhere((item) => item.path == currentPath);
 
     // Only show navigation bar/rail when the current path is a navigation item.
-    final shouldShowNavigation = currentIndex >= 0;
+    final shouldHideNavigation = currentIndex < 0;
 
-    return shouldShowNavigation
-        ? Scaffold(
-            body: child,
-            bottomNavigationBar: NavigationBar(
+    final width = MediaQuery.sizeOf(context).width;
+
+    // Use navigation rail instead of navigation bar when the screen width is
+    // larger than 600dp.
+    final useNavigationRail = width > 600;
+
+    if (shouldHideNavigation) {
+      return Scaffold(body: child);
+    }
+
+    if (useNavigationRail) {
+      return Scaffold(
+        body: Row(
+          children: [
+            NavigationRail(
               selectedIndex: currentIndex,
               onDestinationSelected: (index) =>
                   context.go(navigationItems[index].path),
               destinations: [
                 for (final item in navigationItems)
-                  NavigationDestination(
+                  NavigationRailDestination(
                     icon: Icon(item.icon),
                     selectedIcon: item.selectedIcon != null
                         ? Icon(item.selectedIcon)
                         : null,
-                    label: item.label,
+                    label: Text(item.label),
                   )
               ],
+              extended: true,
             ),
-          )
-        : Scaffold(body: child);
+            Expanded(child: child),
+          ],
+        ),
+      );
+    }
+
+    return Scaffold(
+      body: child,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentIndex,
+        onDestinationSelected: (index) =>
+            context.go(navigationItems[index].path),
+        destinations: [
+          for (final item in navigationItems)
+            NavigationDestination(
+              icon: Icon(item.icon),
+              selectedIcon:
+                  item.selectedIcon != null ? Icon(item.selectedIcon) : null,
+              label: item.label,
+            )
+        ],
+      ),
+    );
   }
 }
 
