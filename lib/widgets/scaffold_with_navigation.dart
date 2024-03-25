@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,29 +22,61 @@ class ScaffoldWithNavigation extends StatelessWidget {
         navigationItems.indexWhere((item) => item.path == currentPath);
 
     // Only show navigation bar/rail when the current path is a navigation item.
-    final shouldShowNavigation = currentIndex >= 0;
+    final shouldHideNavigation = currentIndex < 0;
 
-    return shouldShowNavigation
-        ? AdaptiveScaffold(
-            body: (_) => child,
-            selectedIndex: currentIndex,
-            onSelectedIndexChange: (index) =>
-                context.go(navigationItems[index].path),
-            destinations: [
-              for (final item in navigationItems)
-                NavigationDestination(
-                  icon: Icon(item.icon),
-                  selectedIcon: item.selectedIcon != null
-                      ? Icon(item.selectedIcon)
-                      : null,
-                  label: item.label,
-                )
-            ],
-            largeBreakpoint: Breakpoints.mediumAndUp,
-            useDrawer: false,
-            internalAnimations: false,
-          )
-        : Scaffold(body: child);
+    final width = MediaQuery.sizeOf(context).width;
+
+    // Use navigation rail instead of navigation bar when the screen width is
+    // larger than 600dp.
+    final useNavigationRail = width > 600;
+
+    if (shouldHideNavigation) {
+      return Scaffold(body: child);
+    }
+
+    if (useNavigationRail) {
+      return Scaffold(
+        body: Row(
+          children: [
+            NavigationRail(
+              selectedIndex: currentIndex,
+              onDestinationSelected: (index) =>
+                  context.go(navigationItems[index].path),
+              destinations: [
+                for (final item in navigationItems)
+                  NavigationRailDestination(
+                    icon: Icon(item.icon),
+                    selectedIcon: item.selectedIcon != null
+                        ? Icon(item.selectedIcon)
+                        : null,
+                    label: Text(item.label),
+                  )
+              ],
+              extended: true,
+            ),
+            Expanded(child: child),
+          ],
+        ),
+      );
+    }
+
+    return Scaffold(
+      body: child,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentIndex,
+        onDestinationSelected: (index) =>
+            context.go(navigationItems[index].path),
+        destinations: [
+          for (final item in navigationItems)
+            NavigationDestination(
+              icon: Icon(item.icon),
+              selectedIcon:
+                  item.selectedIcon != null ? Icon(item.selectedIcon) : null,
+              label: item.label,
+            )
+        ],
+      ),
+    );
   }
 }
 
