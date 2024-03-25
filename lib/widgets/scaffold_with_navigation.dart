@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,24 +25,23 @@ class ScaffoldWithNavigation extends StatelessWidget {
     final shouldShowNavigation = currentIndex >= 0;
 
     return shouldShowNavigation
-        ? AdaptiveScaffold(
-            body: (_) => child,
-            selectedIndex: currentIndex,
-            onSelectedIndexChange: (index) =>
-                context.go(navigationItems[index].path),
-            destinations: [
-              for (final item in navigationItems)
-                NavigationDestination(
-                  icon: Icon(item.icon),
-                  selectedIcon: item.selectedIcon != null
-                      ? Icon(item.selectedIcon)
-                      : null,
-                  label: item.label,
-                )
-            ],
-            largeBreakpoint: Breakpoints.mediumAndUp,
-            useDrawer: false,
-            internalAnimations: false,
+        ? Scaffold(
+            body: child,
+            bottomNavigationBar: NavigationBar(
+              selectedIndex: currentIndex,
+              onDestinationSelected: (index) =>
+                  context.go(navigationItems[index].path),
+              destinations: [
+                for (final item in navigationItems)
+                  NavigationDestination(
+                    icon: Icon(item.icon),
+                    selectedIcon: item.selectedIcon != null
+                        ? Icon(item.selectedIcon)
+                        : null,
+                    label: item.label,
+                  )
+              ],
+            ),
           )
         : Scaffold(body: child);
   }
