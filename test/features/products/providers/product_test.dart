@@ -14,7 +14,7 @@ void main() {
 
       const id = 24;
       await expectLater(
-        container.read(productProvider(24).future),
+        container.read(productProvider(id).future),
         completion(isA<Product>().having((item) => item.id, 'id', equals(id))),
       );
     });

@@ -14,7 +14,7 @@ void main() {
 
       const id = 24;
       await expectLater(
-        container.read(postProvider(24).future),
+        container.read(postProvider(id).future),
         completion(isA<Post>().having((item) => item.id, 'id', equals(id))),
       );
     });

@@ -14,7 +14,7 @@ void main() {
 
       const id = 24;
       await expectLater(
-        container.read(todoProvider(24).future),
+        container.read(todoProvider(id).future),
         completion(isA<Todo>().having((item) => item.id, 'id', equals(id))),
       );
     });
