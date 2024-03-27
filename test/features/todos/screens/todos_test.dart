@@ -117,9 +117,9 @@ void main() {
         final todos = (await tester.runAsync(
           () => container.read(todosProvider.future),
         ))!;
-        final uncompletedTodo = todos.firstWhere((todo) => todo.completed);
+        final completedTodo = todos.firstWhere((todo) => todo.completed);
 
-        final todoFinder = find.text(uncompletedTodo.todo);
+        final todoFinder = find.text(completedTodo.todo);
         final textWidget = tester.firstWidget<Text>(todoFinder);
 
         expect(
