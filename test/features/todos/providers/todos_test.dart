@@ -119,9 +119,9 @@ void main() {
       await container.read(todosProvider.notifier).delete(id);
       await expectLater(
         container.read(todosProvider.future),
-        completion(
-          isNot(anyElement(isA<Todo>().having((item) => item.id, 'id', id))),
-        ),
+        completion(isNot(
+          anyElement(isA<Todo>().having((item) => item.id, 'id', equals(id))),
+        )),
       );
     });
   });

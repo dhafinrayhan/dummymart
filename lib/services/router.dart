@@ -19,6 +19,7 @@ import '../widgets/scaffold_with_navigation.dart';
 
 part 'router.g.dart';
 
+/// The router config for the app.
 @riverpod
 GoRouter router(RouterRef ref) {
   // Local notifier for the current auth state. The purpose of this notifier is
@@ -30,6 +31,12 @@ GoRouter router(RouterRef ref) {
       authStateNotifier.value = value;
     });
 
+  // This is the only place you need to define your navigation items. The items
+  // will be propagated automatically to the router and the navigation bar/rail
+  // of the scaffold.
+  //
+  // To configure the authentication state needed to access a particular item,
+  // see [AuthState] enum.
   final navigationItems = [
     NavigationItem(
       path: '/products',

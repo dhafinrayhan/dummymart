@@ -23,8 +23,8 @@ class CurrentAuthState extends _$CurrentAuthState {
     return token != null ? AuthState.authenticated : AuthState.unauthenticated;
   }
 
-  /// Attempts to log in with [data] and saves the token and profile info to
-  /// storage. Will invalidate the state if success.
+  /// Attempts to log in with [data] and saves the token and profile info to storage.
+  /// Will invalidate the state if success.
   Future<void> login(Login data) async {
     final (profile, token) = await ref.read(apiServiceProvider).login(data);
 
@@ -39,19 +39,17 @@ class CurrentAuthState extends _$CurrentAuthState {
       ..invalidate(apiServiceProvider);
   }
 
-  /// Logs out, deletes the saved token and profile info from storage, and
-  /// invalidates the state.
+  /// Logs out, deletes the saved token and profile info from storage, and invalidates
+  /// the state.
   void logout() {
     // Delete the current [token] and [profile] from Hive box.
     _tokenBox.delete('current');
     _profileBox.delete('current');
 
     ref
-      // Invalidate the state so the auth state will be updated to
-      // unauthenticated.
+      // Invalidate the state so the auth state will be updated to unauthenticated.
       ..invalidateSelf()
-      // Invalidate the API service so that it will no longer use the previous
-      // token.
+      // Invalidate the API service so that it will no longer use the previous token.
       ..invalidate(apiServiceProvider);
   }
 }

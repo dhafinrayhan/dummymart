@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../utils/extensions.dart';
 
+/// A button that shows a circular progress indicator when [loading].
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,
