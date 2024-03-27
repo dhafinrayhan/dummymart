@@ -150,7 +150,7 @@ void main() {
           anyOf(
             isA<Post>().having((item) => item.title.toLowerCase(), 'title',
                 contains(search.toLowerCase())),
-            isA<Post>().having((item) => item.body.toLowerCase(), 'title',
+            isA<Post>().having((item) => item.body.toLowerCase(), 'body',
                 contains(search.toLowerCase())),
           ),
         )),
