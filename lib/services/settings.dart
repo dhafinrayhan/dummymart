@@ -10,7 +10,7 @@ part 'settings.g.dart';
 /// and defaults to [ThemeMode.system] if the theme mode was not set before.
 @riverpod
 class CurrentThemeMode extends _$CurrentThemeMode {
-  final _box = Hive.box<String>('settings');
+  late final _box = Hive.box<String>('settings');
 
   @override
   ThemeMode build() {
