@@ -75,7 +75,7 @@ class _ThemeModeDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     void setThemeMode(ThemeMode themeMode) {
       ref.read(currentThemeModeProvider.notifier).set(themeMode);
-      context.pop();
+      Navigator.of(context).pop();
     }
 
     return SimpleDialog(
