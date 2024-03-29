@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+typedef ThemeDataTransformer = ThemeData Function(ThemeData);
+
 /// Creates two [ThemeData]s (light and dark variants) from a given [seedColor].
 ///
 /// This method is needed because once a [ThemeData] is generated, we cannot get
@@ -8,8 +10,9 @@ import 'package:flutter/material.dart';
   required Color seedColor,
   TextTheme? textTheme,
   bool? useMaterial3,
+  ThemeDataTransformer? transformer,
 }) {
-  final lightTheme = ThemeData.from(
+  var lightTheme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: Brightness.light,
@@ -17,7 +20,7 @@ import 'package:flutter/material.dart';
     textTheme: textTheme,
     useMaterial3: useMaterial3,
   );
-  final darkTheme = ThemeData.from(
+  var darkTheme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: Brightness.dark,
@@ -25,6 +28,11 @@ import 'package:flutter/material.dart';
     textTheme: textTheme,
     useMaterial3: useMaterial3,
   );
+
+  if (transformer != null) {
+    lightTheme = transformer(lightTheme);
+    darkTheme = transformer(darkTheme);
+  }
 
   return (lightTheme, darkTheme);
 }
