@@ -54,6 +54,11 @@ class DummyMartApp extends ConsumerWidget {
     final (lightTheme, darkTheme) = createDualThemeData(
       seedColor: Colors.blue,
       useMaterial3: true,
+      transformer: (themeData) => themeData.copyWith(
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(),
+        ),
+      ),
     );
 
     return MaterialApp.router(

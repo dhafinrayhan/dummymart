@@ -53,18 +53,12 @@ class AddTodoScreen extends HookConsumerWidget {
           children: [
             TextField(
               controller: todoController,
-              decoration: const InputDecoration(
-                labelText: 'Todo',
-                border: OutlineInputBorder(),
-              ),
+              decoration: const InputDecoration(labelText: 'Todo'),
               textInputAction: TextInputAction.next,
             ),
             TextField(
               controller: userIdController,
-              decoration: const InputDecoration(
-                labelText: 'User ID',
-                border: OutlineInputBorder(),
-              ),
+              decoration: const InputDecoration(labelText: 'User ID'),
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
             ),
