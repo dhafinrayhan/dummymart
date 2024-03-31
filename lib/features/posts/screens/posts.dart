@@ -27,7 +27,7 @@ class PostsScreen extends HookConsumerWidget {
     /// The search query that will be passed to the provider.
     final search = useState('');
 
-    final searchController = useTextEditingControllerWithValueChangedCallback(
+    final searchController = useTextEditingControllerX(
       onChanged: (value) {
         EasyDebounce.debounce(
           'search-post',
