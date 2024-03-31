@@ -52,7 +52,10 @@ class PostsScreen extends HookConsumerWidget {
               title: TextField(
                 controller: searchController,
                 focusNode: searchFocusNode,
-                decoration: const InputDecoration(hintText: 'Search post'),
+                decoration: const InputDecoration(
+                  hintText: 'Search post',
+                  border: UnderlineInputBorder(),
+                ),
               ),
               actions: [
                 IconButton(
