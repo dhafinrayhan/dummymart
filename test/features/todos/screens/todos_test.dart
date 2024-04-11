@@ -82,9 +82,7 @@ void main() {
         final element = tester.element(find.byType(TodosScreen));
         final container = ProviderScope.containerOf(element);
 
-        final todos = (await tester.runAsync(
-          () => container.read(todosProvider.future),
-        ))!;
+        final todos = await container.read(todosProvider.future);
         final uncompletedTodo = todos.firstWhere((todo) => !todo.completed);
 
         final todoFinder = find.text(uncompletedTodo.todo);
@@ -114,9 +112,7 @@ void main() {
         final element = tester.element(find.byType(TodosScreen));
         final container = ProviderScope.containerOf(element);
 
-        final todos = (await tester.runAsync(
-          () => container.read(todosProvider.future),
-        ))!;
+        final todos = await container.read(todosProvider.future);
         final completedTodo = todos.firstWhere((todo) => todo.completed);
 
         final todoFinder = find.text(completedTodo.todo);
