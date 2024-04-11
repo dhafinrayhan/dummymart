@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
   required Color seedColor,
   TextTheme? textTheme,
   bool? useMaterial3,
+  ThemeData Function(ThemeData)? transformer,
 }) {
-  final lightTheme = ThemeData.from(
+  var lightTheme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: Brightness.light,
@@ -17,7 +18,7 @@ import 'package:flutter/material.dart';
     textTheme: textTheme,
     useMaterial3: useMaterial3,
   );
-  final darkTheme = ThemeData.from(
+  var darkTheme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: Brightness.dark,
@@ -25,6 +26,11 @@ import 'package:flutter/material.dart';
     textTheme: textTheme,
     useMaterial3: useMaterial3,
   );
+
+  if (transformer != null) {
+    lightTheme = transformer(lightTheme);
+    darkTheme = transformer(darkTheme);
+  }
 
   return (lightTheme, darkTheme);
 }

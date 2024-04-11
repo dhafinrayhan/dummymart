@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 /// Similar to [useTextEditingController], with the additional [onChanged]
 /// parameter to pass a callback for when the [TextEditingController.value] is
 /// changed.
-TextEditingController useTextEditingControllerWithValueChangedCallback({
+TextEditingController useTextEditingControllerX({
   String? text,
   List<Object?>? keys,
   required ValueChanged<TextEditingValue> onChanged,

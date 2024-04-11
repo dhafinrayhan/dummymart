@@ -54,17 +54,13 @@ class LoginScreen extends HookConsumerWidget {
         children: [
           TextField(
             controller: usernameController,
-            decoration: const InputDecoration(
-              labelText: 'Username',
-              border: OutlineInputBorder(),
-            ),
+            decoration: const InputDecoration(labelText: 'Username'),
             textInputAction: TextInputAction.next,
           ),
           TextField(
             controller: passwordController,
             decoration: InputDecoration(
               labelText: 'Password',
-              border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 icon: Icon(
                   isPasswordVisible.value

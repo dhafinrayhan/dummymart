@@ -27,8 +27,7 @@ class PostsScreen extends HookConsumerWidget {
     /// The search query that will be passed to the provider.
     final search = useState('');
 
-    final searchFocusNode = useFocusNode();
-    final searchController = useTextEditingControllerWithValueChangedCallback(
+    final searchController = useTextEditingControllerX(
       onChanged: (value) {
         EasyDebounce.debounce(
           'search-post',
@@ -51,8 +50,11 @@ class PostsScreen extends HookConsumerWidget {
           ? AppBar(
               title: TextField(
                 controller: searchController,
-                focusNode: searchFocusNode,
-                decoration: const InputDecoration(hintText: 'Search post'),
+                decoration: const InputDecoration(
+                  hintText: 'Search post',
+                  border: UnderlineInputBorder(),
+                ),
+                autofocus: true,
               ),
               actions: [
                 IconButton(
@@ -70,7 +72,6 @@ class PostsScreen extends HookConsumerWidget {
                 IconButton(
                   onPressed: () {
                     isSearchMode.value = true;
-                    searchFocusNode.requestFocus();
                   },
                   icon: const Icon(Icons.search),
                 ),

@@ -113,7 +113,7 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
           : null,
       actions: [
         TextButton(
-          onPressed: () => context.pop(),
+          onPressed: () => Navigator.of(context).pop(),
           child: const Text('No'),
         ),
         TextButton(
