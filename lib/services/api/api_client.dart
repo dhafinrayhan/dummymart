@@ -7,6 +7,8 @@ import '../../features/profile/models/profile.dart';
 import '../../features/todos/models/todo.dart';
 
 typedef ApiClientException = DioException;
+typedef ApiClientResponse<T> = Response<T>;
+typedef ApiClientRequestOptions = RequestOptions;
 typedef _ResponseData = Map<String, Object?>;
 
 extension ApiClientExceptionX on ApiClientException {
