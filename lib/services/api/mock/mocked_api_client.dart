@@ -62,7 +62,7 @@ class MockedApiClient implements ApiClient {
   @override
   Future<Todo> addTodo(Todo todo) async {
     await Future.delayed(_delay);
-    final id = _todos.length + 1;
+    final id = (_todos.lastOrNull?.id ?? 0) + 1;
     final addedTodo = todo.copyWith(id: id);
     _todos.add(addedTodo);
     return addedTodo;
