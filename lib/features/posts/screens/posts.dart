@@ -1,11 +1,10 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_use/flutter_use.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/extensions.dart';
-import '../../../utils/hooks.dart';
 import '../models/post.dart';
 import '../providers/posts.dart';
 
@@ -27,14 +26,15 @@ class PostsScreen extends HookConsumerWidget {
     /// The search query that will be passed to the provider.
     final search = useState('');
 
-    final searchController = useTextEditingControllerX(
-      onChanged: (value) {
-        EasyDebounce.debounce(
-          'search-post',
-          const Duration(milliseconds: 500),
-          () => search.value = value.text,
-        );
-      },
+    /// The controller for the search field, wrapped with [useListenable] to trigger
+    /// rebuild whenever the value changes, which will cause the debouncer below to
+    /// fire.
+    final searchController = useListenable(useTextEditingController());
+
+    useDebounce(
+      () => search.value = searchController.text,
+      const Duration(milliseconds: 500),
+      [searchController.text],
     );
 
     final posts = ref.watch(postsProvider(search: search.value));
