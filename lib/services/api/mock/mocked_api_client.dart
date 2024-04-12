@@ -15,6 +15,8 @@ class MockedApiClient implements ApiClient {
   final List<Product> _products = _MockedApiClientRepository.getProducts();
   final List<Todo> _todos = _MockedApiClientRepository.getTodos();
   final List<Post> _posts = _MockedApiClientRepository.getPosts();
+  final List<Map<String, Object?>> _usersRaw =
+      _MockedApiClientRepository.getUsersRaw();
 
   MockedApiClient({Duration? delay})
       : _delay = delay ?? const Duration(milliseconds: 500);
@@ -22,17 +24,23 @@ class MockedApiClient implements ApiClient {
   @override
   Future<(Profile, String)> login(Login data) async {
     await Future.delayed(_delay);
-    final profile = Profile(
-      id: 12,
-      username: data.username,
-      email: '${data.username}@email.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      gender: Gender.male,
-      image: 'https://robohash.org/Terry.png?set=set4',
-    );
-    const token = 'fakeToken';
-    return (profile, token);
+    try {
+      final profileRaw = _usersRaw.singleWhere((user) =>
+          user['username'] == data.username &&
+          user['password'] == data.password);
+      final profile = Profile.fromJson(profileRaw);
+      final token = 'fakeTokenForUser${profile.id}';
+      return (profile, token);
+    } on StateError {
+      final requestOptions = ApiClientRequestOptions();
+      throw ApiClientException(
+        requestOptions: requestOptions,
+        response: ApiClientResponse(
+          requestOptions: requestOptions,
+          data: {'message': 'Invalid credentials'},
+        ),
+      );
+    }
   }
 
   @override
