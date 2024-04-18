@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
 import '../utils/extensions.dart';
+import '../utils/hooks.dart';
 
 /// A button that shows a circular progress indicator when the [onPressed] callback
 /// is pending.
@@ -20,8 +21,7 @@ class AppButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pending = useState<Future<void>?>(null);
-    final snapshot = useFuture(pending.value);
+    final (:pending, :snapshot, hasError: _) = useAsyncTask();
 
     return FilledButton(
       onPressed: onPressed == null ? null : () => pending.value = onPressed!(),
