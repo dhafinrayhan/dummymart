@@ -12,6 +12,7 @@ linter:
   rules:
     - avoid_dynamic_calls
     - avoid_void_async
+    - comment_references
     - directives_ordering
     - prefer_relative_imports
     - sort_pub_dependencies
