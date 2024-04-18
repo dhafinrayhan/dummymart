@@ -10,6 +10,7 @@ analyzer:
     - custom_lint
 linter:
   rules:
+    - avoid_dynamic_calls
     - avoid_void_async
     - directives_ordering
     - prefer_relative_imports
