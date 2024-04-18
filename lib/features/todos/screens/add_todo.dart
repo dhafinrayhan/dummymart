@@ -19,10 +19,8 @@ class AddTodoScreen extends HookConsumerWidget {
     final todoController = useTextEditingController();
     final userIdController = useTextEditingController();
     final isCompleted = useState(false);
-    final isLoading = useState(false);
 
     Future<void> addTodo() async {
-      isLoading.value = true;
       try {
         await ref.read(todosProvider.notifier).add(Todo(
               id: -1,
@@ -36,8 +34,6 @@ class AddTodoScreen extends HookConsumerWidget {
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
         context.showTextSnackBar(e.responseMessage ?? 'Add todo failed');
-      } finally {
-        isLoading.value = false;
       }
     }
 
@@ -83,7 +79,6 @@ class AddTodoScreen extends HookConsumerWidget {
             AppButton(
               onPressed: addTodo,
               label: 'Submit',
-              loading: isLoading.value,
             ),
           ],
         ),

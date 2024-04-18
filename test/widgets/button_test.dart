@@ -13,7 +13,7 @@ void main() {
 
         await tester.pumpMaterialWidget(
           AppButton(
-            onPressed: () {},
+            onPressed: () async {},
             label: label,
           ),
         );
@@ -25,58 +25,71 @@ void main() {
     );
 
     testWidgets(
-      'should not show loading indicator when loading is false',
-      (tester) async {
-        await tester.pumpMaterialWidget(
-          AppButton(
-            onPressed: () {},
-            label: 'Submit',
-            loading: false,
-          ),
-        );
-
-        final loadingIndicatorFinder = find.byType(CircularProgressIndicator);
-
-        expect(loadingIndicatorFinder, findsNothing);
-      },
-    );
-
-    testWidgets(
-      'should show loading indicator when loading is true',
-      (tester) async {
-        await tester.pumpMaterialWidget(
-          AppButton(
-            onPressed: () {},
-            label: 'Submit',
-            loading: true,
-          ),
-        );
-
-        final loadingIndicatorFinder = find.byType(CircularProgressIndicator);
-
-        expect(loadingIndicatorFinder, findsOneWidget);
-      },
-    );
-
-    testWidgets(
       'should call the onPressed callback',
       (tester) async {
         var called = false;
 
         await tester.pumpMaterialWidget(
           AppButton(
-            onPressed: () {
+            onPressed: () async {
+              await Future.delayed(const Duration(seconds: 1));
               called = true;
             },
             label: 'Submit',
-            loading: true,
           ),
         );
 
         final buttonFinder = find.byType(AppButton);
         await tester.tap(buttonFinder);
+        await tester.pumpAndSettle();
 
         expect(called, isTrue);
+      },
+    );
+
+    testWidgets(
+      'should show loading indicator when doing async task',
+      (tester) async {
+        await tester.pumpMaterialWidget(
+          AppButton(
+            onPressed: () async {
+              await Future.delayed(const Duration(seconds: 2));
+            },
+            label: 'Submit',
+          ),
+        );
+
+        final buttonFinder = find.byType(AppButton);
+        await tester.tap(buttonFinder);
+        await tester.pump(const Duration(seconds: 1));
+
+        final loadingIndicatorFinder = find.byType(CircularProgressIndicator);
+
+        expect(loadingIndicatorFinder, findsOneWidget);
+
+        await tester.pumpAndSettle();
+      },
+    );
+
+    testWidgets(
+      'should hide loading indicator after doing async task',
+      (tester) async {
+        await tester.pumpMaterialWidget(
+          AppButton(
+            onPressed: () async {
+              await Future.delayed(const Duration(seconds: 1));
+            },
+            label: 'Submit',
+          ),
+        );
+
+        final buttonFinder = find.byType(AppButton);
+        await tester.tap(buttonFinder);
+        await tester.pumpAndSettle();
+
+        final loadingIndicatorFinder = find.byType(CircularProgressIndicator);
+
+        expect(loadingIndicatorFinder, findsNothing);
       },
     );
   });
