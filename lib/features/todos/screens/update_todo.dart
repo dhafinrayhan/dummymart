@@ -46,10 +46,8 @@ class _UpdateTodoForm extends HookConsumerWidget {
     final userIdController =
         useTextEditingController(text: todo.userId.toString());
     final isCompleted = useState(todo.completed);
-    final isLoading = useState(false);
 
     Future<void> updateTodo() async {
-      isLoading.value = true;
       try {
         await ref.read(todosProvider.notifier).updateItem(
             id,
@@ -65,8 +63,6 @@ class _UpdateTodoForm extends HookConsumerWidget {
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
         context.showTextSnackBar(e.responseMessage ?? 'Update todo failed');
-      } finally {
-        isLoading.value = false;
       }
     }
 
@@ -108,7 +104,6 @@ class _UpdateTodoForm extends HookConsumerWidget {
           AppButton(
             onPressed: updateTodo,
             label: 'Submit',
-            loading: isLoading.value,
           ),
         ],
       ),

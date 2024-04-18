@@ -15,14 +15,12 @@ class LoginScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
     final isPasswordVisible = useState(false);
 
     final usernameController = useTextEditingController();
     final passwordController = useTextEditingController();
 
     Future<void> login() async {
-      isLoading.value = true;
       try {
         await ref.read(currentAuthStateProvider.notifier).login(Login(
               username: usernameController.text,
@@ -31,8 +29,6 @@ class LoginScreen extends HookConsumerWidget {
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
         context.showTextSnackBar(e.responseMessage ?? 'Login failed');
-      } finally {
-        isLoading.value = false;
       }
     }
 
@@ -79,7 +75,6 @@ class LoginScreen extends HookConsumerWidget {
           AppButton(
             onPressed: login,
             label: 'Login',
-            loading: isLoading.value,
           ),
         ],
       ),

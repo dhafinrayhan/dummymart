@@ -1,31 +1,35 @@
 import 'package:flextras/flextras.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
 import '../utils/extensions.dart';
 
-/// A button that shows a circular progress indicator when [loading].
-class AppButton extends StatelessWidget {
+/// A button that shows a circular progress indicator when the [onPressed] callback
+/// is pending.
+class AppButton extends HookWidget {
   const AppButton({
     super.key,
     required this.onPressed,
     required this.label,
-    this.loading = false,
   });
 
-  final VoidCallback? onPressed;
+  final AsyncCallback? onPressed;
   final String label;
-  final bool loading;
 
   @override
   Widget build(BuildContext context) {
+    final pending = useState<Future<void>?>(null);
+    final snapshot = useFuture(pending.value);
+
     return FilledButton(
-      onPressed: onPressed,
+      onPressed: onPressed == null ? null : () => pending.value = onPressed!(),
       child: SeparatedRow(
         separatorBuilder: () => const Gap(12),
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (loading)
+          if (snapshot.connectionState == ConnectionState.waiting)
             SizedBox.square(
               dimension: 12,
               child: CircularProgressIndicator(
