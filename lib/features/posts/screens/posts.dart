@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utils/extensions.dart';
+import '../../../utils/hooks.dart';
 import '../models/post.dart';
 import '../providers/posts.dart';
 
@@ -20,8 +21,11 @@ class PostsScreen extends HookConsumerWidget {
     /// the title text).
     final isSearchMode = useState(false);
 
-    /// Whether the request to load more is on loading state.
-    final isLoadingMore = useState(false);
+    final (
+      pending: pendingLoadMore,
+      snapshot: loadMoreSnapshot,
+      hasError: _,
+    ) = useAsyncTask();
 
     /// The search query that will be passed to the provider.
     final search = useState('');
@@ -40,9 +44,7 @@ class PostsScreen extends HookConsumerWidget {
     final posts = ref.watch(postsProvider(search: search.value));
 
     Future<void> loadMore() async {
-      isLoadingMore.value = true;
       await ref.read(postsProvider(search: search.value).notifier).loadMore();
-      isLoadingMore.value = false;
     }
 
     return Scaffold(
@@ -81,11 +83,11 @@ class PostsScreen extends HookConsumerWidget {
         onNotification: (notification) {
           // Use this check to prevent requesting "load more" twice in a single
           // max scroll event.
-          if (!isLoadingMore.value) {
+          if (loadMoreSnapshot.connectionState != ConnectionState.waiting) {
             final ScrollMetrics(:pixels, :maxScrollExtent) =
                 notification.metrics;
             if (pixels >= maxScrollExtent) {
-              loadMore();
+              pendingLoadMore.value = loadMore();
             }
           }
 
@@ -106,7 +108,8 @@ class PostsScreen extends HookConsumerWidget {
                   return Center(
                     child: SizedBox.square(
                       dimension: 36,
-                      child: isLoadingMore.value
+                      child: loadMoreSnapshot.connectionState ==
+                              ConnectionState.waiting
                           ? const CircularProgressIndicator()
                           : const SizedBox(),
                     ),

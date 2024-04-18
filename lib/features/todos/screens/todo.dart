@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api/api_client.dart';
 import '../../../utils/extensions.dart';
+import '../../../utils/hooks.dart';
 import '../providers/todo.dart';
 import '../providers/todos.dart';
 
@@ -82,10 +82,9 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
+    final (:pending, :snapshot, hasError: _) = useAsyncTask();
 
     Future<void> deleteTodo() async {
-      isLoading.value = true;
       try {
         await ref.read(todosProvider.notifier).delete(id);
 
@@ -97,14 +96,12 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
         context.showTextSnackBar(e.responseMessage ?? 'Delete todo failed');
-      } finally {
-        isLoading.value = false;
       }
     }
 
     return AlertDialog(
       title: const Text('Delete this todo?'),
-      content: isLoading.value
+      content: snapshot.connectionState == ConnectionState.waiting
           ? const SizedBox(
               height: 48,
               child: Center(child: CircularProgressIndicator()),
@@ -116,7 +113,7 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
           child: const Text('No'),
         ),
         TextButton(
-          onPressed: deleteTodo,
+          onPressed: () => pending.value = deleteTodo(),
           child: const Text('Yes'),
         ),
       ],
