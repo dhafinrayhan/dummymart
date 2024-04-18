@@ -90,11 +90,10 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
         await ref.read(todosProvider.notifier).delete(id);
 
         if (!context.mounted) return;
-        context
-          // Pop the dialog.
-          ..pop()
-          // Pop the todo screen.
-          ..pop();
+        // Pop the dialog.
+        Navigator.of(context).pop();
+        // Pop the todo screen.
+        context.pop();
       } on ApiClientException catch (e) {
         if (!context.mounted) return;
         context.showTextSnackBar(e.responseMessage ?? 'Delete todo failed');
