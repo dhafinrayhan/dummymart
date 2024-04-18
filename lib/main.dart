@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -43,7 +44,7 @@ Future<void> main() async {
   ));
 }
 
-class DummyMartApp extends ConsumerWidget {
+class DummyMartApp extends HookConsumerWidget {
   const DummyMartApp({super.key});
 
   @override
@@ -51,15 +52,15 @@ class DummyMartApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(currentThemeModeProvider);
 
-    final (lightTheme, darkTheme) = createDualThemeData(
-      seedColor: Colors.blue,
-      useMaterial3: true,
-      transformer: (themeData) => themeData.copyWith(
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-      ),
-    );
+    final (lightTheme, darkTheme) = useMemoized(() => createDualThemeData(
+          seedColor: Colors.blue,
+          useMaterial3: true,
+          transformer: (data) => data.copyWith(
+            inputDecorationTheme: const InputDecorationTheme(
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ));
 
     return MaterialApp.router(
       title: 'DummyMart',
