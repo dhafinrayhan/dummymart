@@ -7,7 +7,7 @@ part 'settings.g.dart';
 /// The current theme mode of the app.
 ///
 /// When this provider is first read, it will read the saved value from storage,
-/// and defaults to [ThemeMode.system] if the theme mode was not set before.
+/// and defaults to [ThemeMode.system] if the theme mode has not been set before.
 @riverpod
 class CurrentThemeMode extends _$CurrentThemeMode {
   late final _box = Hive.box<String>('settings');

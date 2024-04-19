@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// An utility to observe Riverpod providers.
+/// A utility to observe Riverpod providers.
 class AppProviderObserver extends ProviderObserver {
   @override
   void didAddProvider(
