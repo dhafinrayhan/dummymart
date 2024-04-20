@@ -7,7 +7,7 @@ import '../utils/testing_utils.dart';
 
 void main() {
   group('Test theme mode provider', () {
-    test('theme should initally be ThemeMode.system', () async {
+    test('theme should initially be ThemeMode.system', () async {
       await setupHive(() async {
         await Hive.openBox<String>('settings');
       });

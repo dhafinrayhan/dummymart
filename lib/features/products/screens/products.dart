@@ -21,7 +21,7 @@ class ProductsScreen extends ConsumerWidget {
         onRefresh: () => ref.refresh(productsProvider.future),
         child: products.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const Center(child: Text('An error occured')),
+          error: (_, __) => const Center(child: Text('An error occurred')),
           data: (products) => ListView.builder(
             itemCount: products.length,
             itemBuilder: (_, index) => _ProductListTile(products[index]),

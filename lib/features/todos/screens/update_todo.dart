@@ -27,7 +27,7 @@ class UpdateTodoScreen extends ConsumerWidget {
       ),
       body: todo.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => const Center(child: Text('An error occured')),
+        error: (_, __) => const Center(child: Text('An error occurred')),
         data: (todo) => _UpdateTodoForm(id, todo),
       ),
     );

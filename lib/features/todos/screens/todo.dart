@@ -44,7 +44,7 @@ class TodoScreen extends ConsumerWidget {
         // the todo.
         skipLoadingOnRefresh: false,
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => const Center(child: Text('An error occured')),
+        error: (_, __) => const Center(child: Text('An error occurred')),
         data: (todo) {
           final records = [
             (label: 'Todo', text: todo.todo),

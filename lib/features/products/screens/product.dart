@@ -19,7 +19,7 @@ class ProductScreen extends ConsumerWidget {
       ),
       body: product.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => const Center(child: Text('An error occured')),
+        error: (_, __) => const Center(child: Text('An error occurred')),
         data: (product) {
           final records = [
             (label: 'Title', text: product.title),

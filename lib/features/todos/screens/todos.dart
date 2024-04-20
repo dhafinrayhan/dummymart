@@ -22,7 +22,7 @@ class TodosScreen extends ConsumerWidget {
         onRefresh: () => ref.refresh(todosProvider.future),
         child: todos.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => const Center(child: Text('An error occured')),
+          error: (_, __) => const Center(child: Text('An error occurred')),
           data: (todos) => ListView.builder(
             itemCount: todos.length,
             itemBuilder: (_, index) => _TodoListTile(todos[index]),

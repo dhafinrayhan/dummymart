@@ -99,7 +99,7 @@ class PostsScreen extends HookConsumerWidget {
           child: posts.when(
             skipLoadingOnReload: true,
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (_, __) => const Center(child: Text('An error occured')),
+            error: (_, __) => const Center(child: Text('An error occurred')),
             data: (posts) => ListView.builder(
               itemCount: posts.length + 1,
               itemBuilder: (_, index) {

@@ -15,7 +15,7 @@ Future<void> main() async {
   // Some packages, like Hive (through its `initFlutter` method), call this
   // internally. This could make the illusion that we don't need to call it,
   // when some other packages actually need this to be called, but no error
-  // occured because of those internal calls from the packages that call it. So
+  // occurred because of those internal calls from the packages that call it. So
   // it's always a good idea to call this ourself to prevent undesired or
   // unpredictable behavior if in the future packages are being added/removed.
   WidgetsFlutterBinding.ensureInitialized();
