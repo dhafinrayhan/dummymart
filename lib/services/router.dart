@@ -121,8 +121,9 @@ GoRouter router(RouterRef ref) {
         builder: (_, __) => const LoginScreen(),
       ),
 
-      // Configuration for the bottom navigation bar routes. The routes
-      // themselves should be defined in [navigationItems].
+      // Configuration for the bottom navigation bar routes. The routes themselves
+      // should be defined in [navigationItems]. Modification to this [ShellRoute]
+      // config is rarely needed.
       ShellRoute(
         builder: (_, state, child) => ScaffoldWithNavigation(
           currentPath: state.uri.path,
@@ -149,10 +150,16 @@ GoRouter router(RouterRef ref) {
     ],
     refreshListenable: authStateNotifier,
     redirect: (_, state) {
+      // Get the current auth state.
       final authState = ref.read(currentAuthStateProvider);
+
+      // Check if the current path is allowed for the current auth state. If not,
+      // redirect to the redirect target of the current auth state.
       if (!authState.allowedPaths.contains(state.fullPath)) {
         return authState.redirectPath;
       }
+
+      // If the current path is allowed for the current auth state, don't redirect.
       return null;
     },
   );
