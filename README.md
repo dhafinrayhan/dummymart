@@ -5,7 +5,7 @@ An example Flutter project that uses [Riverpod], [go_router], [Hive], [flutter_h
 ## ⚠ Important Notes
 This project uses [DummyJSON] API. Please note that DummyJSON **doesn't apply your changes** when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to these API limitations.
 
-You can run the app with `--dart-define=MOCK_API=true` flag to use the internal mocked API that mimics the original API behavior and does modify your changes in a session. If you're using VSCode, you can instead run the app with the "dummymart (mock API)" configuration. Current limitations: any username/password is allowed to login and you will get a dummy profile data.
+You can run the app with `--dart-define=MOCK_API=true` flag to use the internal mocked API that mimics the original API behavior and does modify your changes in a session. If you're using VSCode, you can instead run the app with the "dummymart (mock API)" configuration.
 
 ## Features
 Each feature demonstrates certain functionalities that are commonly used in a CRUD app.
