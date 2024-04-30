@@ -28,16 +28,15 @@ class ScaffoldWithNavigation extends StatelessWidget {
 
     // Only show navigation bar/rail when the current path is a navigation item.
     final shouldHideNavigation = currentIndex < 0;
+    if (shouldHideNavigation) {
+      return Scaffold(body: child);
+    }
 
     final width = MediaQuery.sizeOf(context).width;
 
     // Use navigation rail instead of navigation bar when the screen width is
     // larger than 600dp.
     final useNavigationRail = width > 600;
-
-    if (shouldHideNavigation) {
-      return Scaffold(body: child);
-    }
 
     if (useNavigationRail) {
       return Scaffold(
