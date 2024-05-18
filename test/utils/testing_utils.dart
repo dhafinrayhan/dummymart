@@ -109,7 +109,7 @@ extension WidgetTesterX on WidgetTester {
     Duration? duration,
     EnginePhase phase = EnginePhase.sendSemanticsUpdate,
   ]) =>
-      pumpWidget(MaterialApp(home: widget), duration, phase);
+      pumpWidget(MaterialApp(home: widget), duration: duration, phase: phase);
 
   /// Calls [pumpWidget] with the [widget] wrapped in a [MaterialApp] and scoped
   /// with a [ProviderScope].
@@ -128,7 +128,7 @@ extension WidgetTesterX on WidgetTester {
           observers: observers,
           child: MaterialApp(home: widget),
         ),
-        duration,
-        phase,
+        duration: duration,
+        phase: phase,
       );
 }
