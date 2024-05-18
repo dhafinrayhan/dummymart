@@ -1,6 +1,8 @@
 # DummyMart
 
 An example Flutter project that uses [Riverpod], [go_router], [Hive], [flutter_hooks], and [Freezed].
+ 
+> Check out the experimental use of macros [here](https://github.com/dhafinrayhan/dummymart/tree/macros).
 
 ## ⚠ Important Notes
 This project uses [DummyJSON] API. Please note that DummyJSON **doesn't apply your changes** when creating, updating, or deleting items. This project correctly implements those actions, but expect no data changes due to these API limitations.
