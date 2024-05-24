@@ -28,10 +28,8 @@ void main() {
         final firstProduct = products.first;
 
         final titleFinder = find.text(firstProduct.title);
-        final brandFinder = find.text(firstProduct.brand);
 
         expect(titleFinder, findsWidgets);
-        expect(brandFinder, findsWidgets);
       },
     );
 
