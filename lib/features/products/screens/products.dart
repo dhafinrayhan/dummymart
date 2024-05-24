@@ -42,7 +42,7 @@ class _ProductListTile extends StatelessWidget {
     return ListTile(
       onTap: () => context.go('/products/${product.id}'),
       title: Text(product.title),
-      subtitle: Text(product.brand),
+      subtitle: product.brand != null ? Text(product.brand!) : null,
     );
   }
 }
