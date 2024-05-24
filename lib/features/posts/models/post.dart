@@ -10,9 +10,9 @@ class Post with _$Post {
     required int id,
     required String title,
     required String body,
-    required int userId,
     required List<String> tags,
-    required int reactions,
+    required int views,
+    required int userId,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
