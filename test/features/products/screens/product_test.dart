@@ -29,13 +29,17 @@ void main() {
 
         final titleFinder = find.text(product.title);
         final descriptionFinder = find.text(product.description);
-        final brandFinder = find.text(product.brand);
         final stockFinder = find.text(product.stock.toString());
 
         expect(titleFinder, findsWidgets);
         expect(descriptionFinder, findsWidgets);
-        expect(brandFinder, findsWidgets);
         expect(stockFinder, findsWidgets);
+
+        final brand = product.brand;
+        if (brand != null) {
+          final brandFinder = find.text(brand);
+          expect(brandFinder, findsWidgets);
+        }
       },
     );
   });

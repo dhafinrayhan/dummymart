@@ -25,7 +25,7 @@ class PostScreen extends ConsumerWidget {
             (label: 'Title', text: post.title),
             (label: 'Body', text: post.body),
             (label: 'Tags', text: post.tags.join(', ')),
-            (label: 'Reactions', text: post.reactions.toString()),
+            (label: 'Views', text: post.views.toString()),
           ];
           return ListView.builder(
             itemCount: records.length,

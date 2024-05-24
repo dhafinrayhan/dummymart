@@ -30,12 +30,12 @@ void main() {
         final titleFinder = find.text(post.title);
         final bodyFinder = find.text(post.body);
         final tagsFinder = find.text(post.tags.join(', '));
-        final reactionsFinder = find.text(post.reactions.toString());
+        final viewsFinder = find.text(post.views.toString());
 
         expect(titleFinder, findsWidgets);
         expect(bodyFinder, findsWidgets);
         expect(tagsFinder, findsWidgets);
-        expect(reactionsFinder, findsWidgets);
+        expect(viewsFinder, findsWidgets);
       },
     );
   });

@@ -24,7 +24,7 @@ class ProductScreen extends ConsumerWidget {
           final records = [
             (label: 'Title', text: product.title),
             (label: 'Description', text: product.description),
-            (label: 'Brand', text: product.brand),
+            if (product.brand != null) (label: 'Brand', text: product.brand!),
             (label: 'Stock', text: product.stock.toString()),
           ];
           return ListView.builder(
