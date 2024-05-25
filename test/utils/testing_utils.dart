@@ -105,10 +105,10 @@ MockedApiClient createMockedApiClient({
 extension WidgetTesterX on WidgetTester {
   /// Calls [pumpWidget] with the [widget] wrapped in a [MaterialApp].
   Future<void> pumpMaterialWidget(
-    Widget widget, [
+    Widget widget, {
     Duration? duration,
     EnginePhase phase = EnginePhase.sendSemanticsUpdate,
-  ]) =>
+  }) =>
       pumpWidget(MaterialApp(home: widget), duration: duration, phase: phase);
 
   /// Calls [pumpWidget] with the [widget] wrapped in a [MaterialApp] and scoped
