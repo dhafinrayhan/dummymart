@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../utils/extensions.dart';
 import '../../auth/providers/auth_state.dart';
 import '../providers/profile.dart';
 
@@ -51,6 +52,7 @@ class ProfileScreen extends ConsumerWidget {
         icon: const Icon(Icons.logout),
         label: const Text('Logout'),
         onPressed: logout,
+        backgroundColor: context.colorScheme.errorContainer,
       ),
     );
   }
