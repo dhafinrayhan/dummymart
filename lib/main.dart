@@ -6,8 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'features/profile/models/profile.dart';
+import 'features/settings/providers/settings.dart';
 import 'services/router.dart';
-import 'services/settings.dart';
 import 'utils/methods.dart';
 import 'utils/provider_observer.dart';
 

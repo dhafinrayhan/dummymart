@@ -2,11 +2,16 @@
 enum AuthState {
   unknown(
     redirectPath: '/',
-    allowedPaths: ['/'],
+    allowedPaths: [
+      '/',
+    ],
   ),
   unauthenticated(
     redirectPath: '/login',
-    allowedPaths: ['/login'],
+    allowedPaths: [
+      '/login',
+      '/settings',
+    ],
   ),
   authenticated(
     redirectPath: '/products',
@@ -20,6 +25,7 @@ enum AuthState {
       '/posts',
       '/posts/:id',
       '/profile',
+      '/settings',
     ],
   ),
   ;

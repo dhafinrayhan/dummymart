@@ -11,6 +11,7 @@ import '../features/posts/screens/posts.dart';
 import '../features/products/screens/product.dart';
 import '../features/products/screens/products.dart';
 import '../features/profile/screens/profile.dart';
+import '../features/settings/screens/settings.dart';
 import '../features/todos/screens/add_todo.dart';
 import '../features/todos/screens/todo.dart';
 import '../features/todos/screens/todos.dart';
@@ -119,6 +120,10 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: '/login',
         builder: (_, __) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/settings',
+        builder: (_, __) => const SettingsScreen(),
       ),
 
       // Configuration for the bottom navigation bar routes. The routes themselves
