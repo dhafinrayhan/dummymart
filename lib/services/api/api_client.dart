@@ -60,6 +60,12 @@ class ApiClient {
     return (profile, token);
   }
 
+  Future<Profile> fetchProfile() async {
+    final response = await _httpClient.get('/user/me');
+
+    return Profile.fromJson(response.data as _ResponseData);
+  }
+
   Future<List<Product>> fetchProducts() async {
     final response = await _httpClient.get('/products');
 

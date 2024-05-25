@@ -12,12 +12,6 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileProvider);
 
-    final profileRecords = [
-      (label: 'Name', text: profile?.fullName),
-      (label: 'Username', text: profile?.username),
-      (label: 'Email', text: profile?.email),
-    ];
-
     void logout() {
       ref.read(currentAuthStateProvider.notifier).logout();
     }
@@ -32,20 +26,31 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          for (final record in profileRecords)
-            ListTile(
-              title: Text(record.label),
-              subtitle: Text(record.text ?? ''),
-            ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
-            onTap: logout,
-          ),
-        ],
+      body: profile.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (_, __) => const Center(child: Text('An error occurred')),
+        data: (profile) {
+          final records = [
+            (label: 'Name', text: profile.fullName),
+            (label: 'Username', text: profile.username),
+            (label: 'Email', text: profile.email),
+          ];
+
+          return ListView(
+            children: [
+              for (final record in records)
+                ListTile(
+                  title: Text(record.label),
+                  subtitle: Text(record.text),
+                ),
+            ],
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.logout),
+        label: const Text('Logout'),
+        onPressed: logout,
       ),
     );
   }

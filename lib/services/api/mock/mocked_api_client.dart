@@ -44,6 +44,11 @@ class MockedApiClient implements ApiClient {
   }
 
   @override
+  Future<Profile> fetchProfile() {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<List<Product>> fetchProducts() async {
     await Future.delayed(_delay);
     return _products;
