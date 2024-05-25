@@ -140,6 +140,7 @@ class _PostListTile extends StatelessWidget {
         spacing: 4,
         children: [for (final tag in post.tags) _PostTag(tag)],
       ),
+      trailing: Text('${post.views} views'),
     );
   }
 }
