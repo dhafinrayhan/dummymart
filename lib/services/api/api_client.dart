@@ -121,7 +121,7 @@ class ApiClient {
     return Todo.fromJson(response.data as _ResponseData);
   }
 
-  Future<List<Post>> fetchPosts({String? search, int? limit}) async {
+  Future<List<Post>> fetchPosts({String? search, int? limit, int? skip}) async {
     var path = '/posts';
     final queryParameters = <String, dynamic>{};
 
@@ -131,6 +131,9 @@ class ApiClient {
     }
     if (limit != null) {
       queryParameters['limit'] = limit;
+    }
+    if (skip != null) {
+      queryParameters['skip'] = skip;
     }
 
     final response =

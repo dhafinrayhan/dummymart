@@ -7,23 +7,26 @@ part 'posts.g.dart';
 
 @riverpod
 class Posts extends _$Posts {
-  static const int defaultLimit = 15;
+  static const int itemsPerPage = 15;
 
   @override
   Future<List<Post>> build({String? search}) {
     return ref
         .watch(apiServiceProvider)
-        .fetchPosts(search: search, limit: defaultLimit);
+        .fetchPosts(search: search, limit: itemsPerPage);
   }
 
   Future<void> loadMore() async {
-    final newLimit = (await future).length + defaultLimit;
+    final oldItems = await future;
 
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      return ref
-          .read(apiServiceProvider)
-          .fetchPosts(search: search, limit: newLimit);
+      final nextItems = await ref.read(apiServiceProvider).fetchPosts(
+            search: search,
+            skip: oldItems.length,
+            limit: itemsPerPage,
+          );
+      return [...oldItems, ...nextItems];
     });
   }
 }

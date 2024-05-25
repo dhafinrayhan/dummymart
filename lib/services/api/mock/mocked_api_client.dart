@@ -99,7 +99,7 @@ class MockedApiClient implements ApiClient {
   }
 
   @override
-  Future<List<Post>> fetchPosts({String? search, int? limit}) async {
+  Future<List<Post>> fetchPosts({String? search, int? limit, int? skip}) async {
     await Future.delayed(_delay);
     var posts = _posts;
     if (search != null && search.isNotEmpty) {
@@ -107,8 +107,11 @@ class MockedApiClient implements ApiClient {
           .where((post) => post.title.find(search) || post.body.find(search))
           .toList();
     }
+    if (skip != null) {
+      posts = posts.skip(skip).toList();
+    }
     if (limit != null) {
-      posts = posts.sublist(0, min(limit, posts.length));
+      posts = posts.take(limit).toList();
     }
     return posts;
   }
