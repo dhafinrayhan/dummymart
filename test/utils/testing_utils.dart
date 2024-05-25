@@ -5,10 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-/// Number of parallel test run, used when creating temporary path for Hive to
-/// prevent locking each other.
-int _parallelCount = 0;
-
 /// Creates a [ProviderContainer] and automatically disposes it at the end of
 /// the test.
 ProviderContainer createContainer({
@@ -30,8 +26,7 @@ ProviderContainer createContainer({
 }
 
 void _setupHive() {
-  final pathIdentifier = (_parallelCount++).toString().padLeft(3, '0');
-  Hive.init('.test-cache/temp-$pathIdentifier');
+  Hive.init('.test-cache/temp-${DateTime.now().millisecondsSinceEpoch}');
   addTearDown(() {
     Hive.deleteFromDisk();
     Hive.resetAdapters();
