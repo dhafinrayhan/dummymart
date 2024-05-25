@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'features/profile/models/profile.dart';
 import 'features/settings/providers/settings.dart';
 import 'services/router.dart';
 import 'utils/methods.dart';
@@ -26,13 +25,8 @@ Future<void> main() async {
   await Future(() async {
     await Hive.initFlutter();
 
-    // Register adapters.
-    Hive.registerAdapter(ProfileAdapter());
-    Hive.registerAdapter(GenderAdapter());
-
     // Open boxes.
     await [
-      Hive.openBox<Profile>('profile'),
       Hive.openBox<String>('token'),
       Hive.openBox<String>('settings'),
     ].wait;

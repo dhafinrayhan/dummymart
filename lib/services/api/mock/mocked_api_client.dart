@@ -22,7 +22,7 @@ class MockedApiClient implements ApiClient {
       : _delay = delay ?? const Duration(milliseconds: 500);
 
   @override
-  Future<(Profile, String)> login(Login data) async {
+  Future<String> login(Login data) async {
     await Future.delayed(_delay);
     try {
       final profileRaw = _usersRaw.singleWhere((user) =>
@@ -30,7 +30,7 @@ class MockedApiClient implements ApiClient {
           user['password'] == data.password);
       final profile = Profile.fromJson(profileRaw);
       final token = 'fakeTokenForUser${profile.id}';
-      return (profile, token);
+      return token;
     } on StateError {
       final requestOptions = ApiClientRequestOptions();
       throw ApiClientException(
@@ -41,6 +41,11 @@ class MockedApiClient implements ApiClient {
         ),
       );
     }
+  }
+
+  @override
+  Future<Profile> fetchProfile() {
+    throw UnimplementedError();
   }
 
   @override

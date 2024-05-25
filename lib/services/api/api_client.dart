@@ -48,16 +48,20 @@ class ApiClient {
     return "ApiClient(_httpClient.options.headers['Authorization']: ${_httpClient.options.headers['Authorization']})";
   }
 
-  Future<(Profile, String)> login(Login data) async {
+  /// Attempts to login with the login [data], returns the token if success.
+  Future<String> login(Login data) async {
     final response = await _httpClient.post(
       '/auth/login',
       data: data.toJson(),
     );
 
-    final profile = Profile.fromJson(response.data as _ResponseData);
-    final token = response.data['token'] as String;
+    return response.data['token'] as String;
+  }
 
-    return (profile, token);
+  Future<Profile> fetchProfile() async {
+    final response = await _httpClient.get('/user/me');
+
+    return Profile.fromJson(response.data as _ResponseData);
   }
 
   Future<List<Product>> fetchProducts() async {
