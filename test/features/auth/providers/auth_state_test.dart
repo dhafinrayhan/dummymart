@@ -1,7 +1,6 @@
 import 'package:dummymart/features/auth/models/auth_state.dart';
 import 'package:dummymart/features/auth/models/login.dart';
 import 'package:dummymart/features/auth/providers/auth_state.dart';
-import 'package:dummymart/features/profile/models/profile.dart';
 import 'package:hive/hive.dart';
 import 'package:test/test.dart';
 
@@ -11,13 +10,7 @@ void main() {
   group('Test CurrentAuthState notifier and provider', () {
     test('login and logout should work', () async {
       await setupHive(() async {
-        Hive.registerAdapter(ProfileAdapter());
-        Hive.registerAdapter(GenderAdapter());
-
-        await [
-          Hive.openBox<String>('token'),
-          Hive.openBox<Profile>('profile'),
-        ].wait;
+        await Hive.openBox<String>('token');
       });
 
       final container = createContainer();

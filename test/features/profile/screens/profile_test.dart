@@ -28,7 +28,7 @@ void main() {
         await tester.pumpMaterialWidgetScoped(
           const ProfileScreen(),
           overrides: [
-            profileProvider.overrideWithValue(profile),
+            profileProvider.overrideWith((_) => profile),
           ],
         );
 

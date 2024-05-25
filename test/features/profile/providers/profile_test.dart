@@ -9,33 +9,10 @@ import '../../../utils/testing_utils.dart';
 
 void main() {
   group('Test profileProvider', () {
-    test('profile should initially be null before login', () async {
+    test('profile should expose profile data after a successful login',
+        () async {
       await setupHive(() async {
-        Hive.registerAdapter(ProfileAdapter());
-        Hive.registerAdapter(GenderAdapter());
-
-        await [
-          Hive.openBox<Profile>('profile'),
-        ].wait;
-      });
-
-      final container = createContainer();
-
-      expect(
-        container.read(profileProvider),
-        isNull,
-      );
-    });
-
-    test('profile should be non-null after a successful login', () async {
-      await setupHive(() async {
-        Hive.registerAdapter(ProfileAdapter());
-        Hive.registerAdapter(GenderAdapter());
-
-        await [
-          Hive.openBox<String>('token'),
-          Hive.openBox<Profile>('profile'),
-        ].wait;
+        await Hive.openBox<String>('token');
       });
 
       final container = createContainer();
@@ -43,9 +20,10 @@ void main() {
       await container
           .read(currentAuthStateProvider.notifier)
           .login(Login(username: 'kminchelle', password: '0lelplR'));
-      expect(
-        container.read(profileProvider),
-        isA<Profile>(),
+
+      await expectLater(
+        container.read(profileProvider.future),
+        completion(isA<Profile>()),
       );
     });
   });
