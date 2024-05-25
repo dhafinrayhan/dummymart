@@ -33,7 +33,7 @@ class SettingsScreen extends ConsumerWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.info_outline),
-            title: const Text('Open-source licenses'),
+            title: const Text('Licenses'),
             onTap: () => context.showAppLicensePage(),
           ),
         ],
