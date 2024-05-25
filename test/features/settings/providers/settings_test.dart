@@ -1,9 +1,9 @@
-import 'package:dummymart/services/settings.dart';
+import 'package:dummymart/features/settings/providers/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:test/test.dart';
 
-import '../utils/testing_utils.dart';
+import '../../../utils/testing_utils.dart';
 
 void main() {
   group('Test theme mode provider', () {
