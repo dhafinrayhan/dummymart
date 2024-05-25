@@ -52,7 +52,10 @@ class ApiClient {
   Future<String> login(Login data) async {
     final response = await _httpClient.post(
       '/auth/login',
-      data: data.toJson(),
+      data: {
+        ...data.toJson(),
+        'expiresInMins': 43200,
+      },
     );
 
     return response.data['token'] as String;
