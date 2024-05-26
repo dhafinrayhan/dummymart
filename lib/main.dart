@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/settings/providers/settings.dart';
 import 'services/router.dart';
+import 'services/storages.dart';
 import 'utils/methods.dart';
 import 'utils/provider_observer.dart';
 
@@ -28,9 +30,10 @@ Future<void> main() async {
     // Open boxes.
     await [
       Hive.openBox<String>('token'),
-      Hive.openBox<String>('settings'),
     ].wait;
   });
+
+  prefs = await SharedPreferences.getInstance();
 
   runApp(ProviderScope(
     observers: [AppProviderObserver()],
