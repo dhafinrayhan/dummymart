@@ -1,7 +1,7 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../services/api/api_service.dart';
+import '../../../services/storage/secure_storage.dart';
 import '../models/auth_state.dart';
 import '../models/login.dart';
 
@@ -13,11 +13,9 @@ part 'auth_state.g.dart';
 /// to the storage through the [login] and [logout] methods.
 @riverpod
 class CurrentAuthState extends _$CurrentAuthState {
-  final _tokenBox = Hive.box<String>('token');
-
   @override
   AuthState build() {
-    final token = _tokenBox.get('current');
+    final token = secureStorage.get('token');
     return token != null ? AuthState.authenticated : AuthState.unauthenticated;
   }
 
@@ -26,8 +24,8 @@ class CurrentAuthState extends _$CurrentAuthState {
   Future<void> login(Login data) async {
     final token = await ref.read(apiServiceProvider).login(data);
 
-    // Save the new [token] and [profile] to Hive box.
-    _tokenBox.put('current', token);
+    // Save the new [token] and [profile] to secure storage.
+    secureStorage.set('token', token);
 
     ref
       // Invalidate the state so the auth state will be updated to authenticated.
@@ -39,8 +37,8 @@ class CurrentAuthState extends _$CurrentAuthState {
   /// Logs out, deletes the saved token and profile info from storage, and invalidates
   /// the state.
   void logout() {
-    // Delete the current [token] and [profile] from Hive box.
-    _tokenBox.delete('current');
+    // Delete the current [token] and [profile] from secure storage.
+    secureStorage.remove('token');
 
     ref
       // Invalidate the state so the auth state will be updated to unauthenticated.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../services/storages.dart';
+import '../../../services/storage/prefs.dart';
 
 part 'settings.g.dart';
 

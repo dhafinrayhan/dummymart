@@ -1,6 +1,6 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../storage/secure_storage.dart';
 import 'api_client.dart';
 import 'mock/mocked_api_client.dart';
 
@@ -18,7 +18,7 @@ part 'api_service.g.dart';
 /// without keepAlive set to true.
 @Riverpod(keepAlive: true)
 ApiClient apiService(ApiServiceRef ref) {
-  final token = Hive.box<String>('token').get('current');
+  final token = secureStorage.get('token');
 
   const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
   if (mock) return MockedApiClient();
