@@ -1,5 +1,5 @@
 name: dummymart
-description: "An example Flutter project that uses Riverpod, go_router, Hive, flutter_hooks, and Freezed."
+description: "An example Flutter project that uses Riverpod, go_router, flutter_hooks, and Freezed."
 publish_to: "none"
 version: 1.2.1
 
@@ -18,8 +18,6 @@ dependencies:
   freezed_annotation: ^2.4.1
   gap: ^3.0.1
   go_router: ^14.1.2
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   hooks_riverpod: ^2.5.1
   json_annotation: ^4.9.0
   riverpod_annotation: ^2.3.5
@@ -33,7 +31,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.4.7
-  hive_generator: ^2.0.1
   husky: ^0.1.7
   json_serializable: ^6.8.0
   lint_staged: ^0.5.1

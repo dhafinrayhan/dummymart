@@ -1,6 +1,6 @@
 # DummyMart
 
-An example Flutter project that uses [Riverpod], [go_router], [Hive], [flutter_hooks], and [Freezed].
+An example Flutter project that uses [Riverpod], [go_router], [flutter_hooks], and [Freezed].
  
 > Check out the experimental use of macros [here](https://github.com/dhafinrayhan/dummymart/tree/macros).
 
@@ -65,7 +65,6 @@ Or you can use any user credentials from here: https://dummyjson.com/users
   [riverpod]: https://pub.dev/packages/riverpod
   [flutter_hooks]: https://pub.dev/packages/flutter_hooks
   [freezed]: https://pub.dev/packages/freezed
-  [hive]: https://pub.dev/packages/hive
   [go_router]: https://pub.dev/packages/go_router
   [build_runner]: https://pub.dev/packages/build_runner
   [DummyJSON]: https://dummyjson.com/
