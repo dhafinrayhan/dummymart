@@ -1,9 +1,10 @@
 import 'package:dummymart/services/api/mock/mocked_api_client.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dummymart/services/storage/secure_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Creates a [ProviderContainer] and automatically disposes it at the end of
 /// the test.
@@ -25,68 +26,21 @@ ProviderContainer createContainer({
   return container;
 }
 
-void _setupHive() {
-  Hive.init('.test-cache/temp-${DateTime.now().millisecondsSinceEpoch}');
-  addTearDown(() {
-    Hive.deleteFromDisk();
-    Hive.resetAdapters();
-  });
+Future<SharedPreferences> createPrefs({
+  Map<String, Object> initialValues = const {},
+}) async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues(initialValues);
+  return await SharedPreferences.getInstance();
 }
 
-/// Initializes Hive for unit test and automatically deletes all boxes at the
-/// end of the test.
-///
-/// The [onInit] callback is typically used for registering adapters and opening
-/// boxes.
-///
-/// ```dart
-/// test('login and logout should work', () async {
-///   await setupHive(() async {
-///     Hive.registerAdapter(ProfileAdapter());
-///     Hive.registerAdapter(GenderAdapter());
-///
-///     await [
-///       Hive.openBox<String>('token'),
-///       Hive.openBox<Profile>('profile'),
-///     ].wait;
-///   });
-///
-///   // ...
-/// });
-/// ```
-///
-/// For widget testing, see [setupHiveFlutter].
-Future<void> setupHive(AsyncCallback onInit) async {
-  _setupHive();
-  await onInit();
-}
-
-/// Initializes Hive for widget test and automatically deletes all boxes at the
-/// end of the test.
-///
-/// The [onInit] callback is typically used for registering adapters and opening
-/// boxes.
-///
-/// ```dart
-/// testWidgets('login and logout should work', (tester) async {
-///   await setupHiveFlutter(tester, () async {
-///     Hive.registerAdapter(ProfileAdapter());
-///     Hive.registerAdapter(GenderAdapter());
-///
-///     await [
-///       Hive.openBox<String>('token'),
-///       Hive.openBox<Profile>('profile'),
-///     ].wait;
-///   });
-///
-///   // ...
-/// });
-/// ```
-///
-/// For unit testing, see [setupHive].
-Future<void> setupHiveFlutter(WidgetTester tester, AsyncCallback onInit) async {
-  _setupHive();
-  await tester.runAsync(onInit);
+Future<SecureStorage> createSecureStorage({
+  required Set<String> keys,
+  Map<String, String> initialValues = const {},
+}) async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  FlutterSecureStorage.setMockInitialValues(initialValues);
+  return await SecureStorage.getInstance(keys: keys);
 }
 
 /// Creates a [MockedApiClient] with the given [delay] as the duration before
