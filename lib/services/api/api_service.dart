@@ -13,15 +13,18 @@ part 'api_service.g.dart';
 /// data provider (provider that fetches data) to refetch when the
 /// authentication state changes.
 ///
-/// The provider is kept alive to follow dio's recommendation to use the same
-/// client instance for the entire app. Technically, this would still work
-/// without keepAlive set to true.
-@Riverpod(keepAlive: true)
+/// The API client is kept alive to follow dio's recommendation to use the same
+/// client instance for the entire app.
+@riverpod
 ApiClient apiService(ApiServiceRef ref) {
+  final secureStorage = ref.watch(secureStorageProvider).requireValue;
   final token = secureStorage.get('token');
 
   const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
   if (mock) return MockedApiClient();
 
-  return token != null ? ApiClient.withToken(token) : ApiClient();
+  final client = token != null ? ApiClient.withToken(token) : ApiClient();
+  ref.keepAlive();
+
+  return client;
 }

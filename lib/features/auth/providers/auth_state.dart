@@ -15,6 +15,7 @@ part 'auth_state.g.dart';
 class CurrentAuthState extends _$CurrentAuthState {
   @override
   AuthState build() {
+    final secureStorage = ref.watch(secureStorageProvider).requireValue;
     final token = secureStorage.get('token');
     return token != null ? AuthState.authenticated : AuthState.unauthenticated;
   }
@@ -22,6 +23,7 @@ class CurrentAuthState extends _$CurrentAuthState {
   /// Attempts to log in with [data] and saves the token and profile info to storage.
   /// Will invalidate the state if success.
   Future<void> login(Login data) async {
+    final secureStorage = ref.read(secureStorageProvider).requireValue;
     final token = await ref.read(apiServiceProvider).login(data);
 
     // Save the new [token] and [profile] to secure storage.
@@ -37,6 +39,8 @@ class CurrentAuthState extends _$CurrentAuthState {
   /// Logs out, deletes the saved token and profile info from storage, and invalidates
   /// the state.
   void logout() {
+    final secureStorage = ref.read(secureStorageProvider).requireValue;
+
     // Delete the current [token] and [profile] from secure storage.
     secureStorage.remove('token');
 

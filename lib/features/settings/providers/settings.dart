@@ -13,6 +13,8 @@ part 'settings.g.dart';
 class CurrentThemeMode extends _$CurrentThemeMode {
   @override
   ThemeMode build() {
+    final prefs = ref.watch(prefsProvider).requireValue;
+
     // Load the saved theme mode setting from shared preferences.
     final themeModeName = prefs.getString('themeMode');
 
@@ -25,6 +27,8 @@ class CurrentThemeMode extends _$CurrentThemeMode {
   }
 
   void set(ThemeMode themeMode) {
+    final prefs = ref.read(prefsProvider).requireValue;
+
     // Save the new theme mode to shared preferences.
     prefs.setString('themeMode', themeMode.name);
 

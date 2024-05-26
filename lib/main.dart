@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/settings/providers/settings.dart';
 import 'services/router.dart';
@@ -13,12 +13,13 @@ import 'utils/methods.dart';
 import 'utils/provider_observer.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+  // We preserve the native splash screen, which will then remove once the main
+  // app is inserted to the widget tree.
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   HttpOverrides.global = _HttpOverrides();
-
-  prefs = await SharedPreferences.getInstance();
-  secureStorage = await SecureStorage.getInstance(keys: {'token'});
 
   runApp(ProviderScope(
     observers: [AppProviderObserver()],
@@ -26,11 +27,52 @@ Future<void> main() async {
   ));
 }
 
-class DummyMartApp extends HookConsumerWidget {
+class DummyMartApp extends StatelessWidget {
   const DummyMartApp({super.key});
 
   @override
+  Widget build(BuildContext context) {
+    return const _EagerInitialization(
+      child: _MainApp(),
+    );
+  }
+}
+
+class _EagerInitialization extends ConsumerWidget {
+  const _EagerInitialization({required this.child});
+  final Widget child;
+
+  @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final values = [
+      ref.watch(prefsProvider),
+      ref.watch(secureStorageProvider),
+    ];
+
+    if (values.every((value) => value.hasValue)) {
+      return child;
+    }
+
+    return const SizedBox();
+  }
+}
+
+class _MainApp extends StatefulHookConsumerWidget {
+  const _MainApp();
+
+  @override
+  ConsumerState<_MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends ConsumerState<_MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    FlutterNativeSplash.remove();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(currentThemeModeProvider);
 

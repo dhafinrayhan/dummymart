@@ -1,6 +1,11 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-late final SecureStorage secureStorage;
+part 'secure_storage.g.dart';
+
+@riverpod
+Future<SecureStorage> secureStorage(SecureStorageRef ref) =>
+    SecureStorage.getInstance(keys: {'token'});
 
 class SecureStorage {
   SecureStorage._(this._flutterSecureStorage, this._cache);
