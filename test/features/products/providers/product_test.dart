@@ -9,7 +9,7 @@ void main() {
   group('Get data from productProvider', () {
     test('should expose a Product with the correct id', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const id = 24;

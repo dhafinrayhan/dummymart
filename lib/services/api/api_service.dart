@@ -20,10 +20,13 @@ ApiClient apiService(ApiServiceRef ref) {
   final secureStorage = ref.watch(secureStorageProvider).requireValue;
   final token = secureStorage.get('token');
 
-  const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
-  if (mock) return MockedApiClient();
+  final ApiClient client;
 
-  final client = token != null ? ApiClient.withToken(token) : ApiClient();
+  const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
+  client = switch (mock) {
+    true => MockedApiClient(),
+    false => token != null ? ApiClient.withToken(token) : ApiClient(),
+  };
   ref.keepAlive();
 
   return client;

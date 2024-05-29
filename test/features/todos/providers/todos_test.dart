@@ -10,7 +10,7 @@ void main() {
   group('Get data from todosProvider', () {
     test('should expose a non-empty List<Todo>', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       await expectLater(
@@ -27,7 +27,7 @@ void main() {
     test('added todo should be available on the list exposed by todosProvider',
         () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const todo = Todo(
@@ -45,7 +45,7 @@ void main() {
 
     test('added todo should be accessible with todoProvider', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const todo = Todo(
@@ -66,7 +66,7 @@ void main() {
     test('todo should be updated on the list exposed by todosProvider',
         () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const id = 24;
@@ -90,7 +90,7 @@ void main() {
     test('todo should be updated on the value exposed by todoProvider',
         () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const id = 24;
@@ -112,7 +112,7 @@ void main() {
     test('todo should be gone from the list exposed by todosProvider',
         () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const id = 24;

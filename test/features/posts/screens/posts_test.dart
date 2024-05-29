@@ -15,7 +15,7 @@ void main() {
         await tester.pumpMaterialWidgetScoped(
           const PostsScreen(),
           overrides: [
-            apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+            apiServiceProvider.overrideWith(createMockedApiClientOverride),
           ],
         );
 

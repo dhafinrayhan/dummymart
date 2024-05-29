@@ -1,7 +1,8 @@
 import 'package:dummymart/features/auth/models/auth_state.dart';
 import 'package:dummymart/features/auth/models/login.dart';
 import 'package:dummymart/features/auth/providers/auth_state.dart';
-import 'package:hive/hive.dart';
+import 'package:dummymart/services/api/api_service.dart';
+import 'package:dummymart/services/storage/secure_storage.dart';
 import 'package:test/test.dart';
 
 import '../../../utils/testing_utils.dart';
@@ -9,11 +10,11 @@ import '../../../utils/testing_utils.dart';
 void main() {
   group('Test CurrentAuthState notifier and provider', () {
     test('login and logout should work', () async {
-      await setupHive(() async {
-        await Hive.openBox<String>('token');
-      });
-
-      final container = createContainer();
+      final secureStorage = await createSecureStorage(keys: {'token'});
+      final container = createContainer(overrides: [
+        secureStorageProvider.overrideWith((ref) => secureStorage),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
+      ]);
 
       expect(
         container.read(currentAuthStateProvider),

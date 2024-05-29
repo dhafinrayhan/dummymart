@@ -23,7 +23,7 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
-              apiServiceProvider.overrideWith((ref) => createMockedApiClient())
+              apiServiceProvider.overrideWith(createMockedApiClientOverride)
             ],
             child: MaterialApp.router(
               routerConfig: GoRouter(

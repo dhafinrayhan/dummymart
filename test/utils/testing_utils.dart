@@ -27,19 +27,19 @@ ProviderContainer createContainer({
 }
 
 Future<SharedPreferences> createPrefs({
-  Map<String, Object> initialValues = const {},
+  Map<String, Object>? initialValues,
 }) async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues(initialValues);
+  SharedPreferences.setMockInitialValues(initialValues ?? {});
   return await SharedPreferences.getInstance();
 }
 
 Future<SecureStorage> createSecureStorage({
   required Set<String> keys,
-  Map<String, String> initialValues = const {},
+  Map<String, String>? initialValues,
 }) async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  FlutterSecureStorage.setMockInitialValues(initialValues);
+  FlutterSecureStorage.setMockInitialValues(initialValues ?? {});
   return await SecureStorage.getInstance(keys: keys);
 }
 
@@ -49,6 +49,16 @@ MockedApiClient createMockedApiClient({
   Duration delay = const Duration(milliseconds: 50),
 }) {
   return MockedApiClient(delay: delay);
+}
+
+/// Creates a [MockedApiClient] for a provider override with the given [delay]
+/// as the duration before each API call returns a value.
+MockedApiClient createMockedApiClientOverride(
+  AutoDisposeProviderRef<Object?> ref, {
+  Duration delay = const Duration(milliseconds: 50),
+}) {
+  ref.keepAlive();
+  return createMockedApiClient(delay: delay);
 }
 
 extension WidgetTesterX on WidgetTester {
