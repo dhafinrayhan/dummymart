@@ -24,7 +24,8 @@ ApiClient apiService(ApiServiceRef ref) {
 
   const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
   client = switch (mock) {
-    true => MockedApiClient(),
+    true =>
+      token != null ? MockedApiClient.withToken(token) : MockedApiClient(),
     false => token != null ? ApiClient.withToken(token) : ApiClient(),
   };
   ref.keepAlive();
