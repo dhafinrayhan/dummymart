@@ -62,11 +62,12 @@ MockedApiClient createMockedApiClientOverride(
   Duration delay = const Duration(milliseconds: 50),
   bool allowAuth = false,
 }) {
-  ref.keepAlive();
-  return createMockedApiClient(
+  final client = createMockedApiClient(
     delay: delay,
     token: allowAuth ? ref.watch(tokenProvider) : null,
   );
+  ref.keepAlive();
+  return client;
 }
 
 extension WidgetTesterX on WidgetTester {
