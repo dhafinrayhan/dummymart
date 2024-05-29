@@ -5,7 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../features/auth/models/auth_state.dart';
 import '../features/auth/providers/auth_state.dart';
 import '../features/auth/screens/login.dart';
-import '../features/auth/screens/splash.dart';
 import '../features/posts/screens/post.dart';
 import '../features/posts/screens/posts.dart';
 import '../features/products/screens/product.dart';
@@ -115,7 +114,7 @@ GoRouter router(RouterRef ref) {
     routes: [
       GoRoute(
         path: '/',
-        builder: (_, __) => const SplashScreen(),
+        builder: (_, __) => const Scaffold(),
       ),
       GoRoute(
         path: '/login',
