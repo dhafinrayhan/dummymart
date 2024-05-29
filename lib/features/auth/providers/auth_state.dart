@@ -32,8 +32,8 @@ class CurrentAuthState extends _$CurrentAuthState {
     ref
       // Invalidate the state so the auth state will be updated to authenticated.
       ..invalidateSelf()
-      // Invalidate the API service so that it will use the new token.
-      ..invalidate(apiServiceProvider);
+      // Invalidate the token provider so the API service will use the new token.
+      ..invalidate(tokenProvider);
   }
 
   /// Logs out, deletes the saved token and profile info from storage, and invalidates
@@ -47,7 +47,8 @@ class CurrentAuthState extends _$CurrentAuthState {
     ref
       // Invalidate the state so the auth state will be updated to unauthenticated.
       ..invalidateSelf()
-      // Invalidate the API service so that it will no longer use the previous token.
-      ..invalidate(apiServiceProvider);
+      // Invalidate the token provider so the API service will no longer use the
+      // previous token.
+      ..invalidate(tokenProvider);
   }
 }

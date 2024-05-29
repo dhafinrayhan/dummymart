@@ -18,7 +18,8 @@ void main() {
       final container = createContainer(overrides: [
         prefsProvider.overrideWith((ref) => prefs),
         secureStorageProvider.overrideWith((ref) => secureStorage),
-        apiServiceProvider.overrideWith(createMockedApiClientOverride),
+        apiServiceProvider.overrideWith(
+            (ref) => createMockedApiClientOverride(ref, allowAuth: true)),
       ]);
 
       await container

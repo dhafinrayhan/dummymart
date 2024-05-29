@@ -17,8 +17,7 @@ part 'api_service.g.dart';
 /// client instance for the entire app.
 @riverpod
 ApiClient apiService(ApiServiceRef ref) {
-  final secureStorage = ref.watch(secureStorageProvider).requireValue;
-  final token = secureStorage.get('token');
+  final token = ref.watch(tokenProvider);
 
   final ApiClient client;
 
@@ -31,4 +30,10 @@ ApiClient apiService(ApiServiceRef ref) {
   ref.keepAlive();
 
   return client;
+}
+
+@riverpod
+String? token(TokenRef ref) {
+  final secureStorage = ref.watch(secureStorageProvider).requireValue;
+  return secureStorage.get('token');
 }

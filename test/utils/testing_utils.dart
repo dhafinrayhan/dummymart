@@ -1,3 +1,4 @@
+import 'package:dummymart/services/api/api_service.dart';
 import 'package:dummymart/services/api/mock/mocked_api_client.dart';
 import 'package:dummymart/services/storage/secure_storage.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +48,11 @@ Future<SecureStorage> createSecureStorage({
 /// each API call returns a value.
 MockedApiClient createMockedApiClient({
   Duration delay = const Duration(milliseconds: 50),
+  String? token,
 }) {
-  return MockedApiClient(delay: delay);
+  return token != null
+      ? MockedApiClient.withToken(token, delay: delay)
+      : MockedApiClient(delay: delay);
 }
 
 /// Creates a [MockedApiClient] for a provider override with the given [delay]
@@ -56,9 +60,13 @@ MockedApiClient createMockedApiClient({
 MockedApiClient createMockedApiClientOverride(
   AutoDisposeProviderRef<Object?> ref, {
   Duration delay = const Duration(milliseconds: 50),
+  bool allowAuth = false,
 }) {
   ref.keepAlive();
-  return createMockedApiClient(delay: delay);
+  return createMockedApiClient(
+    delay: delay,
+    token: allowAuth ? ref.watch(tokenProvider) : null,
+  );
 }
 
 extension WidgetTesterX on WidgetTester {
