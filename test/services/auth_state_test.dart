@@ -1,11 +1,10 @@
-import 'package:dummymart/features/auth/models/auth_state.dart';
-import 'package:dummymart/features/auth/models/login.dart';
-import 'package:dummymart/features/auth/providers/auth_state.dart';
+import 'package:dummymart/features/login/models/login.dart';
 import 'package:dummymart/services/api/api_service.dart';
+import 'package:dummymart/services/auth_state.dart';
 import 'package:dummymart/services/storage/secure_storage.dart';
 import 'package:test/test.dart';
 
-import '../../../utils/testing_utils.dart';
+import '../utils/testing_utils.dart';
 
 void main() {
   group('Test CurrentAuthState notifier and provider', () {

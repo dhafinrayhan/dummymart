@@ -1,4 +1,4 @@
-import '../../../features/auth/models/login.dart';
+import '../../../features/login/models/login.dart';
 import '../../../features/posts/models/post.dart';
 import '../../../features/products/models/product.dart';
 import '../../../features/profile/models/profile.dart';
