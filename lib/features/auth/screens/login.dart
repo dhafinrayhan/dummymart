@@ -6,10 +6,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../services/api/api_client.dart';
+import '../../../services/auth_state.dart';
 import '../../../utils/extensions.dart';
 import '../../../widgets/button.dart';
 import '../models/login.dart';
-import '../providers/auth_state.dart';
 
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({super.key});
