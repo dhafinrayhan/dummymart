@@ -14,13 +14,15 @@ Each feature demonstrates certain functionalities that are commonly used in a CR
 1. [Products](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/products): Basic **"view all items"** and **"view item details"** functionalities. Also implements **"pull-to-refresh"** mechanism.
 2. [Todos](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/todos): Full CRUD operations, including **"add item"**, **"edit item"**, and **"delete item"**.
 3. [Posts](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/posts): More advanced read operations such as **"search as we type (with debounce)"** and **"infinite scrolling"**.
-4. [Auth](https://github.com/dhafinrayhan/dummymart/tree/master/lib/features/auth): Managing auth states, allowing functionalities such as **"invalidate all data when logging out"** and **"redirect screens based on the auth state"**.
+
+The [auth and router services](https://github.com/dhafinrayhan/dummymart/tree/master/lib/services) allow functionalities such as **"invalidate all data on logout"** and **"redirect screens based on the auth state"**.
 
 ## Routes
 ```
 Full paths for routes:
   => /
   => /login
+  => /settings
   => /products
   =>   /products/:id
   => /todos
@@ -41,19 +43,11 @@ Full paths for routes:
 Use these credentials to login:
 
 ```
-username: kminchelle
-password: 0lelplR
-```
-```
-username: kmeus4
-password: aUTdmmmbH
-```
-```
-username: umcgourty9
-password: i0xzpX
+username: avat
+password: avatpass
 ```
 
-Or you can use any user credentials from here: https://dummyjson.com/users
+Or you can use any user credentials from https://dummyjson.com/users.
 
 ## Screenshots
 |||||
