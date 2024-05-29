@@ -1,6 +1,6 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../storage/secure_storage.dart';
 import 'api_client.dart';
 import 'mock/mocked_api_client.dart';
 
@@ -13,15 +13,27 @@ part 'api_service.g.dart';
 /// data provider (provider that fetches data) to refetch when the
 /// authentication state changes.
 ///
-/// The provider is kept alive to follow dio's recommendation to use the same
-/// client instance for the entire app. Technically, this would still work
-/// without keepAlive set to true.
-@Riverpod(keepAlive: true)
+/// The API client is kept alive to follow dio's recommendation to use the same
+/// client instance for the entire app.
+@riverpod
 ApiClient apiService(ApiServiceRef ref) {
-  final token = Hive.box<String>('token').get('current');
+  final token = ref.watch(tokenProvider);
+
+  final ApiClient client;
 
   const mock = bool.fromEnvironment('MOCK_API', defaultValue: false);
-  if (mock) return MockedApiClient();
+  client = switch (mock) {
+    true =>
+      token != null ? MockedApiClient.withToken(token) : MockedApiClient(),
+    false => token != null ? ApiClient.withToken(token) : ApiClient(),
+  };
+  ref.keepAlive();
 
-  return token != null ? ApiClient.withToken(token) : ApiClient();
+  return client;
+}
+
+@riverpod
+String? token(TokenRef ref) {
+  final secureStorage = ref.watch(secureStorageProvider).requireValue;
+  return secureStorage.get('token');
 }

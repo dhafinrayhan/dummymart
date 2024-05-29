@@ -9,7 +9,7 @@ void main() {
   group('Get data from postsProvider', () {
     test('should expose a non-empty List<Post>', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       await expectLater(
@@ -23,7 +23,7 @@ void main() {
 
     test('passing search query should work', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const search = 'hiLl';

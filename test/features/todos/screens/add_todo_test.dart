@@ -23,7 +23,7 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
-              apiServiceProvider.overrideWith((ref) => createMockedApiClient())
+              apiServiceProvider.overrideWith(createMockedApiClientOverride)
             ],
             child: MaterialApp.router(
               routerConfig: GoRouter(
@@ -72,8 +72,8 @@ void main() {
               isA<Todo>().having((item) => item.todo, 'todo', equals(todo)),
               isA<Todo>()
                   .having((item) => item.userId, 'userId', equals(userId)),
-              isA<Todo>()
-                  .having((item) => item.completed, 'completed', completed),
+              isA<Todo>().having(
+                  (item) => item.completed, 'completed', equals(completed)),
             ),
           )),
         );

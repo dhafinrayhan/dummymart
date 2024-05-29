@@ -20,7 +20,7 @@ void main() {
         await tester.pumpMaterialWidgetScoped(
           const TodoScreen(id),
           overrides: [
-            apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+            apiServiceProvider.overrideWith(createMockedApiClientOverride),
           ],
         );
 
@@ -51,7 +51,7 @@ void main() {
 
         await tester.pumpWidget(ProviderScope(
           overrides: [
-            apiServiceProvider.overrideWith((ref) => createMockedApiClient())
+            apiServiceProvider.overrideWith(createMockedApiClientOverride)
           ],
           child: MaterialApp.router(
             routerConfig: GoRouter(
@@ -103,7 +103,7 @@ void main() {
 
         await tester.pumpWidget(ProviderScope(
           overrides: [
-            apiServiceProvider.overrideWith((ref) => createMockedApiClient())
+            apiServiceProvider.overrideWith(createMockedApiClientOverride)
           ],
           child: MaterialApp.router(
             routerConfig: GoRouter(

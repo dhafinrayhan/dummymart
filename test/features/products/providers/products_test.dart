@@ -9,7 +9,7 @@ void main() {
   group('Get data from productsProvider', () {
     test('should expose a non-empty List<Product>', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       await expectLater(

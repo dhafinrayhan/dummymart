@@ -9,7 +9,7 @@ void main() {
   group('Get data from postProvider', () {
     test('should expose a Post with the correct id', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const id = 24;

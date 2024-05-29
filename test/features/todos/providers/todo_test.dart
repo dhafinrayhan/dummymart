@@ -9,7 +9,7 @@ void main() {
   group('Get data from todoProvider', () {
     test('should expose a Todo with the correct id', () async {
       final container = createContainer(overrides: [
-        apiServiceProvider.overrideWith((ref) => createMockedApiClient()),
+        apiServiceProvider.overrideWith(createMockedApiClientOverride),
       ]);
 
       const id = 24;

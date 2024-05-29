@@ -2,7 +2,9 @@ import 'package:dummymart/features/auth/models/login.dart';
 import 'package:dummymart/features/auth/providers/auth_state.dart';
 import 'package:dummymart/features/profile/models/profile.dart';
 import 'package:dummymart/features/profile/providers/profile.dart';
-import 'package:hive/hive.dart';
+import 'package:dummymart/services/api/api_service.dart';
+import 'package:dummymart/services/storage/prefs.dart';
+import 'package:dummymart/services/storage/secure_storage.dart';
 import 'package:test/test.dart';
 
 import '../../../utils/testing_utils.dart';
@@ -11,11 +13,14 @@ void main() {
   group('Test profileProvider', () {
     test('profile should expose profile data after a successful login',
         () async {
-      await setupHive(() async {
-        await Hive.openBox<String>('token');
-      });
-
-      final container = createContainer();
+      final (prefs, secureStorage) =
+          await (createPrefs(), createSecureStorage(keys: {'token'})).wait;
+      final container = createContainer(overrides: [
+        prefsProvider.overrideWith((ref) => prefs),
+        secureStorageProvider.overrideWith((ref) => secureStorage),
+        apiServiceProvider.overrideWith(
+            (ref) => createMockedApiClientOverride(ref, allowAuth: true)),
+      ]);
 
       await container
           .read(currentAuthStateProvider.notifier)
