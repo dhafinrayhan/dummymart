@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../features/auth/screens/login.dart';
+import '../features/login/screens/login.dart';
 import '../features/posts/screens/post.dart';
 import '../features/posts/screens/posts.dart';
 import '../features/products/screens/product.dart';

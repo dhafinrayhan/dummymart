@@ -1,4 +1,4 @@
-import 'package:dummymart/features/auth/models/login.dart';
+import 'package:dummymart/features/login/models/login.dart';
 import 'package:dummymart/services/api/api_service.dart';
 import 'package:dummymart/services/auth_state.dart';
 import 'package:dummymart/services/storage/secure_storage.dart';

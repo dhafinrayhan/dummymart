@@ -1,4 +1,4 @@
-import 'package:dummymart/features/auth/models/login.dart';
+import 'package:dummymart/features/login/models/login.dart';
 import 'package:dummymart/features/profile/models/profile.dart';
 import 'package:dummymart/features/profile/providers/profile.dart';
 import 'package:dummymart/services/api/api_service.dart';

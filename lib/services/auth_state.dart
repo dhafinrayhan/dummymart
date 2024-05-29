@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../features/auth/models/login.dart';
+import '../features/login/models/login.dart';
 import 'api/api_service.dart';
 import 'storage/secure_storage.dart';
 
