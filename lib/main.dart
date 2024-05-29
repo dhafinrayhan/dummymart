@@ -15,7 +15,7 @@ import 'utils/provider_observer.dart';
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  // We preserve the native splash screen, which will then remove once the main
+  // We preserve the native splash screen, which will then removed once the main
   // app is inserted to the widget tree.
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
