@@ -16,7 +16,6 @@ dependencies:
   flutter_native_splash: ^2.4.0
   flutter_secure_storage: ^9.2.2
   flutter_use: ^0.0.4
-  freezed_annotation: ^2.4.1
   gap: ^3.0.1
   go_router: ^14.1.2
   hooks_riverpod: ^2.5.1
@@ -32,9 +31,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.4.7
   husky: ^0.1.7
-  json_serializable: ^6.8.0
   lint_staged: ^0.5.1
   riverpod_generator: ^2.4.0
   riverpod_lint: ^2.3.10
