@@ -7,13 +7,19 @@
         {
             "name": "dummymart",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "toolArgs": [
+                "--enable-experiment",
+                "macros"
+            ]
         },
         {
             "name": "dummymart (mock API)",
             "request": "launch",
             "type": "dart",
             "toolArgs": [
+                "--enable-experiment",
+                "macros",
                 "--dart-define",
                 "MOCK_API=true"
             ]
