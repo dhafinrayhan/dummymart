@@ -1,25 +1,18 @@
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:data_class_macro/data_class_macro.dart';
+import 'package:json/json.dart';
 
-part 'product.freezed.dart';
-part 'product.g.dart';
-
-@freezed
-class Product with _$Product {
-  const factory Product({
-    required int id,
-    required String title,
-    required String description,
-    required String category,
-    required double price,
-    required double discountPercentage,
-    required double rating,
-    required int stock,
-    String? brand,
-    required String thumbnail,
-    required List<String> images,
-  }) = _Product;
-
-  factory Product.fromJson(Map<String, Object?> json) =>
-      _$ProductFromJson(json);
+@Data()
+@JsonCodable()
+class Product {
+  final int id;
+  final String title;
+  final String description;
+  final String category;
+  final double price;
+  final num discountPercentage;
+  final double rating;
+  final int stock;
+  final String? brand;
+  final String thumbnail;
+  final List<String> images;
 }

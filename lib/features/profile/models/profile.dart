@@ -1,30 +1,16 @@
-import 'package:flutter/foundation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:data_class_macro/data_class_macro.dart';
+import 'package:json/json.dart';
 
-part 'profile.freezed.dart';
-part 'profile.g.dart';
-
-@freezed
-class Profile with _$Profile {
-  const factory Profile({
-    required int id,
-    required String username,
-    required String email,
-    required String firstName,
-    required String lastName,
-    required Gender gender,
-    required String image,
-  }) = _Profile;
+@Data()
+@JsonCodable()
+class Profile {
+  final int id;
+  final String username;
+  final String email;
+  final String firstName;
+  final String lastName;
+  final String gender;
+  final String image;
 
   String get fullName => '$firstName $lastName';
-
-  const Profile._();
-
-  factory Profile.fromJson(Map<String, Object?> json) =>
-      _$ProfileFromJson(json);
-}
-
-enum Gender {
-  male,
-  female,
 }

@@ -72,7 +72,7 @@ class ApiClient {
 
     return (response.data['products'] as List)
         .cast<_ResponseData>()
-        .map(Product.fromJson)
+        .map((json) => Product.fromJson(json))
         .toList();
   }
 
@@ -87,7 +87,7 @@ class ApiClient {
 
     return (response.data['todos'] as List)
         .cast<_ResponseData>()
-        .map(Todo.fromJson)
+        .map((json) => Todo.fromJson(json))
         .toList();
   }
 
@@ -141,7 +141,7 @@ class ApiClient {
 
     return (response.data['posts'] as List)
         .cast<_ResponseData>()
-        .map(Post.fromJson)
+        .map((json) => Post.fromJson(json))
         .toList();
   }
 
