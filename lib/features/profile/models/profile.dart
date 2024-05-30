@@ -14,3 +14,10 @@ class Profile {
 
   String get fullName => '$firstName $lastName';
 }
+
+class Gender {
+  Gender._();
+
+  static const String male = 'male';
+  static const String female = 'female';
+}
