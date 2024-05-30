@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
-
-part 'scaffold_with_navigation.freezed.dart';
 
 /// A scaffold that shows navigation bar/rail when the current path is a navigation
 /// item.
@@ -85,25 +82,31 @@ class ScaffoldWithNavigation extends StatelessWidget {
 }
 
 /// An item that represents a navigation destination in a navigation bar/rail.
-@freezed
-class NavigationItem with _$NavigationItem {
-  factory NavigationItem({
-    /// Path in the router.
-    required String path,
+class NavigationItem {
+  /// Path in the router.
+  final String path;
 
-    /// Widget to show when navigating to this [path].
-    required WidgetBuilder body,
+  /// Widget to show when navigating to this [path].
+  final WidgetBuilder body;
 
-    /// Icon in the navigation bar.
-    required IconData icon,
+  /// Icon in the navigation bar.
+  final IconData icon;
 
-    /// Icon in the navigation bar when selected.
-    IconData? selectedIcon,
+  /// Icon in the navigation bar when selected.
+  final IconData? selectedIcon;
 
-    /// Label in the navigation bar.
-    required String label,
+  /// Label in the navigation bar.
+  final String label;
 
-    /// The subroutes of the route from this [path].
-    @Default(<RouteBase>[]) final List<RouteBase> routes,
-  }) = _NavigationItem;
+  /// The subroutes of the route from this [path].
+  final List<RouteBase> routes;
+
+  NavigationItem({
+    required this.path,
+    required this.body,
+    required this.icon,
+    this.selectedIcon,
+    required this.label,
+    this.routes = const [],
+  });
 }
