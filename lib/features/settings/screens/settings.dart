@@ -11,12 +11,12 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(currentThemeModeProvider);
 
-    void showThemeModeDialog() {
-      showDialog(
-        context: context,
-        builder: (_) => const _ThemeModeDialog(),
-      );
-    }
+    void onTapThemeMode() => showDialog(
+          context: context,
+          builder: (_) => const _ThemeModeDialog(),
+        );
+
+    void onTapLicenses() => context.showAppLicensePage();
 
     return Scaffold(
       appBar: AppBar(
@@ -28,13 +28,13 @@ class SettingsScreen extends ConsumerWidget {
             leading: const Icon(Icons.brightness_6),
             title: const Text('Theme mode'),
             trailing: Text(themeMode.label),
-            onTap: showThemeModeDialog,
+            onTap: onTapThemeMode,
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text('Licenses'),
-            onTap: () => context.showAppLicensePage(),
+            onTap: onTapLicenses,
           ),
         ],
       ),
@@ -47,7 +47,7 @@ class _ThemeModeDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void setThemeMode(ThemeMode themeMode) {
+    void onTapOption(ThemeMode themeMode) {
       ref.read(currentThemeModeProvider.notifier).set(themeMode);
       Navigator.of(context).pop();
     }
@@ -58,7 +58,7 @@ class _ThemeModeDialog extends ConsumerWidget {
         for (final themeMode in ThemeMode.values)
           _ThemeModeDialogOption(
             value: themeMode,
-            onTap: () => setThemeMode(themeMode),
+            onTap: () => onTapOption(themeMode),
           )
       ],
     );

@@ -13,12 +13,14 @@ class ProductsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final products = ref.watch(productsProvider);
 
+    Future<void> onRefresh() => ref.refresh(productsProvider.future);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.refresh(productsProvider.future),
+        onRefresh: onRefresh,
         child: products.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, __) => const Center(child: Text('An error occurred')),
@@ -39,8 +41,10 @@ class _ProductListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onTap() => context.go('/products/${product.id}');
+
     return ListTile(
-      onTap: () => context.go('/products/${product.id}'),
+      onTap: onTap,
       title: Text(product.title),
       subtitle: product.brand != null ? Text(product.brand!) : null,
     );

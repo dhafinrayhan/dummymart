@@ -13,16 +13,17 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileProvider);
 
-    void logout() {
-      ref.read(currentAuthStateProvider.notifier).logout();
-    }
+    void onSettingsPressed() => context.push('/settings');
+
+    void onLogoutPressed() =>
+        ref.read(currentAuthStateProvider.notifier).logout();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
         actions: [
           IconButton(
-            onPressed: () => context.push('/settings'),
+            onPressed: onSettingsPressed,
             icon: const Icon(Icons.settings),
           ),
         ],
@@ -51,7 +52,7 @@ class ProfileScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.logout),
         label: const Text('Logout'),
-        onPressed: logout,
+        onPressed: onLogoutPressed,
         backgroundColor: context.colorScheme.errorContainer,
       ),
     );

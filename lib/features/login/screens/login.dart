@@ -21,7 +21,9 @@ class LoginScreen extends HookConsumerWidget {
     final usernameController = useTextEditingController();
     final passwordController = useTextEditingController();
 
-    Future<void> login() async {
+    void onSettingsPressed() => context.push('/settings');
+
+    Future<void> onLoginPressed() async {
       try {
         await ref.read(currentAuthStateProvider.notifier).login(Login(
               username: usernameController.text,
@@ -38,7 +40,7 @@ class LoginScreen extends HookConsumerWidget {
         title: const Text('Login'),
         actions: [
           IconButton(
-            onPressed: () => context.push('/settings'),
+            onPressed: onSettingsPressed,
             icon: const Icon(Icons.settings),
           ),
         ],
@@ -74,7 +76,7 @@ class LoginScreen extends HookConsumerWidget {
           ),
           const Gap(8),
           AppButton(
-            onPressed: login,
+            onPressed: onLoginPressed,
             label: 'Login',
           ),
         ],
