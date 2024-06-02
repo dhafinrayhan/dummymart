@@ -47,6 +47,29 @@ class PostsScreen extends HookConsumerWidget {
       await ref.read(postsProvider(search: search.value).notifier).loadMore();
     }
 
+    void onSearchPressed() => isSearchMode.value = true;
+
+    void onCloseSearchPressed() {
+      isSearchMode.value = false;
+      searchController.clear();
+    }
+
+    Future<void> onRefresh() =>
+        ref.refresh(postsProvider(search: search.value).future);
+
+    bool onScrollEndNotification(ScrollEndNotification notification) {
+      // Use this check to prevent requesting "load more" twice in a single
+      // max scroll event.
+      if (loadMoreSnapshot.connectionState != ConnectionState.waiting) {
+        final ScrollMetrics(:pixels, :maxScrollExtent) = notification.metrics;
+        if (pixels >= maxScrollExtent) {
+          pendingLoadMore.value = loadMore();
+        }
+      }
+
+      return true;
+    }
+
     return Scaffold(
       appBar: isSearchMode.value
           ? AppBar(
@@ -60,10 +83,7 @@ class PostsScreen extends HookConsumerWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    isSearchMode.value = false;
-                    searchController.clear();
-                  },
+                  onPressed: onCloseSearchPressed,
                   icon: const Icon(Icons.close),
                 ),
               ],
@@ -72,30 +92,15 @@ class PostsScreen extends HookConsumerWidget {
               title: const Text('Posts'),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    isSearchMode.value = true;
-                  },
+                  onPressed: onSearchPressed,
                   icon: const Icon(Icons.search),
                 ),
               ],
             ),
       body: NotificationListener<ScrollEndNotification>(
-        onNotification: (notification) {
-          // Use this check to prevent requesting "load more" twice in a single
-          // max scroll event.
-          if (loadMoreSnapshot.connectionState != ConnectionState.waiting) {
-            final ScrollMetrics(:pixels, :maxScrollExtent) =
-                notification.metrics;
-            if (pixels >= maxScrollExtent) {
-              pendingLoadMore.value = loadMore();
-            }
-          }
-
-          return true;
-        },
+        onNotification: onScrollEndNotification,
         child: RefreshIndicator(
-          onRefresh: () =>
-              ref.refresh(postsProvider(search: search.value).future),
+          onRefresh: onRefresh,
           child: posts.when(
             skipLoadingOnReload: true,
             loading: () => const Center(child: CircularProgressIndicator()),
@@ -133,8 +138,10 @@ class _PostListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onTap() => context.go('/posts/${post.id}');
+
     return ListTile(
-      onTap: () => context.go('/posts/${post.id}'),
+      onTap: onTap,
       title: Text(post.title),
       subtitle: Wrap(
         spacing: 4,

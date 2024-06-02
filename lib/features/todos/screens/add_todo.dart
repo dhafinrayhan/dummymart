@@ -20,7 +20,7 @@ class AddTodoScreen extends HookConsumerWidget {
     final userIdController = useTextEditingController();
     final isCompleted = useState(false);
 
-    Future<void> addTodo() async {
+    Future<void> onSubmitPressed() async {
       try {
         await ref.read(todosProvider.notifier).add(Todo(
               id: -1,
@@ -77,7 +77,7 @@ class AddTodoScreen extends HookConsumerWidget {
             ),
             const Gap(8),
             AppButton(
-              onPressed: addTodo,
+              onPressed: onSubmitPressed,
               label: 'Submit',
             ),
           ],

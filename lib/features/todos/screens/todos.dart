@@ -14,12 +14,16 @@ class TodosScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(todosProvider);
 
+    Future<void> onRefresh() => ref.refresh(todosProvider.future);
+
+    void onAddPressed() => context.go('/todos/add');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todos'),
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.refresh(todosProvider.future),
+        onRefresh: onRefresh,
         child: todos.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, __) => const Center(child: Text('An error occurred')),
@@ -30,7 +34,7 @@ class TodosScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/todos/add'),
+        onPressed: onAddPressed,
         tooltip: 'Add todo',
         child: const Icon(Icons.add),
       ),
@@ -45,8 +49,10 @@ class _TodoListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onTap() => context.go('/todos/${todo.id}');
+
     return ListTile(
-      onTap: () => context.go('/todos/${todo.id}'),
+      onTap: onTap,
       title: Text(
         todo.todo,
         style: TextStyle(

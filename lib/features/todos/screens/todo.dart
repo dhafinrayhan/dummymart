@@ -19,20 +19,20 @@ class TodoScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(id));
 
-    void confirmDelete() {
-      showDialog(
-        context: context,
-        useRootNavigator: false,
-        builder: (_) => _ConfirmDeleteDialog(id),
-      );
-    }
+    void onDeletePressed() => showDialog(
+          context: context,
+          useRootNavigator: false,
+          builder: (_) => _ConfirmDeleteDialog(id),
+        );
+
+    void onEditPressed() => context.go('/todos/$id/update');
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo'),
         actions: [
           IconButton(
-            onPressed: confirmDelete,
+            onPressed: onDeletePressed,
             icon: const Icon(Icons.delete),
             color: context.colorScheme.error,
             tooltip: 'Delete',
@@ -67,7 +67,7 @@ class TodoScreen extends ConsumerWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/todos/$id/update'),
+        onPressed: onEditPressed,
         tooltip: 'Edit',
         child: const Icon(Icons.edit),
       ),
@@ -99,6 +99,10 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
       }
     }
 
+    void onNoPressed() => Navigator.of(context).pop();
+
+    void onYesPressed() => pending.value = deleteTodo();
+
     return AlertDialog(
       title: const Text('Delete this todo?'),
       content: snapshot.connectionState == ConnectionState.waiting
@@ -109,11 +113,11 @@ class _ConfirmDeleteDialog extends HookConsumerWidget {
           : null,
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: onNoPressed,
           child: const Text('No'),
         ),
         TextButton(
-          onPressed: () => pending.value = deleteTodo(),
+          onPressed: onYesPressed,
           child: const Text('Yes'),
         ),
       ],

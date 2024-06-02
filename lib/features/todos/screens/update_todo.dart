@@ -47,7 +47,7 @@ class _UpdateTodoForm extends HookConsumerWidget {
         useTextEditingController(text: todo.userId.toString());
     final isCompleted = useState(todo.completed);
 
-    Future<void> updateTodo() async {
+    Future<void> onSubmitPressed() async {
       try {
         await ref.read(todosProvider.notifier).updateItem(
             id,
@@ -102,7 +102,7 @@ class _UpdateTodoForm extends HookConsumerWidget {
           ),
           const Gap(8),
           AppButton(
-            onPressed: updateTodo,
+            onPressed: onSubmitPressed,
             label: 'Submit',
           ),
         ],
