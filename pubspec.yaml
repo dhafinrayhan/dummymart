@@ -7,7 +7,7 @@ environment:
   sdk: ">=3.5.0-152 <4.0.0"
 
 dependencies:
-  data_class_macro: ^0.0.0-dev.12
+  data_class: ^0.0.2
   dio: ^5.4.3
   flextras: ^1.0.0
   flutter:

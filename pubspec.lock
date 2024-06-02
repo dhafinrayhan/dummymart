@@ -270,14 +270,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.6"
-  data_class_macro:
+  data_class:
     dependency: "direct main"
     description:
-      name: data_class_macro
-      sha256: "6a0c0e03d9a9079b3e4e7ccab46bdcb58e5990a65958eb6b6d1d3d79aafd6a99"
+      name: data_class
+      sha256: "244b7365c024684de6139602a23063aa7e2b8eb5199a49c3a227b14e16d1d345"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.0-dev.12"
+    version: "0.0.2"
   dio:
     dependency: "direct main"
     description:
