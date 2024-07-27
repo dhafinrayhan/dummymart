@@ -133,18 +133,12 @@ GoRouter router(RouterRef ref) {
           for (final (index, item) in navigationItems.indexed)
             GoRoute(
               path: item.path,
-              pageBuilder: (context, __) => CustomTransitionPage(
+              pageBuilder: (context, __) => NoTransitionPage(
                 child: ScaffoldWithNavigation(
                   selectedIndex: index,
                   navigationItems: navigationItems,
                   child: item.body(context),
                 ),
-                transitionsBuilder: (_, animation, __, child) {
-                  return FadeTransition(
-                    opacity: animation.drive(CurveTween(curve: Curves.ease)),
-                    child: child,
-                  );
-                },
               ),
               routes: item.routes,
             ),
