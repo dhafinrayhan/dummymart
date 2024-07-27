@@ -128,7 +128,7 @@ GoRouter router(RouterRef ref) {
       // should be defined in [navigationItems]. Modification to this [ShellRoute]
       // config is rarely needed.
       ShellRoute(
-        builder: (_, state, child) => Scaffold(body: child),
+        builder: (_, __, child) => child,
         routes: [
           for (final (index, item) in navigationItems.indexed)
             GoRoute(
