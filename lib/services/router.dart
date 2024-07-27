@@ -133,7 +133,7 @@ GoRouter router(RouterRef ref) {
           for (final (index, item) in navigationItems.indexed)
             GoRoute(
               path: item.path,
-              pageBuilder: (context, __) => NoTransitionPage(
+              pageBuilder: (context, _) => NoTransitionPage(
                 child: ScaffoldWithNavigation(
                   selectedIndex: index,
                   navigationItems: navigationItems,
