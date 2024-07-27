@@ -128,23 +128,17 @@ GoRouter router(RouterRef ref) {
       // should be defined in [navigationItems]. Modification to this [ShellRoute]
       // config is rarely needed.
       ShellRoute(
-        builder: (_, state, child) => ScaffoldWithNavigation(
-          currentPath: state.uri.path,
-          navigationItems: navigationItems,
-          child: child,
-        ),
+        builder: (_, __, child) => child,
         routes: [
-          for (final item in navigationItems)
+          for (final (index, item) in navigationItems.indexed)
             GoRoute(
               path: item.path,
-              pageBuilder: (context, __) => CustomTransitionPage(
-                child: item.body(context),
-                transitionsBuilder: (_, animation, __, child) {
-                  return FadeTransition(
-                    opacity: animation.drive(CurveTween(curve: Curves.ease)),
-                    child: child,
-                  );
-                },
+              pageBuilder: (context, _) => NoTransitionPage(
+                child: ScaffoldWithNavigation(
+                  selectedIndex: index,
+                  navigationItems: navigationItems,
+                  child: item.body(context),
+                ),
               ),
               routes: item.routes,
             ),

@@ -10,37 +10,27 @@ class ScaffoldWithNavigation extends StatelessWidget {
   const ScaffoldWithNavigation({
     super.key,
     required this.child,
-    required this.currentPath,
+    required this.selectedIndex,
     required this.navigationItems,
   });
 
   final Widget child;
-  final String currentPath;
+  final int selectedIndex;
   final List<NavigationItem> navigationItems;
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex =
-        navigationItems.indexWhere((item) => item.path == currentPath);
-
-    // Only show navigation bar/rail when the current path is a navigation item.
-    if (currentIndex < 0) {
-      return Scaffold(body: child);
-    }
-
-    final width = MediaQuery.sizeOf(context).width;
-
     void onDestinationSelected(int index) =>
         context.go(navigationItems[index].path);
 
     // Use navigation rail instead of navigation bar when the screen width is
     // larger than 600dp.
-    if (width > 600) {
+    if (MediaQuery.sizeOf(context).width > 600) {
       return Scaffold(
         body: Row(
           children: [
             NavigationRail(
-              selectedIndex: currentIndex,
+              selectedIndex: selectedIndex,
               onDestinationSelected: onDestinationSelected,
               destinations: [
                 for (final item in navigationItems)
@@ -63,7 +53,7 @@ class ScaffoldWithNavigation extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: currentIndex,
+        selectedIndex: selectedIndex,
         onDestinationSelected: onDestinationSelected,
         destinations: [
           for (final item in navigationItems)
