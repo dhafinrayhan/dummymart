@@ -130,12 +130,12 @@ GoRouter router(RouterRef ref) {
       ShellRoute(
         builder: (_, state, child) => Scaffold(body: child),
         routes: [
-          for (final item in navigationItems)
+          for (final (index, item) in navigationItems.indexed)
             GoRoute(
               path: item.path,
               pageBuilder: (context, __) => CustomTransitionPage(
                 child: ScaffoldWithNavigation(
-                  currentPath: item.path,
+                  selectedIndex: index,
                   navigationItems: navigationItems,
                   child: item.body(context),
                 ),
