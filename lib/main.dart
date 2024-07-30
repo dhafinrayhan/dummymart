@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -23,7 +25,10 @@ Future<void> main() async {
 
   runApp(ProviderScope(
     observers: [AppProviderObserver()],
-    child: const DummyMartApp(),
+    child: DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (_) => const DummyMartApp(),
+    ),
   ));
 }
 
@@ -93,6 +98,8 @@ class _MainAppState extends ConsumerState<_MainApp> {
       darkTheme: darkTheme,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+      builder: DevicePreview.appBuilder,
+      locale: DevicePreview.locale(context),
     );
   }
 }
