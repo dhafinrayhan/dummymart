@@ -4,5 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'prefs.g.dart';
 
 @riverpod
-Future<SharedPreferences> prefs(PrefsRef ref) =>
-    SharedPreferences.getInstance();
+Future<SharedPreferencesWithCache> prefs(PrefsRef ref) =>
+    SharedPreferencesWithCache.create(
+      cacheOptions: const SharedPreferencesWithCacheOptions(),
+    );
