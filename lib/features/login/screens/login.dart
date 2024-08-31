@@ -46,7 +46,7 @@ class LoginScreen extends HookConsumerWidget {
         ],
       ),
       body: SeparatedColumn(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(context.gutter),
         separatorBuilder: () => const Gutter(),
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -43,7 +43,7 @@ class AddTodoScreen extends HookConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: SeparatedColumn(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(context.gutter),
           separatorBuilder: () => const Gutter(),
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
