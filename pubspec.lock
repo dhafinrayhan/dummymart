@@ -318,6 +318,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_adaptive_scaffold:
+    dependency: transitive
+    description:
+      name: flutter_adaptive_scaffold
+      sha256: "93d20f0a4fbded8755571cc1f11a05a116cdc401ebaa15293ea2f87618fa2d18"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.4"
+  flutter_gutter:
+    dependency: "direct main"
+    description:
+      name: flutter_gutter
+      sha256: "22d898d2ffafd686a1df82725ddcc1012c0418afbf0804347e656b0be03cc91c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -448,14 +464,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-  gap:
-    dependency: "direct main"
-    description:
-      name: gap
-      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   glob:
     dependency: transitive
     description:

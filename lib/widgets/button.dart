@@ -1,8 +1,8 @@
 import 'package:flextras/flextras.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 
 import '../utils/extensions.dart';
 import '../utils/hooks.dart';
@@ -26,7 +26,7 @@ class AppButton extends HookWidget {
     return FilledButton(
       onPressed: onPressed == null ? null : () => pending.value = onPressed!(),
       child: SeparatedRow(
-        separatorBuilder: () => const Gap(12),
+        separatorBuilder: () => const GutterSmall(),
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (snapshot.connectionState == ConnectionState.waiting)
