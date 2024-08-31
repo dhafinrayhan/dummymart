@@ -1,7 +1,7 @@
 import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -69,7 +69,7 @@ class _UpdateTodoForm extends HookConsumerWidget {
     return SingleChildScrollView(
       child: SeparatedColumn(
         padding: const EdgeInsets.all(24),
-        separatorBuilder: () => const Gap(16),
+        separatorBuilder: () => const Gutter(),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextField(
@@ -100,7 +100,7 @@ class _UpdateTodoForm extends HookConsumerWidget {
             onSelectionChanged: (value) => isCompleted.value = value.first,
             showSelectedIcon: false,
           ),
-          const Gap(8),
+          const SizedBox.shrink(),
           AppButton(
             onPressed: onSubmitPressed,
             label: 'Submit',
