@@ -36,6 +36,7 @@ dev_dependencies:
   lint_staged: ^0.5.1
   riverpod_generator: ^2.4.0
   riverpod_lint: ^2.3.10
+  shared_preferences_platform_interface: ^2.4.1
   test: ^1.25.2
 
 flutter:

@@ -6,6 +6,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
+import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
 
 /// Creates a [ProviderContainer] and automatically disposes it at the end of
 /// the test.
@@ -27,12 +29,17 @@ ProviderContainer createContainer({
   return container;
 }
 
-Future<SharedPreferences> createPrefs({
+Future<SharedPreferencesWithCache> createPrefs({
   Map<String, Object>? initialValues,
 }) async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues(initialValues ?? {});
-  return await SharedPreferences.getInstance();
+  // Workaround from https://github.com/flutter/flutter/issues/153108#issuecomment-2278456305
+  SharedPreferencesAsyncPlatform.instance = initialValues != null
+      ? InMemorySharedPreferencesAsync.withData(initialValues)
+      : InMemorySharedPreferencesAsync.empty();
+  return await SharedPreferencesWithCache.create(
+    cacheOptions: const SharedPreferencesWithCacheOptions(),
+  );
 }
 
 Future<SecureStorage> createSecureStorage({
