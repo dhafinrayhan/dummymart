@@ -7,8 +7,8 @@ typedef AsyncTask = ({
   bool hasError,
 });
 
-/// Creates a hook that provides a [snapshot] of the current asynchronous task passed
-/// to [pending] and a [hasError] value.
+/// Creates a hook that provides an [AsyncSnapshot] of the pending asynchronous
+/// task and an error flag.
 AsyncTask useAsyncTask() {
   final pending = useState<Future<void>?>(null);
   final snapshot = useFuture(pending.value);
