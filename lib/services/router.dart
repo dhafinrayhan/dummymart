@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../features/login/screens/login.dart';
@@ -20,7 +21,7 @@ part 'router.g.dart';
 
 /// The router config for the app.
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(Ref ref) {
   // Local notifier for the current auth state. The purpose of this notifier is
   // to provide a [Listenable] to the [GoRouter] exposed by this provider.
   final authStateNotifier = ValueNotifier(AuthState.unknown);
