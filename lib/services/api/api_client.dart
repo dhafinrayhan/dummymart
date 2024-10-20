@@ -58,7 +58,7 @@ class ApiClient {
       },
     );
 
-    return response.data['token'] as String;
+    return response.data['accessToken'] as String;
   }
 
   Future<Profile> fetchProfile() async {
