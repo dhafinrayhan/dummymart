@@ -57,4 +57,4 @@ flutter_launcher_icons:
   adaptive_icon_foreground: assets/images/launcher-fg.png
 
 lint_staged:
-  "{lib,test}/**.dart": dart format --fix
+  "{lib,test}/**.dart": dart format
