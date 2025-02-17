@@ -163,7 +163,7 @@ class _PostTag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: context.colorScheme.secondaryContainer.withOpacity(0.7),
+        color: context.colorScheme.secondaryContainer.withAlpha(180),
       ),
       child: Text(
         tag,
