@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../storage/secure_storage.dart';
@@ -16,7 +17,7 @@ part 'api_service.g.dart';
 /// The API client is kept alive to follow dio's recommendation to use the same
 /// client instance for the entire app.
 @riverpod
-ApiClient apiService(ApiServiceRef ref) {
+ApiClient apiService(Ref ref) {
   final token = ref.watch(tokenProvider);
 
   final ApiClient client;
@@ -33,7 +34,7 @@ ApiClient apiService(ApiServiceRef ref) {
 }
 
 @riverpod
-String? token(TokenRef ref) {
+String? token(Ref ref) {
   final secureStorage = ref.watch(secureStorageProvider).requireValue;
   return secureStorage.get('token');
 }

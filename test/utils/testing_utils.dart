@@ -65,6 +65,7 @@ MockedApiClient createMockedApiClient({
 /// Creates a [MockedApiClient] for a provider override with the given [delay]
 /// as the duration before each API call returns a value.
 MockedApiClient createMockedApiClientOverride(
+  // ignore: deprecated_member_use
   AutoDisposeProviderRef<Object?> ref, {
   Duration delay = const Duration(milliseconds: 50),
   bool allowAuth = false,
