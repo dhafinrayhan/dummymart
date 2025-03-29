@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_use/flutter_use.dart';
 import 'package:go_router/go_router.dart';
@@ -144,7 +145,7 @@ class _PostListTile extends StatelessWidget {
       onTap: onTap,
       title: Text(post.title),
       subtitle: Wrap(
-        spacing: 4,
+        spacing: context.gutterTiny,
         children: [for (final tag in post.tags) _PostTag(tag)],
       ),
       trailing: Text('${post.views} views'),

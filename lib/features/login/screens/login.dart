@@ -1,7 +1,7 @@
 import 'package:flextras/flextras.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -46,8 +46,8 @@ class LoginScreen extends HookConsumerWidget {
         ],
       ),
       body: SeparatedColumn(
-        padding: const EdgeInsets.all(24),
-        separatorBuilder: () => const Gap(16),
+        padding: EdgeInsets.all(context.gutter),
+        separatorBuilder: () => const Gutter(),
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -74,7 +74,7 @@ class LoginScreen extends HookConsumerWidget {
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
           ),
-          const Gap(8),
+          const SizedBox.shrink(),
           AppButton(
             onPressed: onLoginPressed,
             label: 'Login',
