@@ -11,7 +11,7 @@ dependencies:
   flextras: ^1.0.0
   flutter:
     sdk: flutter
-  flutter_gutter: ^2.1.1
+  flutter_gutter: ^2.2.0
   flutter_hooks: ^0.20.5
   flutter_native_splash: ^2.4.5
   flutter_secure_storage: ^9.2.4
