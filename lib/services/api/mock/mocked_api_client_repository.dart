@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 part of 'mocked_api_client.dart';
 
 typedef _ResponseData = Map<String, Object?>;
